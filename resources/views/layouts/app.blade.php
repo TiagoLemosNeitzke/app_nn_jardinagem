@@ -27,6 +27,10 @@
         .btn-link-success:hover {
             color: #20c997;
         }
+
+        .bg-teal {
+            background-color: #20c997;
+        }
     </style>
 </head>
 
@@ -66,8 +70,9 @@
                             @endif
                         @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle text-light" href="#"
+                                    role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                    v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
 
