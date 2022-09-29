@@ -17,7 +17,6 @@ return new class extends Migration {
             $table->string('photo');
             $table->string('name', 250);
             $table->string('email');
-            $table->string('phone', 15);
             $table->string('address'); // todos os dados juntos aqui.
             $table->string('type_service'); // jardinagem / piscina / jardiangem e piscina.
             $table->string('service_price'); // valor do serviço
