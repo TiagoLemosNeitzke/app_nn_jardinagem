@@ -141,6 +141,7 @@
 
 
         <main class="py-4">
+            @yield('content')
             @yield('customer')
             @yield('registerCustomer')
         </main>
