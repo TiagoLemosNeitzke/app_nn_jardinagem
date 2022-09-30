@@ -2,6 +2,12 @@
 
 @section('formCustomer')
     {{ $customer }}
+    @if (isset($error))
+        <div class="row text-center">
+            <p class="text-danger">{{ $error }}</p>
+        </div>
+    @endif
+
     <div class="justify-content-center d-flex bg-teal container mt-4">
         <div class="col-md-12 border-success mb-3">
             <div class="row text-center">
@@ -17,7 +23,8 @@
             {{-- Form start --}}
             @if (isset($customer))
                 <form class="row g-3 needs-validation mt-4"
-                    action="{{ route('customer.update', ['customer' => $customer->id]) }}" method="put" novalidate>
+                    action="{{ route('customer.update', ['customer' => $customer->id]) }}" method="post" novalidate>
+                    @method('put')
                 @else
                     <form class="row g-3 needs-validation mt-4" action="{{ route('customer.store') }}" method="post"
                         novalidate>

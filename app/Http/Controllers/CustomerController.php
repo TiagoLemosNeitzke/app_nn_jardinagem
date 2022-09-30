@@ -16,10 +16,14 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $customers = $this->customer->all();
-        return view('app.customers', ['customers' => $customers]);
+        if ($request->message) {
+            return view('app.customers', ['customers' => $customers, 'message' => $request->message]);
+        } else {
+            return view('app.customers', ['customers' => $customers]);
+        }
     }
 
     /**
@@ -89,7 +93,16 @@ class CustomerController extends Controller
      */
     public function update(Request $request, Customer $customer)
     {
-        dd('update');
+        $request->validate($this->customer->rules(), $this->customer->feedback());
+        if ($customer->expirate_day <=31 || $customer->expirate_day >= 1) {
+            $this->customer->rules();
+            $customer->update($request->all());
+            return redirect()->route('customer.index', ['message' => 'Cadastrado atualizado com sucesso!']);
+        } else {
+            return view('app.formCustomer', ['error' => 'Erro ao salvar osa dados. Confira o preenchimento do fromulário e tente novamente']);
+        }
+        
+        dd($customer);
     }
 
     /**
