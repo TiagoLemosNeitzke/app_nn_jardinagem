@@ -90,13 +90,14 @@
             </div>
         </nav>
         @auth
-            <nav class="navbar navbar-expand-lg navbar-light">
+            <nav class="navbar navbar-expand-lg navbar-light bg-teal">
                 <div class="container-fluid">
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
+
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-lg-0mb-2">
                             <li class="nav-item dropdown fw-bold btn btn-success me-2 btn-sm">
@@ -143,7 +144,8 @@
         <main class="py-4">
             @yield('content')
             @yield('customer')
-            @yield('registerCustomer')
+            @yield('formCustomer')
+            @yield('editCustomer')
         </main>
     </div>
 </body>

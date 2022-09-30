@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class CustomerController extends Controller
 {
+    public function __construct(Customer $customer)
+    {
+        $this->customer = $customer;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +18,8 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        return view('app.customers');
+        $customers = $this->customer->all();
+        return view('app.customers', ['customers' => $customers]);
     }
 
     /**
@@ -24,7 +29,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        return view('app.registerCustomer');
+        return view('app.formCustomer');
     }
 
     /**
@@ -35,7 +40,22 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        //dd($request->all());
+        $day = $request->expiration_day;
+        $day = explode('-', $day);
+        $day = $day[2];
+
+        $customer = $this->customer->create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'type_service' => $request->type_service,
+            'service_price' => $request->service_price,
+            'is_monthly' => $request->is_monthly,
+            'expiration_day' => $day
+        ]);
+        return view('app.customers', ['message' => 'Cliente cadastrado com sucesso!']);
     }
 
     /**
@@ -57,7 +77,7 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
-        //
+        return view('app.formCustomer', ['customer' => $customer]);
     }
 
     /**
@@ -69,7 +89,7 @@ class CustomerController extends Controller
      */
     public function update(Request $request, Customer $customer)
     {
-        //
+        dd('update');
     }
 
     /**
@@ -80,6 +100,6 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        //
+        dd('destroy');
     }
 }

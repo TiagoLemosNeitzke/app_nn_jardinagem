@@ -404,10 +404,13 @@
     </style>
 </head>
 
-<body class="antialiased">
+<body>
+    <header>
+
+    </header>
     <div
         class="items-top relative flex min-h-screen justify-center bg-gray-100 py-4 dark:bg-gray-900 sm:items-center sm:pt-0">
-        {{ config('app.name') }}
+
         @if (Route::has('login'))
             <div class="fixed top-0 right-0 hidden px-6 py-4 sm:block">
                 @auth
