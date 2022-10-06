@@ -35,4 +35,9 @@ class Customer extends Model
             'integer' => 'O campo precisar ser preenchido com um número inteiro',
         ];
     }
+
+    public function plan()
+    {
+        return $this->hasOne('App\Models\Plan');
+    }
 }

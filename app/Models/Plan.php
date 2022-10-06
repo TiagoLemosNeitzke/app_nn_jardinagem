@@ -11,4 +11,9 @@ class Plan extends Model
 
     protected $fillable = ['customer_id'];
     protected $table = 'plans';
+
+    public function customer()
+    {
+        return $this->belongsTo('App\Models\Customer');
+    }
 }

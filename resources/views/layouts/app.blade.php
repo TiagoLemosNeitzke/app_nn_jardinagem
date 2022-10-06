@@ -40,6 +40,15 @@
             background-color: #198754;
             border: #198754;
         }
+
+        .hidden {
+            display: none;
+        }
+
+        .fixed-end {
+            display: flex;
+            justify-content: end;
+        }
     </style>
 </head>
 
@@ -132,7 +141,8 @@
                                     <li><a class="dropdown-item text-light" href="{{ route('customer.create') }}"
                                             title="Cadastrar cliente">Cadastrar</a>
                                     </li>
-                                </ul </li>
+                                </ul>
+                            </li>
 
                             <li class="nav-item dropdown fw-bold btn btn-success me-2 btn-sm">
                                 <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown"
@@ -168,7 +178,8 @@
                                             title="Registrar uma despesa">Registrar
                                             Despesa</a>
                                     </li>
-                                </ul </li>
+                                </ul>
+                            </li>
 
                             <li class="nav-item dropdown fw-bold btn btn-success me-2 btn-sm">
                                 <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown"
@@ -189,13 +200,15 @@
                                             title="Lista todos os clientes">Todos os
                                             Serviços</a>
                                     </li>
+
                                     <li>
                                         <hr class="dropdown-divider bg-light">
                                     </li>
                                     <li><a class="dropdown-item text-light" href="{{ route('plan.create') }}"
-                                            title="Cadastrar cliente">Agendar</a>
+                                            title="Cadastrar cliente">Abrir Chamado</a>
                                     </li>
-                                </ul </li>
+                                </ul>
+                            </li>
 
                         </ul>
                         <form class="d-flex">

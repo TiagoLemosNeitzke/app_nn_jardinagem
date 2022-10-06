@@ -17,11 +17,22 @@ class PlanController extends Controller
       *
       * @return \Illuminate\Http\Response
       */
-     public function index()
+     public function index(Request $request)
      {
-         $plans = $this->plan->orderBy('created_at', 'asc')->paginate(4);
-         //dd($plans);
-         return view('app.plan', ['plans' => $plans]);
+         if ($request->filter === 'all') {
+             $plans = $this->plan->orderBy('created_at', 'asc')->with('customer')->paginate(4);
+             return view('app.plan', ['plans' => $plans, 'filter' => 'all']);
+         }
+
+         if ($request->filter === 'open') {
+             $plans = $this->plan->where('status', 1)->orderBy('created_at', 'asc')->with('customer')->paginate(4);
+             return view('app.plan', ['plans' => $plans, 'filter' => 'open']);
+         }
+
+         if ($request->filter === 'done') {
+             $plans = $this->plan->where('status', 0)->orderBy('created_at', 'asc')->with('customer')->paginate(4);
+             return view('app.plan', ['plans' => $plans, 'filter' => 'done']);
+         }
      }
 
      /**
@@ -80,6 +91,7 @@ class PlanController extends Controller
      public function edit(Plan $plan)
      {
          dd('edit');
+         //return redirect()->route('plan.update', ['plan', $plan->id]);
      }
 
      /**
@@ -91,7 +103,14 @@ class PlanController extends Controller
       */
      public function update(Request $request, Plan $plan)
      {
-        //
+         $plan->status = 0;
+         $plan = $plan->update();
+        
+         if ($plan) {
+             return redirect()->route('plan.index');
+         } else {
+             return view('app.plan', ['error' => 'Erro: Não foi possível marcar o serviço como realizado. Tente novamente mais tarde.']);
+         }
      }
 
      /**
