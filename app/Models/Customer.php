@@ -13,14 +13,14 @@ class Customer extends Model
     public function rules()
     {
         return [
-            'name' => 'required',
-            'email' => 'email:rfc,dns',
+            'name' => 'required|min:3|max:255',
+            'email' => 'email:rfc,dns|nullable',
             'phone' => 'required',
             'address' => 'required',
             'type_service' => 'required',
             'service_price' => 'required',
             'is_monthly' => 'required|boolean',
-            'expiration_day' => 'integer|starts_with:1,31'
+            'expiration_day' => 'integer'
         ];
     }
 
@@ -28,10 +28,11 @@ class Customer extends Model
     {
         return [
             'required' => 'O campo :attribute é obrigatório.',
-            'email' => 'O campo email está incorreto.',
-            'boolean' => 'Erro ao validar o campo.',
+            'min' => 'O nome precisa ter pelo menos 3 caracteres',
+            'max' => 'O nome não pode ter mais de 255 caracteres',
+            'email' => 'Email inválido.',
+            'boolean' => 'Erro ao validar o campo mensalidade.',
             'integer' => 'O campo precisar ser preenchido com um número inteiro',
-            'starts_with' => 'Preencha o campo com números entre 1 e 31'
         ];
     }
 }

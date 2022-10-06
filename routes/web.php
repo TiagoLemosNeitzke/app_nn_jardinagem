@@ -23,3 +23,5 @@ Auth::routes(['verify' => true]);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('verified');
 
 Route::resource('customer', '\App\Http\Controllers\CustomerController')->middleware('verified');
+
+Route::resource('plan', 'App\Http\Controllers\PlanController')->middleware('verified');

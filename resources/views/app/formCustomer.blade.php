@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('formCustomer')
-    {{ $customer }}
+
     @if (isset($error))
         <div class="row text-center">
             <p class="text-danger">{{ $error }}</p>
@@ -31,6 +31,15 @@
             @endif
 
             @csrf
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <div class="row mb-3">
                 <label for="inputName" class="col-sm-2 col-form-label">Nome</label>
                 <div class="col-sm-10">
@@ -43,7 +52,7 @@
                 <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
                 <div class="col-sm-10">
                     <input type="email" class="form-control" id="inputEmail" name="email"
-                        value="{{ $customer->email ?? '' }}" required>
+                        value="{{ $customer->email ?? '' }}">
                 </div>
             </div>
 

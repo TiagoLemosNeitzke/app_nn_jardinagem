@@ -18,7 +18,7 @@ class CustomerController extends Controller
      */
     public function index(Request $request)
     {
-        $customers = $this->customer->all();
+        $customers = $this->customer->paginate(8);
         if ($request->message) {
             return view('app.customers', ['customers' => $customers, 'message' => $request->message]);
         } else {
@@ -44,12 +44,9 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->all());
-        $day = $request->expiration_day;
-        $day = explode('-', $day);
-        $day = $day[2];
-
-        $customer = $this->customer->create([
+        $request->validate($this->customer->rules(), $this->customer->feedback());
+        if ($request->expiration_day >= 1 && $request->expiration_day <= 31) {
+            $this->customer->create([
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
@@ -57,9 +54,12 @@ class CustomerController extends Controller
             'type_service' => $request->type_service,
             'service_price' => $request->service_price,
             'is_monthly' => $request->is_monthly,
-            'expiration_day' => $day
+            'expiration_day' => $request->expiration_day
         ]);
-        return view('app.customers', ['message' => 'Cliente cadastrado com sucesso!']);
+            return redirect()->route('customer.index', ['message' => 'Cliente cadastrado com sucesso!']);
+        } else {
+            return view('app.formCustomer', ['errors' => 'Data de vencimento precisa estar entre os dias 1 e 31.']);
+        }
     }
 
     /**
@@ -94,7 +94,7 @@ class CustomerController extends Controller
     public function update(Request $request, Customer $customer)
     {
         $request->validate($this->customer->rules(), $this->customer->feedback());
-        if ($customer->expirate_day <=31 || $customer->expirate_day >= 1) {
+        if ($customer->expiration_day <=31 && $customer->expiration_day >= 1) {
             $this->customer->rules();
             $customer->update($request->all());
             return redirect()->route('customer.index', ['message' => 'Cadastrado atualizado com sucesso!']);
