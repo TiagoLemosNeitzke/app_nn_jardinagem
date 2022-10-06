@@ -70,7 +70,7 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        //
+        return view('app.showCustomer', ['customer' => $customer]);
     }
 
     /**

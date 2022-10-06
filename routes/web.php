@@ -25,3 +25,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('customer', '\App\Http\Controllers\CustomerController')->middleware('verified');
 
 Route::resource('plan', 'App\Http\Controllers\PlanController')->middleware('verified');
+
+Route::resource('toReceive', 'App\Http\Controllers\ToReceiveController')->middleware('verified');

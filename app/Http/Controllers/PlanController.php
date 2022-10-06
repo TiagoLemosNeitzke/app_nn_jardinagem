@@ -22,16 +22,15 @@ class PlanController extends Controller
          if ($request->filter === 'all') {
              $plans = $this->plan->orderBy('created_at', 'asc')->with('customer')->paginate(4);
              return view('app.plan', ['plans' => $plans, 'filter' => 'all']);
-         }
-
-         if ($request->filter === 'open') {
+         } elseif ($request->filter === 'open') {
              $plans = $this->plan->where('status', 1)->orderBy('created_at', 'asc')->with('customer')->paginate(4);
              return view('app.plan', ['plans' => $plans, 'filter' => 'open']);
-         }
-
-         if ($request->filter === 'done') {
+         } elseif ($request->filter === 'done') {
              $plans = $this->plan->where('status', 0)->orderBy('created_at', 'asc')->with('customer')->paginate(4);
              return view('app.plan', ['plans' => $plans, 'filter' => 'done']);
+         } else {
+             $plans = $this->plan->orderBy('created_at', 'asc')->with('customer')->paginate(4);
+             return view('app.plan', ['plans' => $plans, 'filter' => 'all']);
          }
      }
 
@@ -53,10 +52,8 @@ class PlanController extends Controller
       */
      public function store(Request $request, Customer $customer)
      {
-         // dd($request->all());
          $id = $request->customer_id;
          $customer = Customer::where('id', $id)->first();
-         //dd($customer);
          if ($customer === null) {
              return view('app.createPlan', ['error' => 'Id não cadastrado em nossa base de dados. agendamento não realizado. Tente novamente.']);
          } else {
@@ -91,7 +88,6 @@ class PlanController extends Controller
      public function edit(Plan $plan)
      {
          dd('edit');
-         //return redirect()->route('plan.update', ['plan', $plan->id]);
      }
 
      /**
@@ -103,14 +99,23 @@ class PlanController extends Controller
       */
      public function update(Request $request, Plan $plan)
      {
-         $plan->status = 0;
-         $plan = $plan->update();
-        
-         if ($plan) {
-             return redirect()->route('plan.index');
-         } else {
-             return view('app.plan', ['error' => 'Erro: Não foi possível marcar o serviço como realizado. Tente novamente mais tarde.']);
+         // dd($plan) ;
+         $plans = $plan->where('id', $plan->id)->with('customer')->get();
+         foreach ($plans as $plan) {
+             $plan->status = 0;
+             $plan->save();
+             if ($plan) {
+                 return redirect()->route('toReceive.store', ['customer' => $plan->customer]);
+             } else {
+                 return view('app.plan', ['error' => 'Erro: Não foi possível marcar o serviço como realizado. Tente novamente mais tarde.']);
+             }
+
+             
+             //dd($plan->customer) ;
          }
+        
+         //$plan->status = 0;
+         //$plan = $plan->update();
      }
 
      /**

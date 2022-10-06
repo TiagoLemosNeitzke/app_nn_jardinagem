@@ -15,7 +15,7 @@ return new class extends Migration {
         Schema::create('to_receive', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('client_id');
-            $table->date('expiration_day'); // data do vencimento
+            $table->date('expiration_day'); // retirar esta coluna ao rodar a migration novamente, não precisa é só usar a created_at
             $table->string('value'); // valor que o cliente me deve
             $table->boolean('paid_out'); // 1-> pago | 0 -> à pagar || no caso se o cliente pagou ou não
             $table->timestamps();

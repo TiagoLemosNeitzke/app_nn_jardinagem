@@ -158,8 +158,8 @@
                                 </a>
                                 <ul class="dropdown-menu bg-success" aria-labelledby="navbarDropdown">
                                     <li class="nav-item">
-                                        <a class="nav-link fw-bold text-light btn btn-success me-2" href="#"
-                                            title="À receber">À
+                                        <a class="nav-link fw-bold text-light btn btn-success me-2"
+                                            href="{{ route('toReceive.index') }}" title="À receber">À
                                             Receber</a>
                                     </li>
                                     <li>
