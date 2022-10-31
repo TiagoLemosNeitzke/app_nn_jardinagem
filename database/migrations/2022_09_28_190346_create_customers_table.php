@@ -19,7 +19,7 @@ return new class extends Migration {
             $table->string('phone', 15);
             $table->string('address', 250); // todos os dados juntos aqui.
             $table->string('type_service', 18); // jardinagem / piscina / jardinagem e piscina.
-            $table->string('service_price'); // valor do serviço
+            $table->string('service_price')->nullable(); // valor do serviço
             $table->boolean('is_monthly'); // 1 -> mensal | 0 -> não é mensal
             $table->integer('expiration_day')->nullable(); // dia que vence a mensalidade
             $table->timestamps();

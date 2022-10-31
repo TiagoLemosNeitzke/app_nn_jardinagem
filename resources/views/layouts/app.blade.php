@@ -164,7 +164,7 @@
                                     </li>
                                     <li>
                                         <hr class="dropdown-divider bg-light">
-                                    </li>
+                                        {{-- </li>
                                     <li class="nav-item">
                                         <a class="nav-link fw-bold text-light btn btn-success me-2" href="#"
                                             title="À pagar">À
@@ -172,7 +172,7 @@
                                     </li>
                                     <li>
                                         <hr class="dropdown-divider bg-light">
-                                    </li>
+                                    </li> --}}
                                     <li class="nav-item">
                                         <a class="nav-link fw-bold text-light btn btn-success me-2" href="#"
                                             title="Registrar uma despesa">Registrar

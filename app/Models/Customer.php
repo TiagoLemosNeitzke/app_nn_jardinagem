@@ -17,10 +17,10 @@ class Customer extends Model
             'email' => 'email:rfc,dns|nullable',
             'phone' => 'required',
             'address' => 'required',
-            'type_service' => 'required',
+            'type_service' => 'string|nullable',
             'service_price' => 'required',
             'is_monthly' => 'required|boolean',
-            'expiration_day' => 'integer'
+            'expiration_day' => 'integer|nullable'
         ];
     }
 

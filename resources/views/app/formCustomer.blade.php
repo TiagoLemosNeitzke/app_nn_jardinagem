@@ -31,10 +31,11 @@
             @endif
 
             @csrf
+            {{ $errors }}
             @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
-                        @foreach ($errors->all() as $error)
+                        @foreach ($errors as $error)
                             <li>{{ $error }}</li>
                         @endforeach
                     </ul>
@@ -89,7 +90,7 @@
                 <label for="inputPrice" class="col-sm-2 col-form-label">Valor do serviço</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" id="inputPrice" name="service_price"
-                        value="{{ $customer->service_price ?? '' }}" required>
+                        value="{{ $customer->service_price ?? '' }}">
                 </div>
             </div>
 
@@ -149,7 +150,7 @@
                 <label for="inputExpiration" class="col-sm-2 col-form-label">Mensalidade vence dia?</label>
                 <div class="col-sm-10">
                     <input type="number" class="form-control" id="inputExpiration" name="expiration_day"
-                        value="{{ $customer->expiration_day ?? '' }}" required>
+                        value="{{ $customer->expiration_day ?? '' }}">
                 </div>
             </div>
 

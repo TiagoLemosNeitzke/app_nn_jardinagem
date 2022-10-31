@@ -60,6 +60,28 @@
 
             </div>
         @endforeach
-
+        <div class="d-flex justify-content-center mt-4">
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a class="page-link bg-teal text-light" href="{{ $toReceives->previousPageUrl() }}"
+                            aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    @for ($i = 1; $i <= $toReceives->lastPage(); $i++)
+                        <li class="page-item {{ $toReceives->currentPage() == $i ? 'active' : '' }}">
+                            <a class="page-link bg-teal text-light"
+                                href="{{ $toReceives->url($i) }}">{{ $i }}</a>
+                        </li>
+                    @endfor
+                    <li class="page-item">
+                        <a class="page-link bg-teal text-light" href="{{ $toReceives->nextPageUrl() }}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
     </div>
 @endsection

@@ -29,7 +29,7 @@ class PlanController extends Controller
              $plans = $this->plan->where('status', 0)->orderBy('created_at', 'asc')->with('customer')->paginate(4);
              return view('app.plan', ['plans' => $plans, 'filter' => 'done']);
          } else {
-             $plans = $this->plan->orderBy('created_at', 'asc')->with('customer')->paginate(4);
+             $plans = $this->plan->orderBy('created_at', 'desc')->with('customer')->paginate(4);
              return view('app.plan', ['plans' => $plans, 'filter' => 'all']);
          }
      }
@@ -50,21 +50,22 @@ class PlanController extends Controller
       * @param  \Illuminate\Http\Request  $request
       * @return \Illuminate\Http\Response
       */
-     public function store(Request $request, Customer $customer)
+     public function store(Request $request)
      {
-         $id = $request->customer_id;
-         $customer = Customer::where('id', $id)->first();
+         $customer = Customer::where('name', $request->name)->orWhere('id', $request->id)->first();
          if ($customer === null) {
-             return view('app.createPlan', ['error' => 'Id não cadastrado em nossa base de dados. agendamento não realizado. Tente novamente.']);
-         } else {
-             $plan = $this->plan->where('customer_id', $id)->first();
-
-             if ($plan === null) {
-                 $plan = $this->plan->create($request->all());
-                 return redirect()->route('plan.index');
+             return view('app.createPlan', ['error' => 'Cliente não encontrado em nossa base de dados. Consulte sua lista de cliente.']);
+         }
+         if ($customer->exists) {
+             $plan = Plan::where('customer_id', $customer->id)->first();
+             if ($plan->exists) {
+                 return view('app.createPlan', ['error' => 'Cliente já possui agendamento. Consulte seus agendamentos.']);
+             } else {
+                 $plan = $this->plan->create([
+                    'customer_id' => $customer->id
+                ]);
+                 return view('app.createPlan', ['message' => 'Agendamento realizado com sucesso!']);
              }
-    
-             return view('app.createPlan', ['error' => 'Cliente já possui agendamento. Consulte seus agendamentos.']);
          }
      }
 
@@ -99,23 +100,17 @@ class PlanController extends Controller
       */
      public function update(Request $request, Plan $plan)
      {
-         // dd($plan) ;
-         $plans = $plan->where('id', $plan->id)->with('customer')->get();
-         foreach ($plans as $plan) {
-             $plan->status = 0;
-             $plan->save();
-             if ($plan) {
-                 return redirect()->route('toReceive.store', ['customer' => $plan->customer]);
-             } else {
-                 return view('app.plan', ['error' => 'Erro: Não foi possível marcar o serviço como realizado. Tente novamente mais tarde.']);
-             }
-
-             
-             //dd($plan->customer) ;
+         $value = $request->get('value');
+         $plan = $plan->where('id', $plan->id)->with('customer')->first();
+         
+         $plan->status = 0;
+         $plan->update();
+         
+         if ($plan) {
+             return redirect()->route('toReceive.create', ['customer' => $plan->customer, 'value' => $value]);
+         } else {
+             return view('app.plan', ['error' => 'Erro: Não foi possível marcar o serviço como realizado. Tente novamente mais tarde.']);
          }
-        
-         //$plan->status = 0;
-         //$plan = $plan->update();
      }
 
      /**
@@ -126,6 +121,11 @@ class PlanController extends Controller
       */
      public function destroy(Plan $plan)
      {
-         dd('destrouy');
+         if ($plan->exists()) {
+             $plan->delete();
+             return response()->view('app.plan', ['message' => 'Registro apagado da nossa base de dados com sucesso.']);
+         } else {
+             return view('app.plan', ['error' => 'Erro ao tentar apagar registro. (Registro não encontrado)']);
+         }
      }
 }

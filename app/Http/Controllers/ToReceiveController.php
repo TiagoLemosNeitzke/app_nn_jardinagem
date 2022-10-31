@@ -19,7 +19,7 @@ class ToReceiveController extends Controller
       */
      public function index()
      {
-         $toReceives = $this->toReceive->all();
+         $toReceives = $this->toReceive->paginate(4);
          return view('app.toReceive', ['toReceives' => $toReceives]);
      }
 
@@ -30,6 +30,11 @@ class ToReceiveController extends Controller
       */
      public function create(Request $request)
      {
+         $value = $request->get('value');
+    
+         $customer = $request->get('customer');
+        
+         return view('app.toReceiveCreate', ['customer' => $customer, 'value' => $value]);
      }
 
      /**
@@ -40,14 +45,12 @@ class ToReceiveController extends Controller
       */
      public function store(Request $request)
      {
-         $customer = Customer::where('id', $request->customer)->first();
-         
          $this->toReceive->create([
-             'client_id' => $customer->id,
-             'expiration_day' => date_create(),
-             'value' => $customer->service_price,
+             'client_id' => $request->client_id,
+             'value' => $request->value,
              'paid_out' => false
          ]);
+   
          return redirect()->route('toReceive.index');
      }
 

@@ -44,8 +44,11 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
+        
         $request->validate($this->customer->rules(), $this->customer->feedback());
-        if ($request->expiration_day >= 1 && $request->expiration_day <= 31) {
+       
+        if ($request->expiration_day === null || $request->expiration_day >= 1 && $request->expiration_day <= 31) {
+            
             $this->customer->create([
             'name' => $request->name,
             'email' => $request->email,
@@ -57,8 +60,6 @@ class CustomerController extends Controller
             'expiration_day' => $request->expiration_day
         ]);
             return redirect()->route('customer.index', ['message' => 'Cliente cadastrado com sucesso!']);
-        } else {
-            return view('app.formCustomer', ['errors' => 'Data de vencimento precisa estar entre os dias 1 e 31.']);
         }
     }
 
