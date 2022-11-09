@@ -14,14 +14,16 @@ return new class extends Migration {
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained();
             $table->string('name', 250);
             $table->string('email')->nullable();
             $table->string('phone', 15);
-            $table->string('address', 250); // todos os dados juntos aqui.
-            $table->string('type_service', 18); // jardinagem / piscina / jardinagem e piscina.
-            $table->string('service_price')->nullable(); // valor do serviço
-            $table->boolean('is_monthly'); // 1 -> mensal | 0 -> não é mensal
-            $table->integer('expiration_day')->nullable(); // dia que vence a mensalidade
+            $table->string('street', 250); // todos os dados juntos aqui.
+            $table->string('street_number', 250);
+            $table->string('district', 250);
+            $table->string('city', 250);
+            $table->string('state', 250);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

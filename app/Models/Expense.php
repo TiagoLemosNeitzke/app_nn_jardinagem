@@ -4,22 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Nette\SmartObject;
 
-class Customer extends Model
+class Expense extends Model
 {
-    use HasFactory, SmartObject;
+    use HasFactory;
+
     protected $fillable = [
         'id',
         'user_id',
-        'name',
-        'email',
-        'phone',
-        'street',
-        'street_number',
-        'district',
-        'city',
-        'state'
+        'expense_amount',
+        'description'
     ];
 
     public function user()

@@ -12,12 +12,13 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('payable', function (Blueprint $table) {
+        Schema::create('tasks', function (Blueprint $table) {
             $table->id();
-            $table->date('expiration_day'); // dia que tenho que pagar a conta
-            $table->boolean('paid_out'); // 1-> pago | 0-> á pagar
-            $table->string('value'); // valor que tenho que pagar
-            $table->boolean('recurrent'); // 1 -> todo mês tenho que pagar | 0 -> apenas uma parcela
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('customer_id')->constrained();
+            $table->string('scheduled_for_day');
+            $table->string('service_value');
+            $table->string('did_day')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('payable');
+        Schema::dropIfExists('tasks');
     }
 };

@@ -12,14 +12,14 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('to_receive', function (Blueprint $table) {
+        Schema::create('to__receives', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('client_id');
+            $table->foreignId('task_id')->constrained();
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('customer_id')->constrained();
             $table->string('value'); // valor que o cliente me deve
-            $table->boolean('paid_out'); // 1-> pago | 0 -> à pagar || no caso se o cliente pagou ou não
+            $table->smallInteger('status')->default(1);
             $table->timestamps();
-
-            $table->foreign('client_id')->references('id')->on('customers');
         });
     }
 
@@ -30,9 +30,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::table('to_receive', function (Blueprint $table) {
-            $table->dropForeign(['client_id']);
-        });
-        Schema::dropIfExists('to_receive');
+        Schema::dropIfExists('to__receives');
     }
 };

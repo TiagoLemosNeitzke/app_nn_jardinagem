@@ -14,9 +14,9 @@ return new class extends Migration {
     {
         Schema::create('expenses', function (Blueprint $table) {
             $table->id();
-            $table->string('type_expense'); // tipo da despesa: retirada | custeio
-            $table->string('value'); // valor da despesa
-            $table->dateTime('date');
+            $table->foreignId('user_id')->constrained();
+            $table->string('expense_amount'); // valor da despesa
+            $table->string('description', 250);
             $table->timestamps();
         });
     }

@@ -58,7 +58,7 @@ class PlanController extends Controller
          }
          if ($customer->exists) {
              $plan = Plan::where('customer_id', $customer->id)->first();
-             if ($plan->exists) {
+             if ($plan) {
                  return view('app.createPlan', ['error' => 'Cliente já possui agendamento. Consulte seus agendamentos.']);
              } else {
                  $plan = $this->plan->create([
