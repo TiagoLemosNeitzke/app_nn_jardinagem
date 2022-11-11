@@ -2,20 +2,20 @@
 @section('content')
     <div class="container">
         <div class="row text-center">
-        
+
             @if (isset($error))
                 <p class="fw-bold fs-4 text-danger">{{ $error }}</p>
-                <a href="{{ route('plan.index') }}" class="btn btn-success btn-sm fw-bold mb-4">voltar</a>
+                <a href="{{ route('task.index') }}" class="btn btn-success btn-sm fw-bold mb-4">voltar</a>
             @endif
 
-             @if (isset($message))
+            @if (isset($message))
                 <p class="fw-bold fs-4 text-success">{{ $message }}</p>
-                <a href="{{ route('plan.index') }}" class="btn btn-success btn-sm fw-bold mb-4">voltar</a>
+                <a href="{{ route('task.index') }}" class="btn btn-success btn-sm fw-bold mb-4">voltar</a>
             @endif
         </div>
         <div class="row">
-
-            @if (isset($plans))
+            {{ $tasks }}
+            @if (isset($tasks))
                 @if ($filter === 'open')
                     <p class="text-center">Aqui são listados todos os chamados em aberto</p>
                 @endif
@@ -39,18 +39,18 @@
                                     </svg></a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item"
-                                            href="{{ route('plan.index', ['filter' => 'open']) }}">Chamados abertos</a></li>
+                                            href="{{ route('task.index', ['filter' => 'open']) }}">Chamados abertos</a></li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     <li><a class="dropdown-item"
-                                            href="{{ route('plan.index', ['filter' => 'done']) }}">Serviços realizados</a>
+                                            href="{{ route('task.index', ['filter' => 'done']) }}">Serviços realizados</a>
                                     </li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
 
                             </li>
-                            <li><a class="dropdown-item" href="{{ route('plan.index', ['filter' => 'all']) }}">Todos
+                            <li><a class="dropdown-item" href="{{ route('task.index', ['filter' => 'all']) }}">Todos
                                     os chamados</a>
                             </li>
                         </ul>
@@ -58,31 +58,32 @@
                         </ul>
                     </div>
                 </div>
-                @foreach ($plans as $plan)
+                @foreach ($tasks as $task)
                     <div class="col-sm-12 mb-2">
-                        <div class="card border-success border">
+                        <div class="card border-dark border">
                             <div class="card-body">
-                                <h5 class="card-title fw-bold mb-4">ID da tarefa: {{ $plan->id }}</h5>
-                                <h6><b>ID do cliente: </b>{{ $plan->customer_id }}</h6>
-                                <p><b>Cliente: </b>{{ $plan->customer->name }}</p>
-                                <p><b>Endereço: </b>{{ $plan->customer->address }}</p>
-                                <p><b>Telefone: </b>{{ $plan->customer->phone }}</p>
-                                <p><b>Valor do serviço: </b>{{ $plan->customer->service_price }}</p>
-                                <p class="{{ $plan->status ? 'text-success' : 'text-danger' }}"><b>Chamado aberto?
-                                    </b>{{ $plan->status ? 'Sim' : 'Não' }}</p>
-                                <p><b>Data da abertura do chamado: </b>{{ date_format($plan->created_at, 'd-m-y h:i:s') }}
+                                <h5 class="card-title fw-bold mb-4">ID da tarefa: {{ $task->id }}</h5>
+                                <h6><b>ID do cliente: </b>{{ $task->customer_id }}</h6>
+
+                                <p><b>Valor do serviço: </b>{{ $task->service_value }}</p>
+
+                                <p class="{{ $task->did_day ? 'text-danger' : 'text-success' }}"><b>Chamado aberto?
+                                    </b>
+                                    @if ($task->did_day === null)
+                                        Sim
+                                    @else
+                                        Não
+                                    @endif
                                 </p>
-                                <p><b>Data da realização do serviço:
-                                    </b>{{ date_format($plan->updated_at, 'd-m-y h:i:s') }}
+                                <p><b>Agendado para dia:
+                                    </b>{{ $task->scheduled_for_day }}
                                 </p>
                                 <div class="container">
-                                    <form class="row"
-                                        action="{{ route('plan.update', ['plan' => $plan->id, 'value' => $plan->customer->service_price]) }}"
-                                        method="post">
+                                    <form action="{{ route('task.update', ['task' => $task->id]) }}" method="post">
                                         @method('put')
                                         @csrf
-                                        {{-- <input type="number" name="id" value="{{ $plan->id }}" class="hidden"> --}}
-                                        @if ($plan->status == true)
+                                        <input type="number" name="id" value="{{ $task->id }}" class="hidden">
+                                        @if ($task->did_day === null)
                                             <button type="submit" class="btn btn-success"
                                                 title="Marcar tarefa como realizada."><svg
                                                     xmlns="http://www.w3.org/2000/svg" width="30" height="30"
@@ -96,10 +97,10 @@
                                             </button>
                                         @endif
                                     </form>
-                                    <form action="{{ route('plan.destroy', $plan->id) }}" method="post">
-                                    @method('delete')
-                                    @csrf
-                                        <button type="submit" class="btn btn-danger w-100 mt-2"
+                                    <form action="{{ route('task.destroy', $task->id) }}" method="post">
+                                        @method('delete')
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger mt-2"
                                             title="Retira a tarefa da fila."><svg xmlns="http://www.w3.org/2000/svg"
                                                 width="30" height="30" fill="currentColor" class="bi bi-trash3"
                                                 viewBox="0 0 16 16">
@@ -107,6 +108,20 @@
                                                     d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
                                             </svg>
                                             Apagar
+                                        </button>
+                                    </form>
+
+                                    <form action="{{ route('customer.show', ['customer' => $task->customer_id]) }}" method="get">
+
+                                        @csrf
+                                        <button type="submit" class="btn border-dark mt-2"
+                                            title="Consulta dados do cliente."><svg xmlns="http://www.w3.org/2000/svg"
+                                                width="30" height="30" fill="currentColor" class="bi bi-search"
+                                                viewBox="0 0 16 16">
+                                                <path
+                                                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                                            </svg>
+                                            Consultar dados do cliente
                                         </button>
                                     </form>
                                 </div>
@@ -120,19 +135,19 @@
                     <nav aria-label="Page navigation">
                         <ul class="pagination">
                             <li class="page-item">
-                                <a class="page-link bg-teal text-light" href="{{ $plans->previousPageUrl() }}"
+                                <a class="page-link bg-teal text-light" href="{{ $tasks->previousPageUrl() }}"
                                     aria-label="Previous">
                                     <span aria-hidden="true">&laquo;</span>
                                 </a>
                             </li>
-                            @for ($i = 1; $i <= $plans->lastPage(); $i++)
-                                <li class="page-item {{ $plans->currentPage() == $i ? 'active' : '' }}">
+                            @for ($i = 1; $i <= $tasks->lastPage(); $i++)
+                                <li class="page-item {{ $tasks->currentPage() == $i ? 'active' : '' }}">
                                     <a class="page-link bg-teal text-light"
-                                        href="{{ $plans->url($i) }}">{{ $i }}</a>
+                                        href="{{ $tasks->url($i) }}">{{ $i }}</a>
                                 </li>
                             @endfor
                             <li class="page-item">
-                                <a class="page-link bg-teal text-light" href="{{ $plans->nextPageUrl() }}"
+                                <a class="page-link bg-teal text-light" href="{{ $tasks->nextPageUrl() }}"
                                     aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
                                 </a>

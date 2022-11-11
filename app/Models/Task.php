@@ -13,7 +13,7 @@ class Task extends Model
         'id',
         'user_id',
         'customer_id',
-        'schedule_for_day',
+        'scheduled_for_day',
         'service_value',
         'did_day'
     ];

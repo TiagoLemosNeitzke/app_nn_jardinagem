@@ -33,7 +33,7 @@
         }
 
         .bg-teal {
-            background-color: #20c997;
+            background-color: #d8e0d5;
         }
 
         .active>.page-link {
@@ -49,14 +49,18 @@
             display: flex;
             justify-content: end;
         }
+
+        .bg {
+            background: #899286;
+        }
     </style>
 </head>
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-success shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg shadow-sm">
             <div class="container">
-                <a class="navbar-brand text-light fw-bolder" href="{{ url('/') }}" title="Voltar para o site">
+                <a class="navbar-brand fw-bolder" href="{{ url('/') }}" title="Voltar para o site">
                     {{ config('app.name', 'Laravel') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -73,20 +77,20 @@
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link text-light" href="{{ route('login') }}"
+                                    <a class="nav-link" href="{{ route('login') }}"
                                         title="Entrar no sistema">{{ __('Login') }}</a>
                                 </li>
                             @endif
 
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link text-light" href="{{ route('register') }}"
+                                    <a class="nav-link" href="{{ route('register') }}"
                                         title="Criar conta">{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else
                             <li class="nav-item">
-                                <a class="nav-link fw-bold text-light" href="{{ route('logout') }}"
+                                <a class="nav-link fw-bold" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();"
                                     title="Sair do sistema"><svg xmlns="http://www.w3.org/2000/svg" width="30"
@@ -120,9 +124,9 @@
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-lg-0mb-2">
-                            <li class="nav-item dropdown fw-bold btn btn-success me-2 btn-sm">
-                                <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown"
-                                    role="button" data-bs-toggle="dropdown" aria-expanded="false" title="Clientes"><svg
+                            <li class="nav-item dropdown fw-bold btn btn-light me-2 btn-sm">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false" title="Clientes"><svg
                                         xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
                                         class="bi bi-people" viewBox="0 0 16 16">
                                         <path
@@ -130,23 +134,23 @@
                                     </svg>
                                     Clientes
                                 </a>
-                                <ul class="dropdown-menu bg-success" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item text-light" href="{{ route('customer.index') }}"
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="{{ route('customer.index') }}"
                                             title="Lista todos os clientes">Todos os
                                             clientes</a>
                                     </li>
                                     <li>
                                         <hr class="dropdown-divider bg-light">
                                     </li>
-                                    <li><a class="dropdown-item text-light" href="{{ route('customer.create') }}"
+                                    <li><a class="dropdown-item" href="{{ route('customer.create') }}"
                                             title="Cadastrar cliente">Cadastrar</a>
                                     </li>
                                 </ul>
                             </li>
 
-                            <li class="nav-item dropdown fw-bold btn btn-success me-2 btn-sm">
-                                <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown"
-                                    role="button" data-bs-toggle="dropdown" aria-expanded="false"
+                            <li class="nav-item dropdown fw-bold btn btn-light me-2 btn-sm">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false"
                                     title="Gerenciar receitas e despesas"><svg xmlns="http://www.w3.org/2000/svg"
                                         width="30" height="30" fill="currentColor" class="bi bi-cash"
                                         viewBox="0 0 16 16">
@@ -156,34 +160,25 @@
                                     </svg>
                                     Finanças
                                 </a>
-                                <ul class="dropdown-menu bg-success" aria-labelledby="navbarDropdown">
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <li class="nav-item">
-                                        <a class="nav-link fw-bold text-light btn btn-success me-2"
-                                            href="{{ route('toReceive.index') }}" title="À receber">À
+                                        <a class="dropdown-item" href="{{ route('toReceive.index') }}"
+                                            title="À receber">À
                                             Receber</a>
                                     </li>
                                     <li>
                                         <hr class="dropdown-divider bg-light">
-                                        {{-- </li>
+
                                     <li class="nav-item">
-                                        <a class="nav-link fw-bold text-light btn btn-success me-2" href="#"
-                                            title="À pagar">À
-                                            Pagar</a>
-                                    </li>
-                                    <li>
-                                        <hr class="dropdown-divider bg-light">
-                                    </li> --}}
-                                    <li class="nav-item">
-                                        <a class="nav-link fw-bold text-light btn btn-success me-2" href="#"
-                                            title="Registrar uma despesa">Registrar
+                                        <a class="dropdown-item" href="#" title="Registrar uma despesa">Registrar
                                             Despesa</a>
                                     </li>
                                 </ul>
                             </li>
 
-                            <li class="nav-item dropdown fw-bold btn btn-success me-2 btn-sm">
-                                <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown"
-                                    role="button" data-bs-toggle="dropdown" aria-expanded="false" title="Clientes"><svg
+                            <li class="nav-item dropdown fw-bold btn btn-light me-2 btn-sm">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false" title="Clientes"><svg
                                         xmlns="http://www.w3.org/2000/svg" width="30" height="30"
                                         fill="currentColor" class="bi bi-journal-bookmark" viewBox="0 0 16 16">
                                         <path fill-rule="evenodd"
@@ -195,26 +190,26 @@
                                     </svg>
                                     Agenda
                                 </a>
-                                <ul class="dropdown-menu bg-success" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item text-light" href="{{ route('plan.index') }}"
-                                            title="Lista todos os clientes">Todos os
-                                            Serviços</a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="{{ route('task.index') }}"
+                                            title="Lista todos os clientes">Agendamentos</a>
                                     </li>
 
                                     <li>
                                         <hr class="dropdown-divider bg-light">
                                     </li>
-                                    <li><a class="dropdown-item text-light" href="{{ route('plan.create') }}"
+                                    <li><a class="dropdown-item" href="{{ route('customer.index') }}"
                                             title="Cadastrar cliente">Abrir Chamado</a>
                                     </li>
                                 </ul>
                             </li>
 
                         </ul>
-                        <form class="d-flex">
+                        <form class="d-flex" action="{{ route('customer.search') }}" method="get">
+                            @csrf
                             <input class="form-control me-2" type="search" placeholder="Nome do Cliente"
-                                aria-label="Search">
-                            <button class="btn btn-success fw-bold" type="submit" title="Buscar cliente"><svg
+                                aria-label="Search" name="name">
+                            <button class="btn btn-light fw-bold" type="submit" title="Buscar cliente"><svg
                                     xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
                                     class="bi bi-search" viewBox="0 0 16 16">
                                     <path
@@ -229,7 +224,6 @@
 
         <main class="py-4">
             @yield('content')
-            @yield('customer')
             @yield('formCustomer')
             @yield('editCustomer')
         </main>

@@ -18,7 +18,7 @@ class CustomerController extends Controller
      */
     public function index(Request $request)
     {
-        $customers = $this->customer->paginate(8);
+        $customers = $this->customer->with('user')->paginate(8);
         if ($request->message) {
             return view('app.customers', ['customers' => $customers, 'message' => $request->message]);
         } else {
@@ -44,34 +44,39 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
+        $customer = $this->customer->where('name', $request->get('name'))->first();
         
-        $request->validate($this->customer->rules(), $this->customer->feedback());
-       
-        if ($request->expiration_day === null || $request->expiration_day >= 1 && $request->expiration_day <= 31) {
-            
+        if ($customer === null) {
             $this->customer->create([
+            'user_id' => auth()->user()->id,
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
-            'address' => $request->address,
-            'type_service' => $request->type_service,
-            'service_price' => $request->service_price,
-            'is_monthly' => $request->is_monthly,
-            'expiration_day' => $request->expiration_day
+            'street' => $request->street,
+            'street_number' => $request->street_number,
+            'district' => $request->district,
+            'city' => $request->city,
+            'state' => $request->state
         ]);
-            return redirect()->route('customer.index', ['message' => 'Cliente cadastrado com sucesso!']);
+            return view('app.customers', ['message' => 'Cliente cadastrado com sucesso!']);
         }
+
+        if ($customer->name === $request->get('name')) {
+            
+            return view('app.customers', ['error' => 'Cliente já possui cadastro! Verifique o cadastro de clientes. [001]']);
+        } 
     }
 
     /**
      * Display the specified resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function show(Customer $customer)
+    public function show(Customer $customer, Request $request)
     {
-        return view('app.showCustomer', ['customer' => $customer]);
+        return view('app.showCustomer', ['customer' => $customer, 'user' => $request->get('user')]);
     }
 
     /**
@@ -94,16 +99,8 @@ class CustomerController extends Controller
      */
     public function update(Request $request, Customer $customer)
     {
-        $request->validate($this->customer->rules(), $this->customer->feedback());
-        if ($customer->expiration_day <=31 && $customer->expiration_day >= 1) {
-            $this->customer->rules();
-            $customer->update($request->all());
-            return redirect()->route('customer.index', ['message' => 'Cadastrado atualizado com sucesso!']);
-        } else {
-            return view('app.formCustomer', ['error' => 'Erro ao salvar osa dados. Confira o preenchimento do fromulário e tente novamente']);
-        }
-        
-        dd($customer);
+        $customer->update($request->all());
+        return redirect()->route('customer.index', ['message' => 'Cadastrado atualizado com sucesso!']);
     }
 
     /**
@@ -114,6 +111,12 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        dd('destroy');
+        //$customer = $this->customer->destroy($customer->id);
+        $customer = 0;
+        if ($customer) {
+            return redirect()->route('customer.index', ['message' => 'Cliente Removido com sucesso da nossa base de dados.']);
+        } else {
+            return view('app.customers', ['error' => 'Ocorreu um erro ao tentar remover os dados do cliente. Tente novamente ou entre em contato com o suporte. [002]']);
+        }
     }
 }

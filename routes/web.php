@@ -19,12 +19,13 @@ Route::get('/', function () {
 
 Auth::routes(['verify' => true]);
 
+Route::get('/search', [App\Repository\CustomerRepository::class, 'getCustomerName'])->name('customer.search');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('verified');
 
-Route::resource('customer', '\App\Http\Controllers\CustomerController')->middleware('verified');
+Route::resource('customer', 'App\Http\Controllers\CustomerController')->middleware('verified');
 
-Route::resource('plan', 'App\Http\Controllers\PlanController')->middleware('verified');
+Route::resource('task', 'App\Http\Controllers\TaskController')->middleware('verified');
 
 Route::resource('toReceive', 'App\Http\Controllers\ToReceiveController')->middleware('verified');
 

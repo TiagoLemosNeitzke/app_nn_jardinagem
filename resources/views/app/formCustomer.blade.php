@@ -31,7 +31,7 @@
             @endif
 
             @csrf
-            {{ $errors }}
+
             @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
@@ -41,6 +41,14 @@
                     </ul>
                 </div>
             @endif
+
+            <div class="row mb-3">
+                <label for="inputId" class="col-sm-2 col-form-label">ID do Cliente</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="inputID" name="id"
+                        value="{{ $customer->id ?? '' }}" readonly>
+                </div>
+            </div>
             <div class="row mb-3">
                 <label for="inputName" class="col-sm-2 col-form-label">Nome</label>
                 <div class="col-sm-10">
@@ -66,102 +74,52 @@
             </div>
 
             <div class="row mb-3">
-                <label for="inputAddress" class="col-sm-2 col-form-label">Endereço</label>
-                <div class="col-sm-10">
-                    <input type="phone" class="form-control" id="inputAddress" name="address"
-                        value="{{ $customer->address ?? '' }}" required>
+                <label for="inputStreet" class="col-sm-2 col-form-label">Rua</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="inputStreet" name="street"
+                        value="{{ $customer->street ?? '' }}" required>
+                </div>
+                <lebel class="col-form-label col-sm-2 pt-0" for="inputNumber">Numero</lebel>
+                <div class="col-sm-2">
+                    <input id="inputNumber" class="form-control" type="number" name="street_number"
+                        value="{{ $customer->street_number ?? '' }}">
                 </div>
             </div>
 
             <div class="row mb-3">
-                <legend class="col-form-label col-sm-2 pt-0">Qual é o serviço?</legend>
+                <label for="inputDistrict" class="col-sm-2 col-form-label">Bairro</label>
                 <div class="col-sm-10">
-                    <select class="form-select" aria-label="Qual é o serviço?" required name="type_service">
-                        <option selected>{{ $customer->type_service ?? '' }}</option>
-                        <option value="Jardinagem">Jardinagem</option>
-                        <option value="Piscina">Piscina</option>
-                        <option value="Jardinagem|Piscina">Jardinagem|Piscina</option>
-                    </select>
+                    <input type="text" class="form-control" id="inputDistrict" name="district"
+                        value="{{ $customer->district ?? '' }}">
                 </div>
-
             </div>
 
             <div class="row mb-3">
-                <label for="inputPrice" class="col-sm-2 col-form-label">Valor do serviço</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputPrice" name="service_price"
-                        value="{{ $customer->service_price ?? '' }}">
+                <label for="inputCity" class="col-sm-2 col-form-label">Cidade</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="inputCity" name="city"
+                        value="{{ $customer->city ?? '' }}">
+                </div>
+
+                <label for="inputState" class="col-sm-2 col-form-label">Estado</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" id="inputState" name="state"
+                        value="{{ $customer->state ?? 'MS' }}">
                 </div>
             </div>
 
-            <fieldset class="row mb-3">
-                <legend class="col-form-label col-sm-2 pt-0">É mensalidade?</legend>
-                <div class="col-sm-10">
-
-                    @if (isset($customer->is_monthly))
-                        {{-- If is monthly I am check the radio --}}
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" id="gridRadios1" value="1" required
-                                name="is_monthly" checked>
-
-                            <label class="form-check-label" for="gridRadios1">
-                                @if ($customer->is_monthly)
-                                    Sim
-                                @else
-                                    Não
-                                @endif
-                            </label>
-
-                        </div>
-                        {{-- I am printing the other option --}}
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" id="gridRadios1" value="0" required
-                                name="is_monthly">
-
-                            <label class="form-check-label" for="gridRadios1">
-                                @if ($customer->is_monthly)
-                                    Não
-                                @else
-                                    Sim
-                                @endif
-                            </label>
-
-                        </div>
+            <div class="mb-3 pe-4">
+                <button class="btn btn-success float-end fw-bold" type="submit">
+                    @if (isset($customer))
+                        Salvar
                     @else
-                        {{--  --}}
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" id="gridRadios1" value="1" required
-                                name="is_monthly" checked>
-
-                            <label class="form-check-label" for="gridRadios1">
-                                Sim
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" id="gridRadios2" value="0" required
-                                name="is_monthly">
-                            <label class="form-check-label" for="gridRadios2">
-                                Não
-                            </label>
-                        </div>
+                        Cadastrar
                     @endif
-            </fieldset>
-            <div class="row mb-3">
-                <label for="inputExpiration" class="col-sm-2 col-form-label">Mensalidade vence dia?</label>
-                <div class="col-sm-10">
-                    <input type="number" class="form-control" id="inputExpiration" name="expiration_day"
-                        value="{{ $customer->expiration_day ?? '' }}">
-                </div>
+
+                </button>
+
+                <a class="btn btn-outline-success float-end me-2" href="{{ route('customer.index') }}">Cancelar</a>
             </div>
-
-            <button class="btn btn-success float-end fw-bold" type="submit">
-                @if (isset($customer))
-                    Salvar
-                @else
-                    Cadastrar
-                @endif
-
-            </button>
             </form>
             {{-- form end --}}
         </div>

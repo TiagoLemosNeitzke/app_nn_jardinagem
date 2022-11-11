@@ -18,24 +18,32 @@
                 </div>
             @endif
             <div class="card-body">
-                <h5 class="card-title">Busque pelo cadastro do cliente preenchendo um dos campos abaixo</h5>
-                <p>Após a confirmação dos dado o cliente será adicionado a fila de espera.</p>
-                <form class="needs-validation" novalidate action="{{ route('plan.store') }}" method="post">
+                <h5 class="card-title">Confirme os dados do cliente</h5>
+                <p>Após a confirmação dos dados clique no botão agendar e o cliente será adicionado a fila de espera.</p>
+                <form class="" action="{{ route('task.store') }}" method="post">
                     @csrf
                     <div class="mb-3">
                         <label for="name" class="form-label fw-bold">Nome do cliente:</label>
-                        <input type="text" class="form-control" id="name" aria-describedby="idHelpName"
-                            name="name" value="{{ $name ?? '' }}">
-                        <div id="idHelpName" class="form-text">Preencha este campo caso queira buscar por nome do cliente.
-                        </div>
+                        <input type="text" class="form-control" id="name" name="name" value="{{ $name ?? '' }}" readonly>
 
                     </div>
                     <div class="mb-3">
                         <label for="id" class="form-label fw-bold">Id do cliente:</label>
                         <input type="number" class="form-control" id="id" aria-describedby="idHelp"
-                            name="customer_id" value="{{ $id ?? '' }}">
-                        <div id="idHelp" class="form-text">Preencha este campo caso queira buscar pelo ID do cliente
-                        </div>
+                            name="customer_id" value="{{ $id ?? '' }}" readonly>
+                       
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="scheduled_for_day" class="form-label fw-bold">Agendar para dia:</label>
+                        <input type="date" class="form-control" id="scheduled_for_day" name="scheduled_for_day" value="{{ $scheduled_for_day ?? '' }}" required>
+                       
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="service_value" class="form-label fw-bold">Valor do Serviço:</label>
+                        <input type="text" class="form-control" id="service_value" name="service_value" value="{{ $service_value ?? '' }}" required>
+                       
                     </div>
                     <button type="submit" class="btn btn-success">Agendar</button>
                 </form>
