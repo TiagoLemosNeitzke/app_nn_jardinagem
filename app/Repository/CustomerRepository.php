@@ -14,7 +14,9 @@ class CustomerRepository
 
     public function getCustomerName(Request $request)
     {
-        $customer = $this->customer->where('name', $request->name)->first();
+        $parameters = '%'.$request->name.'%';
+       
+        $customer = $this->customer->where('name','like', $parameters)->first();
         return view('app.showCustomer', ['customer' => $customer]);
     }
 }
