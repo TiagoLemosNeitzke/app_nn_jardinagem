@@ -19,23 +19,11 @@ class ToReceiveController extends Controller
       */
      public function index()
      {
-         $toReceives = $this->toReceive->paginate(4);
+         $toReceives = $this->toReceive->with('user', 'customer')->orderBy('created_at', 'asc')->paginate(4);
          return view('app.toReceive', ['toReceives' => $toReceives]);
      }
 
-     /**
-      * Show the form for creating a new resource.
-      *
-      * @return \Illuminate\Http\Response
-      */
-     public function create(Request $request)
-     {
-         $value = $request->get('value');
     
-         $customer = $request->get('customer');
-        
-         return view('app.toReceiveCreate', ['customer' => $customer, 'value' => $value]);
-     }
 
      /**
       * Store a newly created resource in storage.
