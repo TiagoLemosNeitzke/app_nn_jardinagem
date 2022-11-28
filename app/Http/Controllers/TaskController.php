@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Task;
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use App\Http\Requests\TaskRequest;
 
 class TaskController extends Controller
 {
@@ -18,19 +19,18 @@ class TaskController extends Controller
       * @return \Illuminate\Http\Response
       */
      public function index(Request $request)
-     {
-         if ($request->filter === 'all') {
-             $tasks = $this->task->orderBy('created_at', 'asc')->with('customer')->paginate(4);
+     { 
+        if ($request->filter === 'all') {
+             $tasks = $this->task->orderBy('created_at', 'asc')->with('customer')->paginate(9);
              return view('app.task', ['tasks' => $tasks, 'filter' => 'all']);
          } elseif ($request->filter === 'open') {
-             $tasks = $this->task->where('status', 1)->orderBy('created_at', 'asc')->with('customer')->paginate(4);
+             $tasks = $this->task->where('status', 1)->orderBy('created_at', 'asc')->with('customer')->paginate(9);
              return view('app.task', ['tasks' => $tasks, 'filter' => 'open']);
          } elseif ($request->filter === 'done') {
-             $tasks = $this->task->where('status', 0)->orderBy('created_at', 'asc')->with('customer')->paginate(4);
+             $tasks = $this->task->where('status', 0)->orderBy('created_at', 'asc')->with('customer')->paginate(9);
              return view('app.task', ['tasks' => $tasks, 'filter' => 'done']);
          } else {
-             $tasks = $this->task->orderBy('created_at', 'desc')->with('user')->paginate(4);
-             
+             $tasks = $this->task->orderBy('scheduled_for_day', 'asc')->with('user')->paginate(9);
              return view('app.task', ['tasks' => $tasks, 'filter' => 'all']);
          }
      }
@@ -51,7 +51,7 @@ class TaskController extends Controller
       * @param  \Illuminate\Http\Request  $request
       * @return \Illuminate\Http\Response
       */
-     public function store(Request $request)
+     public function store(TaskRequest $request)
      {
        
         $customer = Customer::where('name', $request->name)->orWhere('id', $request->id)->first();
@@ -64,13 +64,7 @@ class TaskController extends Controller
                  return view('app.createTask', ['error' => 'Cliente já possui agendamento. Consulte seus agendamentos.']);
              } else {
                
-                 $task = $this->task->create([
-                   
-                    'user_id' => auth()->user()->id,
-                    'customer_id' => $customer->id,
-                    'scheduled_for_day' => $request->scheduled_for_day,
-                    'service_value' => $request->service_value
-                ]);
+                 $task = Task::create($request->validated());
                  return view('app.createTask', ['message' => 'Agendamento realizado com sucesso!']);
              }
          }

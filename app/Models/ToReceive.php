@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 class ToReceive extends Model
 {
     use HasFactory;
+   
     protected $fillable = ['id','task_id','user_id', 'customer_id', 'value', 'status'];
 
     public function user()

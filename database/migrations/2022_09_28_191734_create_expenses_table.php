@@ -17,6 +17,7 @@ return new class extends Migration {
             $table->foreignId('user_id')->constrained();
             $table->string('expense_amount'); // valor da despesa
             $table->string('description', 250);
+            $table->date('date_expense');
             $table->timestamps();
         });
     }

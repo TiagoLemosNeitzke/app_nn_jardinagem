@@ -4,7 +4,9 @@
         <div class="col-sm-6 mb-2">
             <div class="card border-success border">
                 <div class="card-body">
-                    <p class="mb-4">Cliente foi cadastrado pelo usuário <b>{{ $user }}</b></p>
+                   @if (isset($user))
+                        <p class="mb-4">Cliente foi cadastrado pelo usuário <b>{{ $user }}</b></p>
+                   @endif
                     <h5 class="card-title mb-2">Nome: <b>{{ $customer->name }}</b></h5>
                     <h6><b>ID: </b>{{ $customer->id }}</h6>
                     <p><b>Telefone: </b>{{ $customer->phone }}</p>

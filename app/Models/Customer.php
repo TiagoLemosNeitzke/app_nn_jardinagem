@@ -26,4 +26,9 @@ class Customer extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function task()
+    {
+        return $this->hasOne(Task::class);
+    }
 }

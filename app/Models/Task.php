@@ -15,11 +15,21 @@ class Task extends Model
         'customer_id',
         'scheduled_for_day',
         'service_value',
+        'status',
         'did_day'
+    ];
+
+     protected $casts = [
+        'status' => TaskStatus::class
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
     }
 }

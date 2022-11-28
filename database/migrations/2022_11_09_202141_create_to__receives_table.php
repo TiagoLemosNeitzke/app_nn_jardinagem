@@ -12,7 +12,7 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('to__receives', function (Blueprint $table) {
+        Schema::create('to_receives', function (Blueprint $table) {
             $table->id();
             $table->foreignId('task_id')->constrained();
             $table->foreignId('user_id')->constrained();
@@ -30,6 +30,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('to__receives');
+        Schema::dropIfExists('to_receives');
     }
 };

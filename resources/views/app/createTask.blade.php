@@ -45,7 +45,8 @@
                         <input type="text" class="form-control" id="service_value" name="service_value" value="{{ $service_value ?? '' }}" required>
                        
                     </div>
-                    <button type="submit" class="btn btn-success">Agendar</button>
+                    <button type="submit" class="btn btn-success" title="Salvar agendamento">Agendar</button>
+                    <a class="btn btn-outline-secondary" href="{{ route('customer.index') }}" title="Voltar">Voltar</a>
                 </form>
             </div>
         </div>

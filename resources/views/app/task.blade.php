@@ -59,25 +59,29 @@
                     </div>
                 </div>
                 @foreach ($tasks as $task)
-                    <div class="col-sm-12 mb-2">
+                    <div class="col-sm-4 mb-2">
                         <div class="card border-dark border">
                             <div class="card-body">
-                                <h5 class="card-title fw-bold mb-4">ID da tarefa: {{ $task->id }}</h5>
-                                <h6><b>ID do cliente: </b>{{ $task->customer_id }}</h6>
+                                
+                                <h6 class="fw-bold">Cliente: {{ $task->customer->name }}</h6>
 
-                                <p><b>Valor do serviço: </b>{{ $task->service_value }}</p>
+                                {{-- to do: melhorar como armazeno e exibo o valor do serviço --}}
+                                <p class="fw-bold">Valor do serviço: R$ {{ $task->service_value }},00</p>
 
-                                <p class="{{ $task->did_day ? 'text-danger' : 'text-success' }}"><b>Chamado aberto?
-                                    </b>
+                                <p class="fw-bold {{ $task->did_day ? 'text-danger' : 'text-success' }}">Chamado aberto?
+                                   
                                     @if ($task->did_day === null)
                                         Sim
                                     @else
                                         Não
                                     @endif
                                 </p>
-                                <p><b>Agendado para dia:
-                                    </b>{{ $task->scheduled_for_day }}
-                                </p>
+                                <p class="fw-bold">Agendado para dia:
+                                    @php
+                                        $date = explode('-',$task->scheduled_for_day);
+                                        echo "$date[2]-$date[1]-$date[0]";
+                                    @endphp
+                                </p> 
                                 <div class="container">
                                     <form action="{{ route('task.update', ['task' => $task->id]) }}" method="post">
                                         @method('put')
@@ -93,7 +97,7 @@
                                                     <path
                                                         d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z" />
                                                 </svg>
-                                                Marcar Realizado
+                                                Realizado
                                             </button>
                                         @endif
                                     </form>

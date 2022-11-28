@@ -16,9 +16,10 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('customer_id')->constrained();
-            $table->string('scheduled_for_day');
+            $table->date('scheduled_for_day');
+            $table->smallInteger('status')->default(1);
             $table->string('service_value');
-            $table->string('did_day')->nullable();
+            $table->date('did_day')->nullable();
             $table->timestamps();
         });
     }
