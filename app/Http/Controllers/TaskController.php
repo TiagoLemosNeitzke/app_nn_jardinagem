@@ -6,6 +6,7 @@ use App\Models\Task;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Http\Requests\TaskRequest;
+use Carbon\Carbon;
 
 class TaskController extends Controller
 {
@@ -19,23 +20,21 @@ class TaskController extends Controller
       * @return \Illuminate\Http\Response
       */
      public function index(Request $request)
-     { 
-            if ($request->filter === 'all') {
-             $tasks = $this->task->orderBy('scheduled_for_day', 'asc')->with('customer')->paginate(9);
+     {
+         if ($request->filter === 'all') {
+             $tasks = $this->task->orderBy('scheduled_for_day', 'asc')->paginate(9);
              
              return view('app.task', ['tasks' => $tasks, 'filter' => 'all']);
          } elseif ($request->filter === 'open') {
-             $tasks = $this->task->where('status', 1)->orderBy('scheduled_for_day', 'asc')->with('customer', 'user')->paginate(9);
+             $tasks = $this->task->where('did_day', null)->orderBy('scheduled_for_day', 'asc')->paginate(9);
              return view('app.task', ['tasks' => $tasks, 'filter' => 'open']);
          } elseif ($request->filter === 'done') {
-             $tasks = $this->task->where('status', 0)->orderBy('scheduled_for_day', 'asc')->with('customer')->paginate(9);
+             $tasks = $this->task->where('did_day', '<>', null)->orderBy('scheduled_for_day', 'asc')->paginate(9);
              return view('app.task', ['tasks' => $tasks, 'filter' => 'done']);
          } else {
-             $tasks = $this->task->orderBy('scheduled_for_day', 'asc')->with('user')->paginate(9);
+             $tasks = $this->task->orderBy('scheduled_for_day', 'asc')->paginate(9);
            
              return view('app.task', ['tasks' => $tasks, 'filter' => 'all']);
-            
-
          }
      }
 
@@ -46,7 +45,7 @@ class TaskController extends Controller
       */
      public function create(Request $request)
      {
-        return view('app.createTask', ['id' => $request->id, 'name' => $request->name]);
+         return view('app.createTask', ['id' => $request->id, 'name' => $request->name]);
      }
 
      /**
@@ -57,8 +56,7 @@ class TaskController extends Controller
       */
      public function store(TaskRequest $request)
      {
-       
-        $customer = Customer::where('name', $request->name)->orWhere('id', $request->id)->first();
+         $customer = Customer::where('name', $request->name)->orWhere('id', $request->id)->first();
          if ($customer === null) {
              return view('app.createTask', ['error' => 'Cliente não encontrado em nossa base de dados. Consulte sua lista de cliente.']);
          }
@@ -67,7 +65,6 @@ class TaskController extends Controller
              if ($task) {
                  return view('app.createTask', ['error' => 'Cliente já possui agendamento. Consulte seus agendamentos.']);
              } else {
-               
                  $task = Task::create($request->validated());
                  return view('app.createTask', ['message' => 'Agendamento realizado com sucesso!']);
              }
@@ -105,18 +102,30 @@ class TaskController extends Controller
       */
      public function update(Request $request)
      {
-        dd($request->all());
-        /* $value = $request->get('value');
-         $task = $task->where('id', $task->id)->with('customer')->first();
+        // dd($request->id);
+         // dd(date('d-m-y'));
+         $task = $this->task->where('id', $request->id)->first();
+       
+         $task->did_day =  date('y-m-d');
+         $task = $task->save();
+         dd($task);
+         //$task = $this->task->did_day = Carbon() ;
          
-         $task->status = 0;
-         $task->update();
-         
+
+
+
+
+
+
+
+
+
+
          if ($task) {
              return redirect()->route('toReceive.create', ['customer' => $task->customer, 'value' => $value]);
          } else {
              return view('app.task', ['error' => 'Erro: Não foi possível marcar o serviço como realizado. Tente novamente mais tarde.']);
-         } */
+         }
      }
 
      /**

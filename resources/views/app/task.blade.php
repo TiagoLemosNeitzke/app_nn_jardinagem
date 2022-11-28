@@ -62,26 +62,36 @@
                     <div class="col-sm-4 mb-2">
                         <div class="card border-dark border">
                             <div class="card-body">
-                                
+
                                 <h6 class="fw-bold">Cliente: {{ $task->customer->name }}</h6>
 
                                 {{-- to do: melhorar como armazeno e exibo o valor do serviço --}}
                                 <p class="fw-bold">Valor do serviço: R$ {{ $task->service_value }},00</p>
 
                                 <p class="fw-bold {{ $task->did_day ? 'text-danger' : 'text-success' }}">Chamado aberto?
-                                   
+
                                     @if ($task->did_day === null)
                                         Sim
                                     @else
                                         Não
                                     @endif
                                 </p>
+
+                                @if ($task->did_day !== null)
+                                    <p class="fw-bold">
+                                        Serviço realizado dia: @php
+                                            $date = explode('-', $task->did_day);
+                                            echo "$date[2]-$date[1]-$date[0]";
+                                        @endphp
+                                    </p>
+                                @endif
+
                                 <p class="fw-bold">Agendado para dia:
                                     @php
-                                        $date = explode('-',$task->scheduled_for_day);
+                                        $date = explode('-', $task->scheduled_for_day);
                                         echo "$date[2]-$date[1]-$date[0]";
                                     @endphp
-                                </p> 
+                                </p>
                                 <div class="container">
                                     <form action="{{ route('task.update', ['task' => $task->id]) }}" method="post">
                                         @method('put')
@@ -115,7 +125,8 @@
                                         </button>
                                     </form>
 
-                                    <form action="{{ route('customer.show', ['customer' => $task->customer_id]) }}" method="get">
+                                    <form action="{{ route('customer.show', ['customer' => $task->customer_id]) }}"
+                                        method="get">
 
                                         @csrf
                                         <button type="submit" class="btn border-dark mt-2"
