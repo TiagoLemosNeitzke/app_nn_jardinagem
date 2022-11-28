@@ -6,6 +6,7 @@ use App\Models\Task;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Http\Requests\TaskRequest;
+use App\Models\ToReceive;
 use Carbon\Carbon;
 
 class TaskController extends Controller
@@ -102,27 +103,21 @@ class TaskController extends Controller
       */
      public function update(Request $request)
      {
-        // dd($request->id);
-         // dd(date('d-m-y'));
          $task = $this->task->where('id', $request->id)->first();
-       
          $task->did_day =  date('y-m-d');
          $task = $task->save();
-         dd($task);
-         //$task = $this->task->did_day = Carbon() ;
-         
-
-
-
-
-
-
-
-
-
-
+       
          if ($task) {
-             return redirect()->route('toReceive.create', ['customer' => $task->customer, 'value' => $value]);
+            $task = $this->task->where('id', $request->id)->first();
+            
+            ToReceive::create([
+                'task_id' => $task->id,
+                'user_id' => $task->user_id,
+                'customer_id' => $task->customer_id,
+                'value' => $task->service_value,
+                'status' => 1
+            ]);
+            return redirect()->route('task.index');
          } else {
              return view('app.task', ['error' => 'Erro: Não foi possível marcar o serviço como realizado. Tente novamente mais tarde.']);
          }
