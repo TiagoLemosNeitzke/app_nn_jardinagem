@@ -14,7 +14,7 @@
             @endif
         </div>
         <div class="row">
-            {{ $tasks }}
+           
             @if (isset($tasks))
                 @if ($filter === 'open')
                     <p class="text-center">Aqui são listados todos os chamados em aberto</p>
