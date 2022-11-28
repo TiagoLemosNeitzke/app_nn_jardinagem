@@ -23,25 +23,6 @@ class ToReceiveController extends Controller
          return view('app.toReceive', ['toReceives' => $toReceives]);
      }
 
-    
-
-     /**
-      * Store a newly created resource in storage.
-      *
-      * @param  \Illuminate\Http\Request  $request
-      * @return \Illuminate\Http\Response
-      */
-     public function store(Request $request)
-     {
-         $this->toReceive->create([
-             'client_id' => $request->client_id,
-             'value' => $request->value,
-             'paid_out' => false
-         ]);
-   
-         return redirect()->route('toReceive.index');
-     }
-
      /**
       * Display the specified resource.
       *
