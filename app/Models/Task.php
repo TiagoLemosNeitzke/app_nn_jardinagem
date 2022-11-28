@@ -19,10 +19,6 @@ class Task extends Model
         'did_day'
     ];
 
-     protected $casts = [
-        'status' => TaskStatus::class
-    ];
-
     public function user()
     {
         return $this->belongsTo(User::class);
