@@ -42,7 +42,7 @@ class ToReceiveController extends Controller
       */
      public function edit(ToReceive $toReceive)
      {
-        //
+        dd('edit');
      }
 
      /**
@@ -54,7 +54,7 @@ class ToReceiveController extends Controller
       */
      public function update(Request $request, ToReceive $toReceive)
      {
-        //
+        dd('update');
      }
 
      /**
@@ -65,6 +65,6 @@ class ToReceiveController extends Controller
       */
      public function destroy(ToReceive $toReceive)
      {
-        //
+        dd('destroy', $toReceive);
      }
 }
