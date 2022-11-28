@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\CheckoutStatus;
 use App\Models\Task;
 use App\Models\Customer;
 use Illuminate\Http\Request;
@@ -20,18 +21,22 @@ class TaskController extends Controller
       */
      public function index(Request $request)
      { 
-        if ($request->filter === 'all') {
-             $tasks = $this->task->orderBy('created_at', 'asc')->with('customer')->paginate(9);
+            if ($request->filter === 'all') {
+             $tasks = $this->task->orderBy('scheduled_for_day', 'asc')->with('customer')->paginate(9);
+             
              return view('app.task', ['tasks' => $tasks, 'filter' => 'all']);
          } elseif ($request->filter === 'open') {
-             $tasks = $this->task->where('status', 1)->orderBy('created_at', 'asc')->with('customer')->paginate(9);
+             $tasks = $this->task->where('status', 1)->orderBy('scheduled_for_day', 'asc')->with('customer', 'user')->paginate(9);
              return view('app.task', ['tasks' => $tasks, 'filter' => 'open']);
          } elseif ($request->filter === 'done') {
-             $tasks = $this->task->where('status', 0)->orderBy('created_at', 'asc')->with('customer')->paginate(9);
+             $tasks = $this->task->where('status', 0)->orderBy('scheduled_for_day', 'asc')->with('customer')->paginate(9);
              return view('app.task', ['tasks' => $tasks, 'filter' => 'done']);
          } else {
              $tasks = $this->task->orderBy('scheduled_for_day', 'asc')->with('user')->paginate(9);
+           
              return view('app.task', ['tasks' => $tasks, 'filter' => 'all']);
+            
+
          }
      }
 
