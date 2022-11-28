@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\CheckoutStatus;
 use App\Models\Task;
 use App\Models\Customer;
 use Illuminate\Http\Request;
