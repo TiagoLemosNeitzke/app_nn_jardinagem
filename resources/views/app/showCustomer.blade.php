@@ -5,13 +5,13 @@
             <div class="card border-success border">
                 <div class="card-body">
                    @if (isset($user))
-                        <p class="mb-4">Cliente foi cadastrado pelo usuário <b>{{ $user }}</b></p>
+                        <p class="mb-4">Cliente foi cadastrado pelo usuário {{ $user }}</p>
                    @endif
-                    <h5 class="card-title mb-2">Nome: <b>{{ $customer->name }}</b></h5>
-                    <h6><b>ID: </b>{{ $customer->id }}</h6>
-                    <p><b>Telefone: </b>{{ $customer->phone }}</p>
-                    <p><b>Email: </b>{{ $customer->email }}</p>
-                    <p><b>Endereço: </b>{{ $customer->street }}, {{ $customer->street_number }}. {{ $customer->district }}.
+                    <h5 class="card-title fw-bold mb-2">Nome: {{ $customer->name }}</h5>
+                    
+                    <p class="fw-bold">Telefone: {{ $customer->phone }}</p>
+                    <p class="fw-bold">Email: {{ $customer->email }}</p>
+                    <p class="fw-bold">Endereço: {{ $customer->street }}, {{ $customer->street_number }}. {{ $customer->district }}.
                         {{ $customer->city }} - {{ $customer->state }}.</p>
 
                     <button type="button" class="btn btn-outline-success" data-bs-toggle="modal"
@@ -81,23 +81,23 @@
                         <form class="form-group needs-validation mt-4" action="" method="" novalidate>
                             @csrf
                             <div class="row mb-3">
-                                <label for="inputName" class="col-sm-12 col-form-label"><b>Enviar notificação de
+                                <label for="inputName" class="col-sm-12 col-form-label">Enviar notificação de
                                         serviço
-                                        para:</b></label>
+                                        para:</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="inputName" name="name"
                                         value="{{ $customer->name }}" readonly>
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="inputPhone" class="col-sm-12 col-form-label"><b>Telefone</b></label>
+                                <label for="inputPhone" class="col-sm-12 col-form-label">Telefone</label>
                                 <div class="col-sm-10">
                                     <input type="phone" class="form-control" id="inputPhone" name="phone"
                                         value="{{ $customer->phone }}">
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <label for="exampleFormControlTextarea1" class="form-label"><b>Mensagem</b></label>
+                                <label for="exampleFormControlTextarea1" class="form-label">Mensagem</label>
                                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="message">Olá! {{ $customer->name }}, iremos prestar o serviço de {{ $customer->type_service }} hoje, dia {{ date('d-m') }}. Por favor confirme se terá alguém em sua residência.</textarea>
                             </div>
 
@@ -142,23 +142,23 @@
                         <form class="form-group needs-validation mt-4" action="" method="" novalidate>
                             @csrf
                             <div class="row mb-3">
-                                <label for="inputName" class="col-sm-12 col-form-label"><b>Enviar notificação de
+                                <label for="inputName" class="col-sm-12 col-form-label">Enviar notificação de
                                         cobrança
-                                        para:</b></label>
+                                        para:</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="inputName" name="name"
                                         value="{{ $customer->name }}" readonly>
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="inputPhone" class="col-sm-12 col-form-label"><b>Telefone</b></label>
+                                <label for="inputPhone" class="col-sm-12 col-form-label">Telefone</label>
                                 <div class="col-sm-10">
                                     <input type="phone" class="form-control" id="inputPhone" name="phone"
                                         value="{{ $customer->phone }}">
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <label for="exampleFormControlTextarea1" class="form-label"><b>Mensagem</b></label>
+                                <label for="exampleFormControlTextarea1" class="form-label">Mensagem</label>
                                 <textarea class="form-control" id="messageText" rows="3" name="message">Olá! {{ $customer->name }}, não identificamos o pagamento referente ao serviço {{ $customer->type_service }}, realizado no dia (implementar dia). Caso o pagamento tenha cido efetuado, por favor desconcidere esta mensagem.</textarea>
                             </div>
 
