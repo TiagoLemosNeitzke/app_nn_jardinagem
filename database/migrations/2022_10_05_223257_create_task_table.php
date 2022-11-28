@@ -17,7 +17,6 @@ return new class extends Migration {
             $table->foreignId('user_id')->constrained();
             $table->foreignId('customer_id')->constrained();
             $table->date('scheduled_for_day');
-            $table->smallInteger('status')->default(1);
             $table->string('service_value');
             $table->date('did_day')->nullable();
             $table->timestamps();
