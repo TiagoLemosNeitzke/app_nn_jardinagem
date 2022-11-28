@@ -31,4 +31,9 @@ class Customer extends Model
     {
         return $this->hasOne(Task::class);
     }
+
+    public function toReceive()
+    {
+        return $this->hasOne(ToReceive::class);
+    }
 }

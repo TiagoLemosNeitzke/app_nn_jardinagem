@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-
-use App\Enums\ToReceiveStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -18,7 +16,10 @@ class ToReceive extends Model
         return $this->belongsTo(User::class);
     }
 
-    protected $casts = [
-        'status' => ToReceiveStatus::class
-    ];
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
+    }
+
+   
 }
