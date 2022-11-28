@@ -4,15 +4,16 @@
 
 
         @foreach ($toReceives as $toReceive)
+        
             <div class="col-sm-12 mb-2">
                 <div class="card border-success border">
                     <div class="card-body">
-                        <h5 class="card-title fw-bold mb-4">ID da Recebimento: {{ $toReceive->id }}</h5>
-                        <h6><b>ID do cliente: </b>{{ $toReceive->client_id }}</h6>
-                        <p><b>Valor do serviço: </b>R$ {{ $toReceive->value }}</p>
+
+                        <h6 class="fw-bold">Cliente: {{ $toReceive->customer->name }}</h6>
+                        <p class="fw-bold">Valor do serviço: R$ {{ $toReceive->value }}</p>
                         <p class="{{ $toReceive->paid_out ? 'text-success' : 'text-danger' }}"><b>Serviço foi pago?
                             </b>{{ $toReceive->paid_out ? 'Sim' : 'Não' }}</p>
-                        <p><b>Serviço realizado em: </b>{{ date_format($toReceive->created_at, 'd-m-y h:i:s') }}
+                        <p class="fw-bold">Serviço realizado em: {{ date_format($toReceive->created_at, 'd-m-y h:i:s') }}
                         </p>
 
                         <div class="container">
@@ -33,7 +34,7 @@
                                 </button>
                             </form>
                             <div class="row">
-                                <a href="{{ route('customer.show', $toReceive->client_id) }}"
+                                <a href="{{ route('customer.show', ['customer' => $toReceive->customer->id]) }}"
                                     class="btn btn-success w-100 mt-2" title="Ver mais dados do cliente"><svg
                                         xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
                                         class="bi bi-person" viewBox="0 0 16 16">
