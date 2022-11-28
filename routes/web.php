@@ -27,7 +27,7 @@ Route::resource('customer', 'App\Http\Controllers\CustomerController')->middlewa
 
 Route::resource('task', 'App\Http\Controllers\TaskController')->middleware('verified');
 
-Route::resource('toReceive', 'App\Http\Controllers\ToReceiveController')->middleware('verified');
+Route::resource('toReceive', 'App\Http\Controllers\ToReceiveController')->middleware('verified')->except('create');
 
 /* Route::post('/searchCustomer', function () {
     if (request()->name) {
