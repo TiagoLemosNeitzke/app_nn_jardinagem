@@ -110,7 +110,7 @@ class TaskController extends Controller
          if ($task) {
             $task = $this->task->where('id', $request->id)->first();
             
-            ToReceive::create([
+            ToReceive::updateOrCreate([
                 'task_id' => $task->id,
                 'user_id' => $task->user_id,
                 'customer_id' => $task->customer_id,
