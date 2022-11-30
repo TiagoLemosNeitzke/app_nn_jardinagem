@@ -62,9 +62,8 @@ class CustomerController extends Controller
         }
 
         if ($customer->name === $request->get('name')) {
-            
             return view('app.customers', ['error' => 'Cliente já possui cadastro! Verifique o cadastro de clientes. [001]']);
-        } 
+        }
     }
 
     /**
@@ -76,7 +75,8 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer, Request $request)
     {
-        return view('app.showCustomer', ['customer' => $customer, 'user' => $request->get('user')]);
+        $urlPrevious = url()->previous();
+        return view('app.showCustomer', ['customer' => $customer, 'user' => $request->get('user'), 'urlPrevious' => $urlPrevious]);
     }
 
     /**

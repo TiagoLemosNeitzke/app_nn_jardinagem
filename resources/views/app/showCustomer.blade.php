@@ -4,14 +4,15 @@
         <div class="col-sm-6 mb-2">
             <div class="card border-success border">
                 <div class="card-body">
-                   @if (isset($user))
+                    @if (isset($user))
                         <p class="mb-4">Cliente foi cadastrado pelo usuário {{ $user }}</p>
-                   @endif
+                    @endif
                     <h5 class="card-title fw-bold mb-2">Nome: {{ $customer->name }}</h5>
-                    
+
                     <p class="fw-bold">Telefone: {{ $customer->phone }}</p>
                     <p class="fw-bold">Email: {{ $customer->email }}</p>
-                    <p class="fw-bold">Endereço: {{ $customer->street }}, {{ $customer->street_number }}. {{ $customer->district }}.
+                    <p class="fw-bold">Endereço: {{ $customer->street }}, {{ $customer->street_number }}.
+                        {{ $customer->district }}.
                         {{ $customer->city }} - {{ $customer->state }}.</p>
 
                     <button type="button" class="btn btn-outline-success" data-bs-toggle="modal"
@@ -53,7 +54,7 @@
                                 d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                         </svg>Editar</a>
 
-                    <button class="btn btn-outline-danger mt-2"  data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <button class="btn btn-outline-danger mt-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
                             class="bi bi-pencil-square me-2" viewBox="0 0 16 16">
                             <path
@@ -61,6 +62,16 @@
                             <path fill-rule="evenodd"
                                 d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                         </svg>Excluir</button>
+
+                    <a class="btn btn-outline-secondary text-dark mt-2" href="{{ $urlPrevious}}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+                            class="bi bi-skip-backward-circle" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                            <path
+                                d="M11.729 5.055a.5.5 0 0 0-.52.038L8.5 7.028V5.5a.5.5 0 0 0-.79-.407L5 7.028V5.5a.5.5 0 0 0-1 0v5a.5.5 0 0 0 1 0V8.972l2.71 1.935a.5.5 0 0 0 .79-.407V8.972l2.71 1.935A.5.5 0 0 0 12 10.5v-5a.5.5 0 0 0-.271-.445z" />
+                        </svg>
+                        Voltar
+                    </a>
                 </div>
             </div>
         </div>
@@ -82,8 +93,8 @@
                             @csrf
                             <div class="row mb-3">
                                 <label for="inputName" class="col-sm-12 col-form-label">Enviar notificação de
-                                        serviço
-                                        para:</label>
+                                    serviço
+                                    para:</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="inputName" name="name"
                                         value="{{ $customer->name }}" readonly>
@@ -143,8 +154,8 @@
                             @csrf
                             <div class="row mb-3">
                                 <label for="inputName" class="col-sm-12 col-form-label">Enviar notificação de
-                                        cobrança
-                                        para:</label>
+                                    cobrança
+                                    para:</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="inputName" name="name"
                                         value="{{ $customer->name }}" readonly>
@@ -194,8 +205,9 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header text-danger text-center">
-                        <h5 class="modal-title" id="exampleModalLabel">Tem certeza que deseja excluir permanentemente os dados do cliente?</h5>
-                       
+                        <h5 class="modal-title" id="exampleModalLabel">Tem certeza que deseja excluir permanentemente os
+                            dados do cliente?</h5>
+
                     </div>
                     <div class="modal-body text-center">
                         Os dados não poderão ser recuperados.
@@ -203,9 +215,9 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <form action="{{ route('customer.destroy', ['customer' => $customer->id]) }}" method="post">
-                        @csrf
-                        @method('delete')
-                        <button type="submit" class="btn btn-danger">Confirmar</button>
+                            @csrf
+                            @method('delete')
+                            <button type="submit" class="btn btn-danger">Confirmar</button>
                         </form>
                     </div>
                 </div>
