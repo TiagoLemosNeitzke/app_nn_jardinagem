@@ -11,9 +11,10 @@ use Carbon\Carbon;
 
 class TaskController extends Controller
 {
-    public function __construct(Task $task)
+    public function __construct(Task $task, Customer $customer)
     {
         $this->task = $task;
+        $this->customer = $customer;
     }
      /**
       * Display a listing of the resource.
@@ -46,7 +47,9 @@ class TaskController extends Controller
       */
      public function create(Request $request)
      {
-         return view('app.createTask', ['id' => $request->id, 'name' => $request->name]);
+        $customers = $this->customer->orderBy('name', 'asc')->paginate(10);
+        //dd($customers);
+        return view('app.createTask', ['id' => $request->id, 'name' => $request->name, 'openTask' => true, 'customers' => $customers]);
      }
 
      /**
@@ -66,6 +69,7 @@ class TaskController extends Controller
              if ($task) {
                  return view('app.createTask', ['error' => 'Cliente já possui agendamento. Consulte seus agendamentos.']);
              } else {
+                dd('store de task');
                  $task = Task::create($request->validated());
                  return view('app.createTask', ['message' => 'Agendamento realizado com sucesso!']);
              }
