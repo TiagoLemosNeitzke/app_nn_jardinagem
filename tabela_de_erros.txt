@@ -1,2 +1,4 @@
 001 -> Nome do Cliente já está cadastrado na base de dados.
 002 -> Erro ao tentar remover o cadastro de um cliente. Erro acontece porque os dados não forma localizados no banco de dados e retorna 0 na variável $customer.
+003 -> Erro ao tentar marcar status da tabela toReceive como false (recebido);
+004 -> Erro ao tentar apagar um registro de toReceive;
