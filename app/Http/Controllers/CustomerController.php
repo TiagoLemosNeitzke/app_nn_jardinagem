@@ -18,7 +18,7 @@ class CustomerController extends Controller
      */
     public function index(Request $request)
     {
-        $customers = $this->customer->with('user')->paginate(8);
+        $customers = $this->customer->with('user')->orderBy('name', 'asc')->paginate(8);
         if ($request->message) {
             return view('app.customers', ['customers' => $customers, 'message' => $request->message]);
         } else {
