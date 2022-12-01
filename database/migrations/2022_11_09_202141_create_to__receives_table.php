@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->foreignId('user_id')->constrained();
             $table->foreignId('customer_id')->constrained();
             $table->string('value'); // valor que o cliente me deve
-            $table->smallInteger('status')->default(1);
+            $table->boolean('status')->default(false);
             $table->timestamps();
         });
     }
