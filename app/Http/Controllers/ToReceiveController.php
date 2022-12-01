@@ -17,10 +17,10 @@ class ToReceiveController extends Controller
       *
       * @return \Illuminate\Http\Response
       */
-     public function index()
+     public function index(Request $request)
      {
          $toReceives = $this->toReceive->with('user', 'customer')->orderBy('created_at', 'asc')->paginate(4);
-         return view('app.toReceive', ['toReceives' => $toReceives]);
+         return view('app.toReceive', ['toReceives' => $toReceives, 'message' => $request->message, 'error' => $request->error]);
      }
 
      /**
@@ -42,19 +42,27 @@ class ToReceiveController extends Controller
       */
      public function edit(ToReceive $toReceive)
      {
-        dd('edit');
+         dd('edit');
      }
 
      /**
       * Update the specified resource in storage.
       *
-      * @param  \Illuminate\Http\Request  $request
+      *
       * @param  \App\Models\ToReceive  $toReceive
       * @return \Illuminate\Http\Response
       */
-     public function update(Request $request, ToReceive $toReceive)
+     public function update(ToReceive $toReceive)
      {
-        dd('update');
+         $toReceive = $toReceive->update([
+                  'status' => 0
+                ]);
+          
+         if ($toReceive) {
+             return redirect()->route('toReceive.index', ['message' => 'Sucesso! Você marcou como recebido.']);
+         } else {
+             return redirect()->route('toReceive.index', ['error' => 'Ocorreu um erro ao tentar marcar como recebido. Tente novamente mais tarde. [003]']);
+         };
      }
 
      /**
@@ -65,6 +73,11 @@ class ToReceiveController extends Controller
       */
      public function destroy(ToReceive $toReceive)
      {
-        dd('destroy', $toReceive);
+         $toReceive = $toReceive->delete();
+         if ($toReceive) {
+             return redirect()->route('toReceive.index', ['message' => 'Sucesso! Registro apagado.']);
+         } else {
+             return redirect()->route('toReceive.index', ['error' => 'Ocorreu um erro ao tentar apagar o registro. Tente novamente mais tarde. [004]']);
+         };
      }
 }
