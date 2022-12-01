@@ -198,7 +198,7 @@
                                     <li>
                                         <hr class="dropdown-divider bg-light">
                                     </li>
-                                    <li><a class="dropdown-item" href="{{ route('customer.index') }}"
+                                    <li><a class="dropdown-item" href="{{ route('task.create') }}"
                                             title="Cadastrar cliente">Abrir Chamado</a>
                                     </li>
                                 </ul>

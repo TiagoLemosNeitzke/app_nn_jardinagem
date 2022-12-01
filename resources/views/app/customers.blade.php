@@ -16,10 +16,11 @@
                 </div>
             @else
                 <div class="row">
-                    <div class="text-center">
-                        <h4>Aqui estão listados todos os seus clientes</h4>
-                        <p>Caso você queira fazer um agendamento basta buscar pelo nome do seu cliente no campo acima.</p>
-                    </div>
+                    
+                        <div class="mb-2 text-center">
+                            <h4>Aqui estão listados todos os seus clientes.</h4>
+                        </div>
+                   
 
                 </div>
             @endif
@@ -53,7 +54,7 @@
                                             d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                                     </svg>Editar</a>
                                 <a class="btn btn-outline-success"
-                                    href="{{ route('task.create', ['id' => $customer->id, 'name' => $customer->name]) }}"
+                                    href="{{ route('task.store', ['id' => $customer->id, 'name' => $customer->name]) }}"
                                     title="Realizar agendamento."><svg xmlns="http://www.w3.org/2000/svg" width="30"
                                         height="30" fill="currentColor" class="bi bi-bookmark" viewBox="0 0 16 16">
                                         <path
@@ -76,10 +77,13 @@
                                 </a>
                             </li>
                             @for ($i = 1; $i <= $customers->lastPage(); $i++)
-                                <li class="page-item {{ $customers->currentPage() == $i ? 'active' : '' }}">
-                                    <a class="page-link bg-teal text-light"
-                                        href="{{ $customers->url($i) }}">{{ $i }}</a>
-                                </li>
+                               
+                                    <li class="page-item {{ $customers->currentPage() == $i ? 'active' : '' }}">
+                                        <a class="page-link bg-teal text-light"
+                                            href="{{ $customers->url($i) }}">{{ $i }}</a>
+                                    </li>
+                                
+                                       
                             @endfor
                             <li class="page-item">
                                 <a class="page-link bg-teal text-light" href="{{ $customers->nextPageUrl() }}"
