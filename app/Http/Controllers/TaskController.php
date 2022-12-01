@@ -60,6 +60,7 @@ class TaskController extends Controller
       */
      public function store(TaskRequest $request)
      {
+        dd($request->all());
          $customer = Customer::where('name', $request->name)->orWhere('id', $request->id)->first();
          if ($customer === null) {
              return view('app.createTask', ['error' => 'Cliente não encontrado em nossa base de dados. Consulte sua lista de cliente.']);

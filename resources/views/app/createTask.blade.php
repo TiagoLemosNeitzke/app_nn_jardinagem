@@ -20,6 +20,7 @@
             <div class="card-body">
                 <h5 class="card-title">Confirme os dados do cliente</h5>
                 <p>Após a confirmação dos dados clique no botão agendar e o cliente será adicionado a fila de espera.</p>
+                
                 <form class="" action="{{ route('task.store') }}" method="post">
                     @csrf
                     <div class="mb-3">
