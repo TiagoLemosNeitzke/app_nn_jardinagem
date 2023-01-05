@@ -33,7 +33,9 @@
                         <div class="card border-dark border">
                             <div class="card-body">
                                 <h5 class="card-title fw-bold mb-4">{{ $customer->name }}</h5>
-                                <h6><b>ID: </b>{{ $customer->id }}</h6>
+                                <p><span class="fw-bold">Endereço:</span> {{ $customer->street }}, {{ $customer->street_number }}.</p>
+                                <p><span class="fw-bold">Cidade:</span> {{ $customer->city }}.</p>
+                                <p><span class="fw-bold">Telefone:</span> {{ $customer->phone }} </p>
                                 <a href="{{ route('customer.show', ['customer' => $customer->id, 'user' => $customer->user->name]) }}"
                                     class="btn btn-outline-success" title="Ver mais dados do cliente"><svg
                                         xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
