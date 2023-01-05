@@ -54,8 +54,9 @@ class ToReceiveController extends Controller
       */
      public function update(ToReceive $toReceive)
      {
-         $toReceive = $toReceive->update([
-                  'status' => 0
+       
+        $toReceive = $toReceive->update([
+                  'status' => 1
                 ]);
           
          if ($toReceive) {

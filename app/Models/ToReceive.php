@@ -9,7 +9,7 @@ class ToReceive extends Model
 {
     use HasFactory;
    
-    protected $fillable = ['id','task_id','user_id', 'customer_id', 'value', 'status'];
+    protected $fillable = ['id','task_id','user_id', 'customer_id', 'service_value', 'status'];
 
     public function user()
     {

@@ -115,13 +115,13 @@ class TaskController extends Controller
        
          if ($task) {
             $task = $this->task->where('id', $request->id)->first();
-            
+            //dd($task->service_value);
             ToReceive::updateOrCreate([
                 'task_id' => $task->id,
                 'user_id' => $task->user_id,
                 'customer_id' => $task->customer_id,
-                'value' => $task->service_value,
-                'status' => 1
+                'service_value' => $task->service_value,
+                
             ]);
             return redirect()->route('task.index');
          } else {
