@@ -27,10 +27,12 @@ class HomeController extends Controller
     public function index(Customer $customers, Task $tasks, Expense $expenses)
     {
         $today = date('Y-m-d');
-        dd($tasks);
-        $howManyCustomer = $customers->count();
-        //$tasksForToday = $tasks->where();
         
-        return view('home');
+        $howManyCustomers = $customers->count();
+        $tasksForToday = $tasks->where('scheduled_for_day', $today)->get();
+        return view('home', [
+            'howManyCustomers' => $howManyCustomers,
+            'tasksForToday' => $tasksForToday
+        ]);
     }
 }

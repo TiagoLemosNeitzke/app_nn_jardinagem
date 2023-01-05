@@ -163,15 +163,25 @@
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <li class="nav-item">
                                         <a class="dropdown-item" href="{{ route('toReceive.index') }}"
-                                            title="À receber">À
-                                            Receber</a>
+                                            title="À receber">
+                                                À Receber
+                                        </a>
                                     </li>
                                     <li>
                                         <hr class="dropdown-divider bg-light">
-
+                                    </li>
                                     <li class="nav-item">
-                                        <a class="dropdown-item" href="#" title="Registrar uma despesa">Registrar
-                                            Despesa</a>
+                                        <a class="dropdown-item" href="#" title="Registrar uma despesa">
+                                            Registrar Despesa
+                                        </a>
+                                    </li>
+                                     <li>
+                                        <hr class="dropdown-divider bg-light">
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="dropdown-item" href="#" title="Registrar uma despesa">
+                                            Contas a Pagar
+                                        </a>
                                     </li>
                                 </ul>
                             </li>
@@ -194,13 +204,7 @@
                                     <li><a class="dropdown-item" href="{{ route('task.index') }}"
                                             title="Lista todos os clientes">Agendamentos</a>
                                     </li>
-
-                                    <li>
-                                        <hr class="dropdown-divider bg-light">
-                                    </li>
-                                    <li><a class="dropdown-item" href="{{ route('task.create') }}"
-                                            title="Cadastrar cliente">Abrir Chamado</a>
-                                    </li>
+                                  
                                 </ul>
                             </li>
 
