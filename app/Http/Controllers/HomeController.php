@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Customer;
+use App\Models\Expense;
+use App\Models\Task;
 
 class HomeController extends Controller
 {
@@ -21,8 +24,13 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Customer $customers, Task $tasks, Expense $expenses)
     {
+        $today = date('Y-m-d');
+        dd($tasks);
+        $howManyCustomer = $customers->count();
+        //$tasksForToday = $tasks->where();
+        
         return view('home');
     }
 }
