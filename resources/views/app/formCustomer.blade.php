@@ -43,10 +43,13 @@
             @endif
 
             <div class="row mb-3">
-                <label for="inputId" class="col-sm-2 col-form-label">ID do Cliente</label>
+                
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputID" name="id"
-                        value="{{ $customer->id ?? '' }}" readonly>
+                    @if (isset($customer))
+                        <label for="inputId" class="col-sm-2 col-form-label">ID do Cliente</label>
+                        <input type="text" class="form-control" id="inputID" name="id"
+                        value="{{ $customer->id }}" readonly>
+                    @endif
                 </div>
             </div>
             <div class="row mb-3">
