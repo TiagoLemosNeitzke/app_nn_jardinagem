@@ -2,3 +2,5 @@
 002 -> Erro ao tentar remover o cadastro de um cliente. Erro acontece porque os dados não forma localizados no banco de dados e retorna 0 na variável $customer.
 003 -> Erro ao tentar marcar status da tabela toReceive como false (recebido);
 004 -> Erro ao tentar apagar um registro de toReceive;
+005 -> Erro ao tentar cadastrar uma tarefa, id do cliente não é encontrado na base de dados.
+006 -> Erro ao tentar cadastrar uma tarefa, a tarefa já possui cadastro.
