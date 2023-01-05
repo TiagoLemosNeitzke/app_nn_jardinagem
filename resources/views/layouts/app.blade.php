@@ -60,7 +60,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg shadow-sm">
             <div class="container">
-                <a class="navbar-brand fw-bolder" href="{{ url('/') }}" title="Voltar para o site">
+                <a class="navbar-brand fw-bolder" href="{{ url('/home') }}" title="Voltar para Dashboard">
                     {{ config('app.name', 'Laravel') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
