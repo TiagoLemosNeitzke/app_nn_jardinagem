@@ -22,11 +22,11 @@ class CustomerFactory extends Factory
             'name' => fake()->name(),
             'email' => fake()->email(),
             'phone' => fake()->phoneNumber(),
-            'street' => 'Rua teste',
-            'street_number' => '000',
-            'district' => 'centro',
+            'street' => fake()->streetAddress(),
+            'street_number' => fake()->numberBetween(1234, 9876),
+            'district' => 'Brasilândia',
             'city' => 'Fátima do Sul',
-            'state' => 'MS',
+            'state' => 'MS'
         ];
     }
 }
