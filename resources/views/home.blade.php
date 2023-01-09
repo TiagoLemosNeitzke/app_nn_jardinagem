@@ -5,18 +5,9 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card border">
-                    <div class="card-header bg fw-bold text-light text-center">{{ __('Dashboard') }}</div>
-
-                    <div class="card-body bg-teal fs-6 text-center">
-                        @if (session('status'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('status') }}
-                            </div>
-                        @endif
-                        Olá! {{ Auth::user()->name }}.
-                        {{ _('Bem vindo de volta!') }}
+                    <div class="card-header bg fw-bold text-light text-center">
+                        {{ __('Dashboard') }}
                     </div>
-
                 </div>
             </div>
         </div>
@@ -27,7 +18,7 @@
                         sistema.</div>
                 </div>
             </div>
-            <div class="row mt-1 ">
+            <div class="row mt-1">
                 <div class="col-6">
                     <div class="card bg-teal mb-2 border">
                         <div class="card-body text-center">Você possui os seguintes agendamentos para hoje.</div>
@@ -36,7 +27,7 @@
 
                     @foreach ($tasksForToday as $task)
                         <div class="col mb-0 mb-2 rounded">
-                            <div class="card  mt-2 mb-2">
+                            <div class="card mt-2 mb-2">
                                 <div class="card-body">
 
                                     <h6><span class="fw-bold">Cliente: </span>{{ $task->customer->name }}</h6>
@@ -51,12 +42,38 @@
                                         @endphp
                                     </p>
                                     <div class="text-center">
-                                        <a href="tel:{{ $task->customer->phone }}" class="btn btn-success">Ligar para cliente</a>
+                                        <a href="tel:{{ $task->customer->phone }}" class="btn btn-success">Ligar para
+                                            cliente</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     @endforeach
+                    <div class="d-flex justify-content-center mt-4">
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination">
+                                    <li class="page-item">
+                                        <a class="page-link bg-teal text-light" href="{{  $tasksForToday->previousPageUrl()}}"
+                                            aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                    </li>
+                                    @for ($i = 1; $i <= $tasksForToday->lastPage(); $i++)
+                                        <li class="page-item {{ $tasksForToday->currentPage() == $i ? 'active' : '' }}">
+                                            <a class="page-link bg-teal text-light"
+                                                href="{{ $tasksForToday->url($i) }}">{{ $i }}</a>
+                                        </li>
+                                    @endfor
+                                    <li class="page-item">
+                                        <a class="page-link bg-teal text-light" href="{{ $tasksForToday->nextPageUrl() }}"
+                                            aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+
+                        </div>
                 </div>
 
                 <div class="col-6">
@@ -66,17 +83,44 @@
 
                     @foreach ($toReceives as $toReceive)
                         
-                        <div class="card rounded">
+                        <div class="card mb-2 rounded">
                             <div class="card-body">
                                 <p><span class="fw-bold">Cliente: </span>{{ $toReceive->customer->name }}</p>
                                 <p><span class="fw-bold">Valor do serviço: </span>R$ {{ $toReceive->service_value }},00</p>
-                                <p><span class="fw-bold">Serviço realizado dia: </span>{{ date('d-m-Y',strtotime($toReceive->created_at)) }}</p>
+                                <p><span class="fw-bold">Serviço realizado dia:
+                                    </span>{{ date('d-m-Y', strtotime($toReceive->created_at)) }}</p>
                                 <div class="text-center">
-                                    <a class="btn btn-success" href="tel:{{ $toReceive->customer->phone }}">Ligar para cliente</a>
+                                    <a class="btn btn-success" href="tel:{{ $toReceive->customer->phone }}">Ligar para
+                                        cliente</a>
                                 </div>
                             </div>
                         </div>
                     @endforeach
+                    <div class="d-flex justify-content-center mt-4">
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination">
+                                    <li class="page-item">
+                                        <a class="page-link bg-teal text-light" href="{{  $toReceives->previousPageUrl()}}"
+                                            aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                    </li>
+                                    @for ($i = 1; $i <= $toReceives->lastPage(); $i++)
+                                        <li class="page-item {{ $toReceives->currentPage() == $i ? 'active' : '' }}">
+                                            <a class="page-link bg-teal text-light"
+                                                href="{{ $toReceives->url($i) }}">{{ $i }}</a>
+                                        </li>
+                                    @endfor
+                                    <li class="page-item">
+                                        <a class="page-link bg-teal text-light" href="{{ $toReceives->nextPageUrl() }}"
+                                            aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+
+                        </div>
                 </div>
             </div>
 
