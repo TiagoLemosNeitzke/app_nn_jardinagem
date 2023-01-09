@@ -65,7 +65,7 @@
                     </div>
 
                     @foreach ($toReceives as $toReceive)
-                        {{ $toReceive }}
+                        
                         <div class="card rounded">
                             <div class="card-body">
                                 <p><span class="fw-bold">Cliente: </span>{{ $toReceive->customer->name }}</p>

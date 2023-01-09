@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Customer;
 use App\Models\Expense;
 use App\Models\Task;
+use App\Models\ToReceive;
 
 class HomeController extends Controller
 {
@@ -24,15 +25,16 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index(Customer $customers, Task $tasks, Expense $expenses)
+    public function index(Customer $customers, Task $tasks, ToReceive $toReceives)
     {
         $today = date('Y-m-d');
-        
         $howManyCustomers = $customers->count();
         $tasksForToday = $tasks->where('scheduled_for_day', $today)->get();
+        $toReceives = $toReceives->where('status', false)->with('customer')->get();
         return view('home', [
             'howManyCustomers' => $howManyCustomers,
-            'tasksForToday' => $tasksForToday
+            'tasksForToday' => $tasksForToday,
+            'toReceives' => $toReceives
         ]);
     }
 }

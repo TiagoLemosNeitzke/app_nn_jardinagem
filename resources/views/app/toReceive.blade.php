@@ -1,7 +1,9 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-        <h3>Aqui Estão todos os seus serviços realizados</h3>
+        <div class="text-center border-bottom mb-2">
+            <p>Aqui estão todos os seus serviços realizados</p>
+        </div>
         <div class="row mb-2 text-center">
             @if (isset($message))
                 <p class="text-success">{{ $message }}</p>
@@ -15,7 +17,7 @@
         <div class="row">
             @foreach ($toReceives as $toReceive)
                 <div class="col-4">
-                    <div class="card border-success border">
+                    <div class="card border">
                         <div class="card-body">
 
                             <h6><span class="fw-bold">Cliente: </span>{{ $toReceive->customer->name }}</h6>
