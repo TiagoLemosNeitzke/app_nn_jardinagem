@@ -35,8 +35,8 @@
 
 
                     @foreach ($tasksForToday as $task)
-                        <div class="col bg-teal mb-0 mb-2 rounded">
-                            <div class="card bg-teal mt-2 mb-2 border">
+                        <div class="col mb-0 mb-2 rounded">
+                            <div class="card  mt-2 mb-2">
                                 <div class="card-body">
 
                                     <h6><span class="fw-bold">Cliente: </span>{{ $task->customer->name }}</h6>
@@ -51,7 +51,7 @@
                                         @endphp
                                     </p>
                                     <div class="text-center">
-                                        <a href="tel:{{ $task->customer->phone }}" class="btn btn-success">Ligar Agora</a>
+                                        <a href="tel:{{ $task->customer->phone }}" class="btn btn-success">Ligar para cliente</a>
                                     </div>
                                 </div>
                             </div>
@@ -61,8 +61,22 @@
 
                 <div class="col-6">
                     <div class="card bg-teal mb-2 border">
-                        <div class="card-body text-center">As seguintes contas vencem hoje.</div>
+                        <div class="card-body text-center">As seguintes clientes ainda não pagaram.</div>
                     </div>
+
+                    @foreach ($toReceives as $toReceive)
+                        {{ $toReceive }}
+                        <div class="card rounded">
+                            <div class="card-body">
+                                <p><span class="fw-bold">Cliente: </span>{{ $toReceive->customer->name }}</p>
+                                <p><span class="fw-bold">Valor do serviço: </span>R$ {{ $toReceive->service_value }},00</p>
+                                <p><span class="fw-bold">Serviço realizado dia: </span>{{ date('d-m-Y',strtotime($toReceive->created_at)) }}</p>
+                                <div class="text-center">
+                                    <a class="btn btn-success" href="tel:{{ $toReceive->customer->phone }}">Ligar para cliente</a>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
             </div>
 

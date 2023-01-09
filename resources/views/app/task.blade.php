@@ -26,7 +26,7 @@
                     <p class="text-center">Aqui são listados todos os chamados, incluindo os já realizados</p>
                 @endif
 
-                <div class="row">
+                <div class="row border-bottom mb-4">
                     <div class="fixed-end mb-4">
                         <ul class="nav">
                             <li class="nav-item dropdown">
@@ -60,7 +60,7 @@
                 </div>
                 @foreach ($tasks as $task)
                     <div class="col-sm-4 mb-2">
-                        <div class="card border-dark border">
+                        <div class="card border">
                             <div class="card-body">
 
                                 <h6 class="fw-bold">Cliente: {{ $task->customer->name }}</h6>
@@ -98,7 +98,7 @@
                                         @csrf
                                         <input type="number" name="id" value="{{ $task->id }}" class="hidden">
                                         @if ($task->did_day === null)
-                                            <button type="submit" class="btn btn-success"
+                                            <button type="submit" class="btn btn-success w-100"
                                                 title="Marcar tarefa como realizada."><svg
                                                     xmlns="http://www.w3.org/2000/svg" width="30" height="30"
                                                     fill="currentColor" class="bi bi-check2-circle" viewBox="0 0 16 16">
@@ -114,7 +114,7 @@
                                     <form action="{{ route('task.destroy', $task->id) }}" method="post">
                                         @method('delete')
                                         @csrf
-                                        <button type="submit" class="btn btn-danger mt-2"
+                                        <button type="submit" class="btn btn-danger mt-2 w-100"
                                             title="Retira a tarefa da fila."><svg xmlns="http://www.w3.org/2000/svg"
                                                 width="30" height="30" fill="currentColor" class="bi bi-trash3"
                                                 viewBox="0 0 16 16">
@@ -129,14 +129,14 @@
                                         method="get">
 
                                         @csrf
-                                        <button type="submit" class="btn border-dark mt-2"
+                                        <button type="submit" class="btn btn-success mt-2 w-100"
                                             title="Consulta dados do cliente."><svg xmlns="http://www.w3.org/2000/svg"
                                                 width="30" height="30" fill="currentColor" class="bi bi-search"
                                                 viewBox="0 0 16 16">
                                                 <path
                                                     d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
                                             </svg>
-                                            Consultar dados do cliente
+                                            Dados do cliente
                                         </button>
                                     </form>
                                 </div>
