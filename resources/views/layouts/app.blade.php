@@ -39,6 +39,7 @@
         .active>.page-link {
             background-color: #198754;
             border: #198754;
+            color: #fff !important;
         }
 
         .hidden {
@@ -171,7 +172,7 @@
                                         <hr class="dropdown-divider bg-light">
                                     </li>
                                     <li class="nav-item">
-                                        <a class="dropdown-item" href="#" title="Registrar uma despesa">
+                                        <a class="dropdown-item" href="{{ route('expense.index') }}" title="Registrar uma despesa">
                                             Registrar Despesa
                                         </a>
                                     </li>
