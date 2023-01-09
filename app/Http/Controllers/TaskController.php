@@ -47,9 +47,7 @@ class TaskController extends Controller
       */
      public function create(Request $request)
      {
-        ('create');
         $customers = $this->customer->orderBy('name', 'asc')->paginate(10);
-        //dd($customers);
         return view('app.createTask', ['id' => $request->id, 'name' => $request->name, 'openTask' => true, 'customers' => $customers]);
      }
 
@@ -65,8 +63,7 @@ class TaskController extends Controller
          $customer = Customer::where('name', $request->name)->orWhere('id', $request->id)->first();
          if ($customer === null) {
              return view('app.createTask', ['error' => 'Cliente não encontrado em nossa base de dados. Consulte sua lista de cliente. [005]']);
-         }
-         if ($customer->exists) {
+         }else {
              $task = Task::where('customer_id', $customer->id)->first();
              if ($task) {
                  return view('app.createTask', ['error' => 'Cliente já possui agendamento. Consulte seus agendamentos. [006]']);
