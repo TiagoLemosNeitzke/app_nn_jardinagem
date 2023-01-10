@@ -49,31 +49,6 @@
                             </div>
                         </div>
                     @endforeach
-                    <div class="d-flex justify-content-center mt-4">
-                            <nav aria-label="Page navigation">
-                                <ul class="pagination">
-                                    <li class="page-item">
-                                        <a class="page-link bg-teal text-light" href="{{  $tasksForToday->previousPageUrl()}}"
-                                            aria-label="Previous">
-                                            <span aria-hidden="true">&laquo;</span>
-                                        </a>
-                                    </li>
-                                    @for ($i = 1; $i <= $tasksForToday->lastPage(); $i++)
-                                        <li class="page-item {{ $tasksForToday->currentPage() == $i ? 'active' : '' }}">
-                                            <a class="page-link bg-teal text-light"
-                                                href="{{ $tasksForToday->url($i) }}">{{ $i }}</a>
-                                        </li>
-                                    @endfor
-                                    <li class="page-item">
-                                        <a class="page-link bg-teal text-light" href="{{ $tasksForToday->nextPageUrl() }}"
-                                            aria-label="Next">
-                                            <span aria-hidden="true">&raquo;</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>
-
-                        </div>
                 </div>
 
                 <div class="col-6">
@@ -82,7 +57,6 @@
                     </div>
 
                     @foreach ($toReceives as $toReceive)
-                        
                         <div class="card mb-2 rounded">
                             <div class="card-body">
                                 <p><span class="fw-bold">Cliente: </span>{{ $toReceive->customer->name }}</p>
@@ -96,31 +70,31 @@
                             </div>
                         </div>
                     @endforeach
-                    <div class="d-flex justify-content-center mt-4">
-                            <nav aria-label="Page navigation">
-                                <ul class="pagination">
-                                    <li class="page-item">
-                                        <a class="page-link bg-teal text-light" href="{{  $toReceives->previousPageUrl()}}"
-                                            aria-label="Previous">
-                                            <span aria-hidden="true">&laquo;</span>
-                                        </a>
-                                    </li>
-                                    @for ($i = 1; $i <= $toReceives->lastPage(); $i++)
-                                        <li class="page-item {{ $toReceives->currentPage() == $i ? 'active' : '' }}">
-                                            <a class="page-link bg-teal text-light"
-                                                href="{{ $toReceives->url($i) }}">{{ $i }}</a>
-                                        </li>
-                                    @endfor
-                                    <li class="page-item">
-                                        <a class="page-link bg-teal text-light" href="{{ $toReceives->nextPageUrl() }}"
-                                            aria-label="Next">
-                                            <span aria-hidden="true">&raquo;</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>
 
-                        </div>
+                </div>
+                <div class="d-flex justify-content-center mt-4">
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination">
+                            <li class="page-item">
+                                <a class="page-link bg-teal text-light" href="{{ $toReceives->previousPageUrl() }}"
+                                    aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            @for ($i = 1; $i <= $toReceives->lastPage(); $i++)
+                                <li class="page-item {{ $toReceives->currentPage() == $i ? 'active' : '' }}">
+                                    <a class="page-link bg-teal text-light"
+                                        href="{{ $toReceives->url($i) }}">{{ $i }}</a>
+                                </li>
+                            @endfor
+                            <li class="page-item">
+                                <a class="page-link bg-teal text-light" href="{{ $toReceives->nextPageUrl() }}"
+                                    aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
 
