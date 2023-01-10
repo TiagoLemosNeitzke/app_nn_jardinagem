@@ -8,7 +8,7 @@
                 </div>
             @endif
         </div>
-        <div class="fixed-end">
+        <div class="fixed-end mb-4">
             <a class="btn btn-success" href="{{ route('expense.create') }}">Cadastrar despesa</a>
         </div>
         <div class="row">
@@ -20,6 +20,10 @@
                             <p><span class="fw-bold">Descrição da despesa:</span> {{ $expense->description }}</p>
                             <p><span class="fw-bold">Data da despesa:</span>
                                 {{ date('d-m-Y', strtotime($expense->date_expense)) }}</p>
+                            <div class="container d-flex justify-content-between">
+                            <a class="nav-link text-success hover" href="{{ route('expense.edit', ['expense' => $expense]) }}">Editar</a>
+                            <a class="nav-link text-danger hover" href="">Remover</a>
+                            </div>
                         </div>
                     </div>
                 </div>
