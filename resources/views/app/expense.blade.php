@@ -20,9 +20,14 @@
                             <p><span class="fw-bold">Descrição da despesa:</span> {{ $expense->description }}</p>
                             <p><span class="fw-bold">Data da despesa:</span>
                                 {{ date('d-m-Y', strtotime($expense->date_expense)) }}</p>
-                            <div class="container d-flex justify-content-between">
-                            <a class="nav-link text-success hover" href="{{ route('expense.edit', ['expense' => $expense]) }}">Editar</a>
-                            <a class="nav-link text-danger hover" href="">Remover</a>
+                            <div class="d-flex justify-content-between container">
+                                <a class="mt-2 nav-link text-success hover"
+                                    href="{{ route('expense.edit', ['expense' => $expense]) }}">Editar</a>
+                                <form action="{{ route('expense.destroy', ['expense' => $expense->id]) }}" method="post">
+                                    @csrf
+                                    @method('delete')
+                                    <button type="submit" class="btn text-danger hover">Remover</button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -39,7 +44,8 @@
                         </li>
                         @for ($i = 1; $i <= $expenses->lastPage(); $i++)
                             <li class="page-item {{ $expenses->currentPage() == $i ? 'active' : '' }}">
-                                <a class="page-link bg-teal text-dark" href="{{ $expenses->url($i) }}">{{ $i }}</a>
+                                <a class="page-link bg-teal text-dark"
+                                    href="{{ $expenses->url($i) }}">{{ $i }}</a>
                             </li>
                         @endfor
                         <li class="page-item">
