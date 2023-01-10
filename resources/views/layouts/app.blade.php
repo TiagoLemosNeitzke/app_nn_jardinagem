@@ -169,7 +169,7 @@
                                     <li class="nav-item">
                                         <a class="dropdown-item" href="{{ route('toReceive.index') }}"
                                             title="À receber">
-                                            À Receber
+                                            Contas Receber
                                         </a>
                                     </li>
                                     <li>
@@ -178,7 +178,7 @@
                                     <li class="nav-item">
                                         <a class="dropdown-item" href="{{ route('expense.index') }}"
                                             title="Registrar uma despesa">
-                                            Registrar Despesa
+                                            Despesas
                                         </a>
                                     </li>
                                     <li>
