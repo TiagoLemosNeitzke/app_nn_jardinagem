@@ -47,11 +47,12 @@
                     <div class="container d-flex justify-content-end mt-4 mb-2">
                         @if (isset($expense))
                             <button type="submit" class="btn btn-success">Salvar</button>
-                            <a href="{{ route('expense.index') }}" class="btn btn-success ms-2">Voltar</a>
+                            <a href="{{ route('expense.index') }}" class="btn btn-secondary ms-2">Voltar</a>
                         @elseif (isset($message))
                             <a href="{{ route('expense.index') }}" class="btn btn-success">Voltar</a>
                         @else
                             <button type="submit" class="btn btn-success">Cadastrar</button>
+                            <a href="{{ route('expense.index') }}" class="btn btn-secondary ms-2">Voltar</a>
                         @endif
                         
                     </div>
