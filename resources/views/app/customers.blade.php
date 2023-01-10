@@ -2,7 +2,9 @@
 
 @section('content')
     <div class="container">
-
+        <div class="d-flex justify-content-end container mb-1">
+            <a class="btn btn-success" href="{{ route('customer.create') }}" title="Cadastrar cliente">Cadastrar</a>
+        </div>
         <div class="row text-center">
             @if (isset($message))
                 <p class="fw-bold fs-4 text-success">{{ $message }}</p>
@@ -15,13 +17,8 @@
                     <a class="btn btn-outline-success" href="{{ route('customer.index') }}">Voltar</a>
                 </div>
             @else
-                <div class="row">
-                    
-                        <div class="mb-2 text-center">
-                            <h4>Aqui estão listados todos os seus clientes.</h4>
-                        </div>
-                   
-
+                <div class="mb-4 border-bottom pb-2 fs-4 text-center">
+                    <span>Aqui estão listados todos os seus clientes.</span>
                 </div>
             @endif
         </div>
@@ -33,7 +30,8 @@
                         <div class="card border-dark border">
                             <div class="card-body">
                                 <h5 class="card-title fw-bold mb-4">{{ $customer->name }}</h5>
-                                <p><span class="fw-bold">Endereço:</span> {{ $customer->street }}, {{ $customer->street_number }}.</p>
+                                <p><span class="fw-bold">Endereço:</span> {{ $customer->street }},
+                                    {{ $customer->street_number }}.</p>
                                 <p><span class="fw-bold">Cidade:</span> {{ $customer->city }}.</p>
                                 <p><span class="fw-bold">Telefone:</span> {{ $customer->phone }} </p>
                                 <a href="{{ route('customer.show', ['customer' => $customer->id, 'user' => $customer->user->name]) }}"
@@ -79,13 +77,10 @@
                                 </a>
                             </li>
                             @for ($i = 1; $i <= $customers->lastPage(); $i++)
-                               
-                                    <li class="page-item {{ $customers->currentPage() == $i ? 'active' : '' }}">
-                                        <a class="page-link bg-teal text-light"
-                                            href="{{ $customers->url($i) }}">{{ $i }}</a>
-                                    </li>
-                                
-                                       
+                                <li class="page-item {{ $customers->currentPage() == $i ? 'active' : '' }}">
+                                    <a class="page-link bg-teal text-light"
+                                        href="{{ $customers->url($i) }}">{{ $i }}</a>
+                                </li>
                             @endfor
                             <li class="page-item">
                                 <a class="page-link bg-teal text-light" href="{{ $customers->nextPageUrl() }}"

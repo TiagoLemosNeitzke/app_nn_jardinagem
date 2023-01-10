@@ -144,12 +144,6 @@
                                             title="Lista todos os clientes">Todos os
                                             clientes</a>
                                     </li>
-                                    <li>
-                                        <hr class="dropdown-divider bg-light">
-                                    </li>
-                                    <li><a class="dropdown-item" href="{{ route('customer.create') }}"
-                                            title="Cadastrar cliente">Cadastrar</a>
-                                    </li>
                                 </ul>
                             </li>
 
