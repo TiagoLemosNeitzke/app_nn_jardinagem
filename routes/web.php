@@ -29,6 +29,7 @@ Route::resource('task', 'App\Http\Controllers\TaskController')->middleware('veri
 
 Route::resource('toReceive', 'App\Http\Controllers\ToReceiveController')->middleware('verified')->except('create', 'store');
 
+Route::resource('expense', 'App\Http\Controllers\ExpenseController')->middleware('verified');
 /* Route::post('/searchCustomer', function () {
     if (request()->name) {
         $customer = \App\Models\Customer::where('name', request()->name)->get()->toArray();

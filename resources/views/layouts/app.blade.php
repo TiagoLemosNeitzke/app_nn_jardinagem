@@ -39,6 +39,7 @@
         .active>.page-link {
             background-color: #198754;
             border: #198754;
+            color: #fff !important;
         }
 
         .hidden {
@@ -52,6 +53,10 @@
 
         .bg {
             background: #899286;
+        }
+
+        .hover:hover {
+            transform: scale(1.2) translate3d(5px, -10%, 3em);
         }
     </style>
 </head>
@@ -164,18 +169,19 @@
                                     <li class="nav-item">
                                         <a class="dropdown-item" href="{{ route('toReceive.index') }}"
                                             title="À receber">
-                                                À Receber
+                                            À Receber
                                         </a>
                                     </li>
                                     <li>
                                         <hr class="dropdown-divider bg-light">
                                     </li>
                                     <li class="nav-item">
-                                        <a class="dropdown-item" href="#" title="Registrar uma despesa">
+                                        <a class="dropdown-item" href="{{ route('expense.index') }}"
+                                            title="Registrar uma despesa">
                                             Registrar Despesa
                                         </a>
                                     </li>
-                                     <li>
+                                    <li>
                                         <hr class="dropdown-divider bg-light">
                                     </li>
                                     <li class="nav-item">
@@ -204,7 +210,7 @@
                                     <li><a class="dropdown-item" href="{{ route('task.index') }}"
                                             title="Lista todos os clientes">Agendamentos</a>
                                     </li>
-                                  
+
                                 </ul>
                             </li>
 
