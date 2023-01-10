@@ -40,20 +40,9 @@ class ExpenseController extends Controller
     {
         $expense->create($request->validated());
 
-        $expenses = $expense->all();
+        $expenses = $expense->paginate(9);
 
         return view('app.expense', ['expenses' => $expenses ,'message' => 'Despesa cadastrada com sucesso!']);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -77,14 +66,11 @@ class ExpenseController extends Controller
     {
         $expense = Expense::where('id', $id)->first();
         $expense = $expense->update($request->validated());
-        if($expense){
+        if ($expense) {
             return view('app.createExpense', ['message' => 'Despesa atualizada com sucesso!']);
-        }else{
-
+        } else {
             return view('app.createExpense', ['error' => 'Erro ao tentar atualizar os dados da despesa. Tente novamente mais tarde. [007]']);
-
         }
-        
     }
 
     /**
@@ -95,7 +81,13 @@ class ExpenseController extends Controller
      */
     public function destroy(Expense $expense)
     {
-        $expense->destroy($expense->id);
-        return redirect()->route('expense.index');
+        //$expense = $expense->destroy($expense->id);
+        $expenses = $expense->paginate(9);
+        $expense = false;
+        if ($expense) {
+            return view('app.expense', ['expenses' => $expenses,'message' => 'Despesa removida do banco de dados com sucesso!']);
+        }else{
+            return view('app.expense', ['expenses' => $expenses,'error' => 'Ocorreu um erro ao tentar excluir a despesa. Tente novamente mais tarde. [008]']);
+        }
     }
 }

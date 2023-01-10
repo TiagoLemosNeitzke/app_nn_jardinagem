@@ -5,3 +5,4 @@
 005 -> Erro ao tentar cadastrar uma tarefa, id do cliente não é encontrado na base de dados.
 006 -> Erro ao tentar cadastrar uma tarefa, a tarefa já possui cadastro.
 007 -> Erro as tentar atualizar uma despesa;
+008 -> Erro ao tentar excluir uma despesa. O método destroy retorna false;

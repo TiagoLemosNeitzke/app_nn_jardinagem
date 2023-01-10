@@ -1,11 +1,15 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-        <div class="row bg-success mb-2 rounded text-center">
+        <div class="row mb-2 rounded text-center">
             @if (isset($message))
-                <div class="fw-bold p-2 text-white">
+                <span class="fw-bold p-2 text-success">
                     {{ $message }}
-                </div>
+                </span>
+            @elseif (isset($error))
+                <span class="fw-bold p-2 text-danger">
+                    {{ $error }}
+                </span>
             @endif
         </div>
         <div class="fixed-end mb-4">
