@@ -17,7 +17,7 @@
                     <a class="btn btn-outline-success" href="{{ route('customer.index') }}">Voltar</a>
                 </div>
             @else
-                <div class="mb-4 border-bottom pb-2 fs-4 text-center">
+                <div class="border-bottom fs-4 mb-4 pb-2 text-center">
                     <span>Aqui estão listados todos os seus clientes.</span>
                 </div>
             @endif
@@ -34,34 +34,42 @@
                                     {{ $customer->street_number }}.</p>
                                 <p><span class="fw-bold">Cidade:</span> {{ $customer->city }}.</p>
                                 <p><span class="fw-bold">Telefone:</span> {{ $customer->phone }} </p>
-                                <a href="{{ route('customer.show', ['customer' => $customer->id, 'user' => $customer->user->name]) }}"
-                                    class="btn btn-outline-success" title="Ver mais dados do cliente"><svg
-                                        xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
-                                        class="bi bi-person me-2" viewBox="0 0 16 16">
-                                        <path
-                                            d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
-                                    </svg>
-                                    Ver Mais
-                                </a>
 
-                                <a class="btn btn-outline-success"
-                                    href="{{ route('customer.edit', ['customer' => $customer->id]) }}">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
-                                        fill="currentColor" class="bi bi-pencil-square me-2" viewBox="0 0 16 16">
-                                        <path
-                                            d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-                                        <path fill-rule="evenodd"
-                                            d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
-                                    </svg>Editar</a>
-                                <a class="btn btn-outline-success"
-                                    href="{{ route('task.create', ['id' => $customer->id, 'name' => $customer->name]) }}"
-                                    title="Realizar agendamento."><svg xmlns="http://www.w3.org/2000/svg" width="30"
-                                        height="30" fill="currentColor" class="bi bi-bookmark" viewBox="0 0 16 16">
-                                        <path
-                                            d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
-                                    </svg>
-                                    Agendar
-                                </a>
+                                <div class="row">
+                                    <a href="{{ route('customer.show', ['customer' => $customer->id, 'user' => $customer->user->name]) }}"
+                                        class="btn btn-outline-success" title="Ver mais dados do cliente"><svg
+                                            xmlns="http://www.w3.org/2000/svg" width="30" height="30"
+                                            fill="currentColor" class="bi bi-person me-2" viewBox="0 0 16 16">
+                                            <path
+                                                d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
+                                        </svg>
+                                        Ver Mais
+                                    </a>
+                                </div>
+
+                                <div class="row my-2">
+                                    <a class="btn btn-outline-success"
+                                        href="{{ route('customer.edit', ['customer' => $customer->id]) }}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
+                                            fill="currentColor" class="bi bi-pencil-square me-2" viewBox="0 0 16 16">
+                                            <path
+                                                d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                            <path fill-rule="evenodd"
+                                                d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                        </svg>Editar</a>
+                                </div>
+                                <div class="row">
+                                    <a class="btn btn-outline-success"
+                                        href="{{ route('task.create', ['id' => $customer->id, 'name' => $customer->name]) }}"
+                                        title="Realizar agendamento."><svg xmlns="http://www.w3.org/2000/svg" width="30"
+                                            height="30" fill="currentColor" class="bi bi-bookmark" viewBox="0 0 16 16">
+                                            <path
+                                                d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
+                                        </svg>
+                                        Agendar
+                                    </a>
+                                </div>
+
                             </div>
                         </div>
 

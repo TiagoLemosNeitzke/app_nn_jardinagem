@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-        <div class="text-center border-bottom mb-2">
+        <div class="border-bottom mb-2 text-center">
             <p>Aqui estão todos os seus serviços realizados</p>
         </div>
         <div class="row mb-2 text-center">
@@ -14,9 +14,9 @@
             @endif
         </div>
 
-        <div class="row">
+        <div class="col text-center">
             @foreach ($toReceives as $toReceive)
-                <div class="col-4">
+                <div class="d-md-inline-flex my-2">
                     <div class="card border">
                         <div class="card-body">
 

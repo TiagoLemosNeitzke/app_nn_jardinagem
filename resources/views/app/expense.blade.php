@@ -15,9 +15,9 @@
         <div class="fixed-end mb-4">
             <a class="btn btn-success" href="{{ route('expense.create') }}">Cadastrar despesa</a>
         </div>
-        <div class="row">
+        <div class="col text-center">
             @foreach ($expenses as $expense)
-                <div class="col-4 mb-2">
+                <div class="my-2 d-md-inline-flex">
                     <div class="card">
                         <div class="card-body">
                             <p><span class="fw-bold">Valor da despesa:</span> R$ {{ $expense->expense_amount }},00</p>
