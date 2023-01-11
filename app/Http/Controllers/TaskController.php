@@ -47,8 +47,8 @@ class TaskController extends Controller
       */
      public function create(Request $request)
      {
-        $customers = $this->customer->orderBy('name', 'asc')->paginate(10);
-        return view('app.createTask', ['id' => $request->id, 'name' => $request->name, 'openTask' => true, 'customers' => $customers]);
+         $customers = $this->customer->orderBy('name', 'asc')->paginate(10);
+         return view('app.createTask', ['id' => $request->id, 'name' => $request->name, 'openTask' => true, 'customers' => $customers]);
      }
 
      /**
@@ -59,16 +59,14 @@ class TaskController extends Controller
       */
      public function store(TaskRequest $request)
      {
-        
          $customer = Customer::where('name', $request->name)->orWhere('id', $request->id)->first();
          if ($customer === null) {
              return view('app.createTask', ['error' => 'Cliente não encontrado em nossa base de dados. Consulte sua lista de cliente. [005]']);
-         }else {
+         } else {
              $task = Task::where('customer_id', $customer->id)->first();
              if ($task) {
                  return view('app.createTask', ['error' => 'Cliente já possui agendamento. Consulte seus agendamentos. [006]']);
              } else {
-               
                  $task = Task::create($request->validated());
                  return view('app.createTask', ['message' => 'Agendamento realizado com sucesso!']);
              }
@@ -111,16 +109,16 @@ class TaskController extends Controller
          $task = $task->save();
        
          if ($task) {
-            $task = $this->task->where('id', $request->id)->first();
-            //dd($task->service_value);
-            ToReceive::updateOrCreate([
-                'task_id' => $task->id,
-                'user_id' => $task->user_id,
-                'customer_id' => $task->customer_id,
-                'service_value' => $task->service_value,
+             $task = $this->task->where('id', $request->id)->first();
+             //dd($task->service_value);
+             ToReceive::updateOrCreate([
+                 'task_id' => $task->id,
+                 'user_id' => $task->user_id,
+                 'customer_id' => $task->customer_id,
+                 'service_value' => $task->service_value,
                 
-            ]);
-            return redirect()->route('task.index');
+             ]);
+             return redirect()->route('task.index');
          } else {
              return view('app.task', ['error' => 'Erro: Não foi possível marcar o serviço como realizado. Tente novamente mais tarde.']);
          }
@@ -132,13 +130,22 @@ class TaskController extends Controller
       * @param  \App\Models\Task  $task
       * @return \Illuminate\Http\Response
       */
-     public function destroy(Task $task)
+     public function destroy(Task $task, ToReceive $toReceive)
      {
          if ($task->exists()) {
-             $task->delete();
-             return response()->view('app.task', ['message' => 'Registro apagado da nossa base de dados com sucesso.']);
+             $toReceive = ToReceive::where('task_id', $task->id)->first();
+             if ($toReceive !== null) {
+                 $toReceive = $toReceive->delete($toReceive->id);
+             } else {
+                 $task = $task->delete($task->id);
+                 if ($task) {
+                     return response()->view('app.task', ['message' => 'Registro apagado da nossa base de dados com sucesso.']);
+                 } else {
+                     return view('app.task', ['error' => 'Erro ao tentar apagar registro. [009]']);
+                 }
+             }
          } else {
-             return view('app.task', ['error' => 'Erro ao tentar apagar registro. (Registro não encontrado)']);
+             return view('app.task', ['error' => 'Erro ao tentar apagar registro. [009]']);
          }
      }
 }

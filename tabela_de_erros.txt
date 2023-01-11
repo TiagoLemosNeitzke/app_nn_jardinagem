@@ -6,3 +6,4 @@
 006 -> Erro ao tentar cadastrar uma tarefa, a tarefa já possui cadastro.
 007 -> Erro as tentar atualizar uma despesa;
 008 -> Erro ao tentar excluir uma despesa. O método destroy retorna false;
+009 -> Registro da tarefa não pode ser encontrado no banco de dados.
