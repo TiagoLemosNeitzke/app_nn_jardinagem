@@ -58,6 +58,12 @@
         .hover:hover {
             transform: scale(1.2) translate3d(5px, -10%, 3em);
         }
+
+        @media (max-width: 576px) {
+            .hidden-sm{
+                display: none !important;
+            }
+        }
     </style>
 </head>
 
@@ -121,11 +127,6 @@
         @auth
             <nav class="navbar navbar-expand-lg navbar-light bg-teal">
                 <div class="container-fluid">
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-lg-0mb-2">
@@ -209,7 +210,8 @@
                             </li>
 
                         </ul>
-                        <form class="d-flex" action="{{ route('customer.search') }}" method="get">
+                        <div class="hidden-sm">
+                            <form class="d-flex" action="{{ route('customer.search') }}" method="get">
                             @csrf
                             <input class="form-control me-2" type="search" placeholder="Nome do Cliente"
                                 aria-label="Search" name="name">
@@ -220,6 +222,7 @@
                                         d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
                                 </svg></button>
                         </form>
+                        </div>
                     </div>
                 </div>
             </nav>

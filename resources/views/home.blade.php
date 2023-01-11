@@ -18,15 +18,15 @@
                         sistema.</div>
                 </div>
             </div>
-            <div class="row mt-1">
-                <div class="col-6">
+            <div class="d-md-flex justify-content-between">
+                <div class="col-md-5 col-sm-12 mt-2">
                     <div class="card bg-teal mb-2 border">
                         <div class="card-body text-center">Você possui os seguintes agendamentos para hoje.</div>
                     </div>
 
 
                     @foreach ($tasksForToday as $task)
-                        <div class="col mb-0 mb-2 rounded">
+                        <div class="col col-sm-12 mb-0 mb-2 rounded">
                             <div class="card mt-2 mb-2">
                                 <div class="card-body">
 
@@ -51,7 +51,7 @@
                     @endforeach
                 </div>
 
-                <div class="col-6">
+                <div class="col-md-5 col-sm-12 mt-2">
                     <div class="card bg-teal mb-2 border">
                         <div class="card-body text-center">As seguintes clientes ainda não pagaram.</div>
                     </div>
@@ -72,32 +72,31 @@
                     @endforeach
 
                 </div>
-                <div class="d-flex justify-content-center mt-4">
-                    <nav aria-label="Page navigation">
-                        <ul class="pagination">
-                            <li class="page-item">
-                                <a class="page-link bg-teal text-light" href="{{ $toReceives->previousPageUrl() }}"
-                                    aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
-                            @for ($i = 1; $i <= $toReceives->lastPage(); $i++)
-                                <li class="page-item {{ $toReceives->currentPage() == $i ? 'active' : '' }}">
-                                    <a class="page-link bg-teal text-light"
-                                        href="{{ $toReceives->url($i) }}">{{ $i }}</a>
-                                </li>
-                            @endfor
-                            <li class="page-item">
-                                <a class="page-link bg-teal text-light" href="{{ $toReceives->nextPageUrl() }}"
-                                    aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
             </div>
-
+            <div class="d-flex justify-content-center mt-4">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                        <li class="page-item">
+                            <a class="page-link bg-teal text-light" href="{{ $toReceives->previousPageUrl() }}"
+                                aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        @for ($i = 1; $i <= $toReceives->lastPage(); $i++)
+                            <li class="page-item {{ $toReceives->currentPage() == $i ? 'active' : '' }}">
+                                <a class="page-link bg-teal text-light"
+                                    href="{{ $toReceives->url($i) }}">{{ $i }}</a>
+                            </li>
+                        @endfor
+                        <li class="page-item">
+                            <a class="page-link bg-teal text-light" href="{{ $toReceives->nextPageUrl() }}"
+                                aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
         </main>
     </div>
 @endsection
