@@ -63,12 +63,12 @@ class TaskController extends Controller
          if ($customer === null) {
              return view('app.createTask', ['error' => 'Cliente não encontrado em nossa base de dados. Consulte sua lista de cliente. [005]']);
          } else {
-             $task = Task::where('customer_id', $customer->id)->first();
-             if ($task) {
-                 return view('app.createTask', ['error' => 'Cliente já possui agendamento. Consulte seus agendamentos. [006]']);
-             } else {
+             $task = Task::where('customer_id', $customer->id)->where('did_day', null)->first();
+             if ($task === null) {
                  $task = Task::create($request->validated());
                  return view('app.createTask', ['message' => 'Agendamento realizado com sucesso!']);
+             } else {
+                 return view('app.createTask', ['error' => 'Cliente já possui agendamento. Consulte seus agendamentos. [006]']);
              }
          }
      }
