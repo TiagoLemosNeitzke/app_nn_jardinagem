@@ -25,7 +25,6 @@ class TaskController extends Controller
      {
          if ($request->filter === 'all') {
              $tasks = $this->task->orderBy('scheduled_for_day', 'asc')->paginate(9);
-             
              return view('app.task', ['tasks' => $tasks, 'filter' => 'all']);
          } elseif ($request->filter === 'open') {
              $tasks = $this->task->where('did_day', null)->orderBy('scheduled_for_day', 'asc')->paginate(9);
@@ -34,8 +33,7 @@ class TaskController extends Controller
              $tasks = $this->task->where('did_day', '<>', null)->orderBy('scheduled_for_day', 'asc')->paginate(9);
              return view('app.task', ['tasks' => $tasks, 'filter' => 'done']);
          } else {
-             $tasks = $this->task->orderBy('scheduled_for_day', 'asc')->paginate(9);
-           
+             $tasks = $this->task->where('did_day', null)->orderBy('scheduled_for_day', 'asc')->paginate(9);
              return view('app.task', ['tasks' => $tasks, 'filter' => 'all']);
          }
      }
@@ -47,8 +45,8 @@ class TaskController extends Controller
       */
      public function create(Request $request)
      {
-         $customers = $this->customer->orderBy('name', 'asc')->paginate(10);
-         return view('app.createTask', ['id' => $request->id, 'name' => $request->name, 'openTask' => true, 'customers' => $customers]);
+         $customer = $this->customer->where('id', $request->id)->first();
+         return view('app.createTask', ['customer' => $customer]);
      }
 
      /**
@@ -92,7 +90,8 @@ class TaskController extends Controller
       */
      public function edit(Task $task)
      {
-         dd('edit');
+         $task = $task->where('id', $task->id)->with('customer')->first();
+         return view('app.createTask', ['task' => $task]);
      }
 
      /**
@@ -102,12 +101,22 @@ class TaskController extends Controller
       * @param  \App\Models\Task  $task
       * @return \Illuminate\Http\Response
       */
-     public function update(Request $request)
+     public function update(TaskRequest $request, Task $task)
+     {
+         $task = $task->update($request->validated());
+         if ($task) {
+             return view('app.createTask', ['message' => 'Agendamento editado com sucesso!']);
+         } else {
+             return view('app.createTask', ['error' => 'Ocorreu um erro ao tentar editar a tarefa. Tente novamente mais tarde [010]']);
+         }
+     }
+
+     public function done(Request $request)
      {
          $task = $this->task->where('id', $request->id)->first();
          $task->did_day =  date('y-m-d');
          $task = $task->save();
-       
+         
          if ($task) {
              $task = $this->task->where('id', $request->id)->first();
             
@@ -123,7 +132,6 @@ class TaskController extends Controller
              return view('app.task', ['error' => 'Erro: Não foi possível marcar o serviço como realizado. Tente novamente mais tarde.']);
          }
      }
-
      /**
       * Remove the specified resource from storage.
       *

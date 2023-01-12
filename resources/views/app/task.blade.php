@@ -14,18 +14,9 @@
             @endif
         </div>
         <div class="row">
-           
-            @if (isset($tasks))
-                @if ($filter === 'open')
-                    <p class="text-center">Aqui são listados todos os chamados em aberto</p>
-                @endif
-                @if ($filter === 'done')
-                    <p class="text-center">Aqui são listados todos os serviços já realizados</p>
-                @endif
-                @if ($filter === 'all')
-                    <p class="text-center">Aqui são listados todos os chamados, incluindo os já realizados</p>
-                @endif
 
+            @if (isset($tasks))
+                
                 <div class="row border-bottom mb-4">
                     <div class="fixed-end mb-4">
                         <ul class="nav">
@@ -93,7 +84,8 @@
                                     @endphp
                                 </p>
                                 <div class="container">
-                                    <form action="{{ route('task.update', ['task' => $task->id]) }}" method="post">
+                               
+                                    <form action="{{ route('task.done', ['task' => $task]) }}" method="put">
                                         @method('put')
                                         @csrf
                                         <input type="number" name="id" value="{{ $task->id }}" class="hidden">
@@ -111,10 +103,21 @@
                                             </button>
                                         @endif
                                     </form>
+                                    @if ($task->did_day === null)
+                                        <a class="btn btn-success w-100 mt-2"
+                                            href="{{ route('task.edit', ['task' => $task->id]) }}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
+                                                fill="currentColor" class="bi bi-pencil-square me-2" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                                <path fill-rule="evenodd"
+                                                    d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                            </svg>Editar</a>
+                                    @endif
                                     <form action="{{ route('task.destroy', $task->id) }}" method="post">
                                         @method('delete')
                                         @csrf
-                                        <button type="submit" class="btn btn-danger mt-2 w-100"
+                                        <button type="submit" class="btn btn-danger w-100 mt-2"
                                             title="Retira a tarefa da fila."><svg xmlns="http://www.w3.org/2000/svg"
                                                 width="30" height="30" fill="currentColor" class="bi bi-trash3"
                                                 viewBox="0 0 16 16">
@@ -129,7 +132,7 @@
                                         method="get">
 
                                         @csrf
-                                        <button type="submit" class="btn btn-success mt-2 w-100"
+                                        <button type="submit" class="btn btn-success w-100 mt-2"
                                             title="Consulta dados do cliente."><svg xmlns="http://www.w3.org/2000/svg"
                                                 width="30" height="30" fill="currentColor" class="bi bi-search"
                                                 viewBox="0 0 16 16">

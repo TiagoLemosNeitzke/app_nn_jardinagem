@@ -27,6 +27,8 @@ Route::resource('customer', 'App\Http\Controllers\CustomerController')->middlewa
 
 Route::resource('task', 'App\Http\Controllers\TaskController')->middleware('verified');
 
+Route::put('task/{task}/done', [App\Http\Controllers\TaskController::class, 'done'])->middleware('verified')->name('task.done');
+
 Route::resource('toReceive', 'App\Http\Controllers\ToReceiveController')->middleware('verified')->except('create', 'store');
 
 Route::resource('expense', 'App\Http\Controllers\ExpenseController')->middleware('verified');
