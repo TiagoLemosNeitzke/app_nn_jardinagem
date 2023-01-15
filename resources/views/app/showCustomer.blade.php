@@ -3,15 +3,16 @@
     <div class="justify-content-center d-flex container">
         <div class="col-md-6 mb-2">
             <div class="card border-success">
-                <div class="card-body">
+                <div class="card-header text-center">
                     @if (isset($user))
-                        <p class="mb-4">Cliente foi cadastrado pelo usuário {{ $user }}</p>
+                        <p class="pt-1">Cliente cadastrado por: <span class="fw-bold">{{ $user }}</span></p>
                     @endif
-                    <h5 class="card-title fw-bold mb-2">Nome: {{ $customer->name }}</h5>
-
-                    <p class="fw-bold">Telefone: {{ $customer->phone }}</p>
-                    <p class="fw-bold">Email: {{ $customer->email }}</p>
-                    <p class="fw-bold">Endereço: {{ $customer->street }}, {{ $customer->street_number }}.
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title"><span class="fw-bold">Nome: </span>{{ $customer->name }}</h5>
+                    <p><span class="fw-bold">Telefone: </span>{{ $customer->phone }}</p>
+                    <p><span class="fw-bold">Email: </span>{{ $customer->email }}</p>
+                    <p><span class="fw-bold">Endereço: </span>{{ $customer->street }}, {{ $customer->street_number }}.
                         {{ $customer->district }}.
                         {{ $customer->city }} - {{ $customer->state }}.</p>
 
@@ -106,7 +107,7 @@
                     </div>
                     <div class="modal-body">
                         {{-- Form start --}}
-                        <form class="form-group needs-validation mt-4" action="{{ route('whatsapp') }}" method="get">
+                        <form class="form-group needs-validation mt-4" action="{{ route('whatsapp') }}" method="post">
                             @csrf
                             <div class="row mb-3">
                                 <label for="inputName" class="col-sm-12 col-form-label">Enviar notificação de
@@ -168,7 +169,7 @@
                     </div>
                     <div class="modal-body">
                         {{-- Form start --}}
-                        <form class="form-group needs-validation mt-4" action="" method="" novalidate>
+                        <form class="form-group needs-validation mt-4" action="{{ route('whatsapp') }}" method="post">
                             @csrf
                             <div class="row mb-3">
                                 <label for="inputName" class="col-sm-12 col-form-label">Enviar notificação de
@@ -188,21 +189,21 @@
                             </div>
                             <div class="mb-3">
                                 <label for="exampleFormControlTextarea1" class="form-label">Mensagem</label>
-                                <textarea class="form-control" id="messageText" rows="3" name="message">Olá! {{ $customer->name }}, não identificamos o pagamento referente ao serviço {{ $customer->type_service }}, realizado no dia (implementar dia). Caso o pagamento tenha cido efetuado, por favor desconcidere esta mensagem.</textarea>
+                                <textarea class="form-control" id="messageText" rows="3" name="message">Olá! {{ $customer->name }}, não identificamos o pagamento referente ao serviço de jardinagem, realizado no dia {{ date('d-m-y', strtotime($customer->task->did_day)) }}. Caso o pagamento tenha sido efetuado, por favor desconcidere esta mensagem.</textarea>
                             </div>
+                            <button type="submit" href="" class="btn btn-outline-success"><svg
+                                    xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                                    class="bi bi-send-check me-2" viewBox="0 0 16 16">
+                                    <path
+                                        d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855a.75.75 0 0 0-.124 1.329l4.995 3.178 1.531 2.406a.5.5 0 0 0 .844-.536L6.637 10.07l7.494-7.494-1.895 4.738a.5.5 0 1 0 .928.372l2.8-7Zm-2.54 1.183L5.93 9.363 1.591 6.602l11.833-4.733Z" />
+                                    <path
+                                        d="M16 12.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Zm-1.993-1.679a.5.5 0 0 0-.686.172l-1.17 1.95-.547-.547a.5.5 0 0 0-.708.708l.774.773a.75.75 0 0 0 1.174-.144l1.335-2.226a.5.5 0 0 0-.172-.686Z" />
+                                </svg>Enviar Cobrança</button>
 
                         </form>
                         {{-- form end --}}
                     </div>
                     <div class="modal-footer bg-teal">
-                        <button type="submit" href="" class="btn border-dark d-flex"
-                            onclick="sendMessagemWhatsapp()"><svg xmlns="http://www.w3.org/2000/svg" width="30"
-                                height="30" fill="currentColor" class="bi bi-send-check me-2" viewBox="0 0 16 16">
-                                <path
-                                    d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855a.75.75 0 0 0-.124 1.329l4.995 3.178 1.531 2.406a.5.5 0 0 0 .844-.536L6.637 10.07l7.494-7.494-1.895 4.738a.5.5 0 1 0 .928.372l2.8-7Zm-2.54 1.183L5.93 9.363 1.591 6.602l11.833-4.733Z" />
-                                <path
-                                    d="M16 12.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Zm-1.993-1.679a.5.5 0 0 0-.686.172l-1.17 1.95-.547-.547a.5.5 0 0 0-.708.708l.774.773a.75.75 0 0 0 1.174-.144l1.335-2.226a.5.5 0 0 0-.172-.686Z" />
-                            </svg>Enviar Cobrança</button>
 
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><svg
                                 xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
