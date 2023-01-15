@@ -9,7 +9,7 @@ class WhatsappController extends Controller
 {
     public function setWhatsappLink(Request $request)
     {
-        $phone = '67996636340'; //$request->phone; //Esta fixo porque os números do banco não estão padronizados
+        $phone = $request->phone; //Esta fixo porque os números do banco não estão padronizados
         $phoneDDD = substr($phone, 0,2);
         $phonePayload = substr($phone, 3);
         $message = $request->message;
