@@ -21,7 +21,7 @@ class CustomerFactory extends Factory
             'user_id' => 1,
             'name' => fake()->name(),
             'email' => fake()->email(),
-            'phone' => fake()->phoneNumber(),
+            'phone' => '67988882222',
             'street' => fake()->streetAddress(),
             'street_number' => fake()->numberBetween(1234, 9876),
             'district' => 'Brasilândia',

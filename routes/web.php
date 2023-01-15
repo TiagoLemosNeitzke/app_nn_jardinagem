@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\WhatsappController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,6 +29,8 @@ Route::resource('customer', 'App\Http\Controllers\CustomerController')->middlewa
 Route::resource('task', 'App\Http\Controllers\TaskController')->middleware('verified');
 
 Route::put('task/{task}/done', [App\Http\Controllers\TaskController::class, 'done'])->middleware('verified')->name('task.done');
+
+Route::get('whatsapp', [App\Http\Controllers\WhatsappController::class, 'sendMessage'])->middleware('verified')->name('whatsapp');
 
 Route::resource('toReceive', 'App\Http\Controllers\ToReceiveController')->middleware('verified')->except('create', 'store');
 
