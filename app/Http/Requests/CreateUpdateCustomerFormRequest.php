@@ -24,7 +24,15 @@ class CreateUpdateCustomerFormRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'user_id' => 'required',
+            'name' => 'required',
+            'email' => 'email:rfc,dns',
+            'phone' => 'required|numeric',
+            'street' => 'required',
+            'street_number' => 'required|',
+            'district' => 'required',
+            'city' => 'required',
+            'state' => 'required'
         ];
     }
 }

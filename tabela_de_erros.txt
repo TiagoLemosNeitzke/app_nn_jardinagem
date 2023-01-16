@@ -8,3 +8,4 @@
 008 -> Erro ao tentar excluir uma despesa. O método destroy retorna false;
 009 -> Registro da tarefa não pode ser encontrado no banco de dados.
 010 -> Não é possível editar o registro da tarefa;
+011 -> Não é possível cadastrar cliente. A tentativa de cadastro retornou false.

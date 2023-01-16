@@ -187,10 +187,12 @@
                                         value="{{ $customer->phone }}">
                                 </div>
                             </div>
-                            <div class="mb-3">
+                           @if (isset($customer->task->did_day))
+                                <div class="mb-3">
                                 <label for="exampleFormControlTextarea1" class="form-label">Mensagem</label>
                                 <textarea class="form-control" id="messageText" rows="3" name="message">Olá! {{ $customer->name }}, não identificamos o pagamento referente ao serviço de jardinagem, realizado no dia {{ date('d-m-y', strtotime($customer->task->did_day)) }}. Caso o pagamento tenha sido efetuado, por favor desconcidere esta mensagem.</textarea>
                             </div>
+                           @endif
                             <button type="submit" href="" class="btn btn-outline-success"><svg
                                     xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
                                     class="bi bi-send-check me-2" viewBox="0 0 16 16">

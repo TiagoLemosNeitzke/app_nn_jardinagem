@@ -7,7 +7,7 @@
             <p class="text-danger">{{ $error }}</p>
         </div>
     @endif
-
+ 
     <div class="justify-content-center d-flex bg-teal container mt-4">
         <div class="col-md-12 border-success mb-3">
             <div class="row text-center">
@@ -19,11 +19,15 @@
                     @endif
                 </h5>
             </div>
-
+            @if ($errors->any())
+                <div class=" text-center bg-danger w-100 p-2">
+                    <span class="text-white fw-bold">{{ $errors->first() }}</span>
+                </div>
+            @endif
             {{-- Form start --}}
             @if (isset($customer))
                 <form class="row g-3 needs-validation mt-4"
-                    action="{{ route('customer.update', ['customer' => $customer->id]) }}" method="post" novalidate>
+                    action="{{ route('customer.update', ['customer' => $customer->id]) }}" method="post">
                     @method('put')
                 @else
                     <form class="row g-3 needs-validation mt-4" action="{{ route('customer.store') }}" method="post"
@@ -32,19 +36,9 @@
 
             @csrf
 
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-
             <div class="row mb-3">
                 
-                <div class="col-sm-10">
+                <div class="col-sm-10 hidden">
                     @if (isset($customer))
                         <label for="inputId" class="col-sm-2 col-form-label">ID do Cliente</label>
                         <input type="text" class="form-control" id="inputID" name="id"
@@ -52,19 +46,26 @@
                     @endif
                 </div>
             </div>
-            <div class="row mb-3">
-                <label for="inputName" class="col-sm-2 col-form-label">Nome</label>
+            <div class="row mb-3 hidden">
+                <label for="user_id" class="col-sm-2 col-form-label">User_id</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputName" name="name"
-                        value="{{ $customer->name ?? '' }}" required>
+                    <input type="text" class="form-control" id="user_id" name="user_id"
+                        value="{{ $customer->user_id ?? Auth::User()->id }}" required readonly>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="name" class="col-sm-2 col-form-label">Nome</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="name" name="name"
+                        value="{{ $customer->name ?? '' }}" required placeholder="Seu nome aqui">
                 </div>
             </div>
 
             <div class="row mb-3">
-                <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+                <label for="email" class="col-sm-2 col-form-label">Email</label>
                 <div class="col-sm-10">
-                    <input type="email" class="form-control" id="inputEmail" name="email"
-                        value="{{ $customer->email ?? '' }}">
+                    <input type="email" class="form-control" id="email" name="email"
+                        value="{{  $customer->email ?? '' }}" placeholder="seuemail@email.com">
                 </div>
             </div>
 
@@ -72,7 +73,7 @@
                 <label for="inputPhone" class="col-sm-2 col-form-label">Telefone</label>
                 <div class="col-sm-10">
                     <input type="phone" class="form-control" id="inputPhone" name="phone"
-                        value="{{ $customer->phone ?? '' }}" required>
+                        value="{{ $customer->phone ?? '' }}" required placeholder="67998880000">
                 </div>
             </div>
 
@@ -80,12 +81,12 @@
                 <label for="inputStreet" class="col-sm-2 col-form-label">Rua</label>
                 <div class="col-sm-6">
                     <input type="text" class="form-control" id="inputStreet" name="street"
-                        value="{{ $customer->street ?? '' }}" required>
+                        value="{{ $customer->street ?? '' }}" required placeholder="Av. Nove de Julho">
                 </div>
                 <lebel class="col-form-label col-sm-2 pt-0" for="inputNumber">Numero</lebel>
                 <div class="col-sm-2">
                     <input id="inputNumber" class="form-control" type="number" name="street_number"
-                        value="{{ $customer->street_number ?? '' }}">
+                        value="{{ $customer->street_number ?? '' }}" required placeholder="1234">
                 </div>
             </div>
 
@@ -93,7 +94,7 @@
                 <label for="inputDistrict" class="col-sm-2 col-form-label">Bairro</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" id="inputDistrict" name="district"
-                        value="{{ $customer->district ?? '' }}">
+                        value="{{ $customer->district ?? '' }}" required placeholder="Jardim Brasilândia">
                 </div>
             </div>
 
@@ -101,13 +102,13 @@
                 <label for="inputCity" class="col-sm-2 col-form-label">Cidade</label>
                 <div class="col-sm-6">
                     <input type="text" class="form-control" id="inputCity" name="city"
-                        value="{{ $customer->city ?? '' }}">
+                        value="{{ $customer->city ?? '' }}" required placeholder="Fátima do Sul">
                 </div>
 
                 <label for="inputState" class="col-sm-2 col-form-label">Estado</label>
                 <div class="col-sm-2">
                     <input type="text" class="form-control" id="inputState" name="state"
-                        value="{{ $customer->state ?? 'MS' }}">
+                        value="{{ $customer->state ?? 'MS' }}" required>
                 </div>
             </div>
 

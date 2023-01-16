@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateUpdateCustomerFormRequest;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 
@@ -39,29 +40,24 @@ class CustomerController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Http\Requests\CreateUpdateCustomerFormRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateUpdateCustomerFormRequest $request)
     {
-        $customer = $this->customer->where('name', $request->get('name'))->first();
+        $customer = $this->customer->where('name',$request->validated('name'))->first();
         
         if ($customer === null) {
-            $this->customer->create([
-            'user_id' => auth()->user()->id,
-            'name' => $request->name,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'street' => $request->street,
-            'street_number' => $request->street_number,
-            'district' => $request->district,
-            'city' => $request->city,
-            'state' => $request->state
-        ]);
-            return view('app.customers', ['message' => 'Cliente cadastrado com sucesso!']);
+            $customer = $this->customer->create($request->validated());
+            if($customer->exists()){
+                return view('app.customers', ['message' => 'Cliente cadastrado com sucesso!']);
+            }else{
+               return view('app.customers', ['error' => 'Cliente não pode ser cadastrado. Tente novamente ou entre em contato com o suporte.[011]']);
+            }
+            
         }
 
-        if ($customer->name === $request->get('name')) {
+        if ($customer->name === $request->validated('name')) {
             return view('app.customers', ['error' => 'Cliente já possui cadastro! Verifique o cadastro de clientes. [001]']);
         }
     }
@@ -77,7 +73,6 @@ class CustomerController extends Controller
     {
         $urlPrevious = url()->previous();
         $customer = $customer->where('id', $customer->id)->with('task')->first();
-        //dd($customer);
         return view('app.showCustomer', ['customer' => $customer, 'user' => $request->get('user'), 'urlPrevious' => $urlPrevious]);
     }
 
@@ -95,13 +90,13 @@ class CustomerController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Http\Requests\CreateUpdateCustomerFormRequest  $request
      * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Customer $customer)
+    public function update(CreateUpdateCustomerFormRequest $request, Customer $customer)
     {
-        $customer->update($request->all());
+        $customer->update($request->validated());
         return redirect()->route('customer.index', ['message' => 'Cadastrado atualizado com sucesso!']);
     }
 

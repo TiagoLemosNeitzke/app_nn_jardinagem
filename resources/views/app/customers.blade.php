@@ -22,7 +22,10 @@
                 </div>
             @endif
         </div>
-        <div class="row">
+        @if (isset($message) || isset($error))
+            <div class="row hidden">
+        @else
+            <div class="row">
 
             @if (isset($customers))
                 @foreach ($customers as $customer)
@@ -100,6 +103,7 @@
                     </nav>
             @endif
         </div>
+        @endif
 
     </div>
 @endsection

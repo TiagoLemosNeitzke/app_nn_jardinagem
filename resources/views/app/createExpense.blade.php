@@ -23,8 +23,6 @@
                     <form class="form-group" action="{{ route('expense.store') }}" method="POST">
                         @csrf
                 @endif
-                
-                    {{ $errors->first() }}
                     <input type="number" class="hidden" value="{{ $expense->user_id ?? Auth::user()->id }}" name="user_id">
                     <div class="mb-3">
                         <label for="expense_amount" class="form-label fw-bold">Valor da despesa</label>
@@ -35,7 +33,7 @@
                     <div class="mb-3">
                         <label for="description" class="form-label fw-bold">Descrição da despesa</label>
                         <textarea type="number" class="form-control {{ $errors->first('description') ? 'border-danger' : '' }}" id="description" name="description" placeholder="Descreva a despesa"
-                            rows="3">{{ $expense->description ??old('description') }}</textarea>
+                            rows="3">{{ $expense->description ?? old('description') }}</textarea>
                         <span class="text-danger">{{ $errors->first('description') }}</span>
                     </div>
 
