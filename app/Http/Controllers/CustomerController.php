@@ -108,8 +108,7 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        //$customer = $this->customer->destroy($customer->id);
-        $customer = 0;
+        $customer = $this->customer->destroy($customer->id);
         if ($customer) {
             return redirect()->route('customer.index', ['message' => 'Cliente Removido com sucesso da nossa base de dados.']);
         } else {

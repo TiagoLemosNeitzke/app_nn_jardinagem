@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->string('name', 250);
             $table->string('email')->nullable();
             $table->string('phone');
-            $table->string('street', 250); // todos os dados juntos aqui.
+            $table->string('street', 250);
             $table->string('street_number', 250);
             $table->string('district', 250);
             $table->string('city', 250);
