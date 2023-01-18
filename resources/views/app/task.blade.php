@@ -104,7 +104,7 @@
                                         @endif
                                     </form>
                                     @if ($task->did_day === null)
-                                        <a class="btn btn-success w-100 mt-2"
+                                        <a class="btn btn-primary w-100 mt-2"
                                             href="{{ route('task.edit', ['task' => $task->id]) }}">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
                                                 fill="currentColor" class="bi bi-pencil-square me-2" viewBox="0 0 16 16">
