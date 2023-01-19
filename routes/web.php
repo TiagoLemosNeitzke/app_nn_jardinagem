@@ -32,7 +32,7 @@ Route::put('task/{task}/done', [App\Http\Controllers\TaskController::class, 'don
 
 Route::post('whatsapp', [App\Http\Controllers\WhatsappController::class, 'sendMessage'])->middleware('verified')->name('whatsapp');
 
-Route::resource('toReceive', 'App\Http\Controllers\ToReceiveController')->middleware('verified')->except('create', 'store');
+Route::resource('toReceive', 'App\Http\Controllers\ToReceiveController')->middleware('verified')->except('create', 'store','edit', 'show');
 
 Route::resource('expense', 'App\Http\Controllers\ExpenseController')->middleware('verified');
 /* Route::post('/searchCustomer', function () {

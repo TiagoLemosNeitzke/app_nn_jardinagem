@@ -28,28 +28,6 @@ class ToReceiveController extends Controller
      }
 
      /**
-      * Display the specified resource.
-      *
-      * @param  \App\Models\ToReceive  $toReceive
-      * @return \Illuminate\Http\Response
-      */
-     public function show(ToReceive $toReceive)
-     {
-        //
-     }
-
-     /**
-      * Show the form for editing the specified resource.
-      *
-      * @param  \App\Models\ToReceive  $toReceive
-      * @return \Illuminate\Http\Response
-      */
-     public function edit(ToReceive $toReceive)
-     {
-         dd('edit');
-     }
-
-     /**
       * Update the specified resource in storage.
       *
       *
