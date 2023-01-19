@@ -15,7 +15,7 @@
         <div class="fixed-end mb-4">
             <a class="btn btn-success" href="{{ route('expense.create') }}">Cadastrar despesa</a>
         </div>
-        <div class="d-md-flex justify-content-around">
+        <div class="row">
             @foreach ($expenses as $expense)
                 <div class="col-md-5 col-sm-12 my-2">
                     <div class="card">
