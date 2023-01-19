@@ -11,6 +11,14 @@ class Customer extends Model
     use HasFactory;
     use SoftDeletes;
 
+    public $customerTrashed;
+
+    static function getCustomerTrashed($relationshipId ):static
+    {
+        $customerTrashed = Customer::withTrashed()->with('toReceive')->where('deleted_at', '<>' , null)->first();
+        return $customerTrashed;
+    }
+
     protected $fillable = [
         'id',
         'user_id',

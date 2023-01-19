@@ -20,7 +20,12 @@ class ToReceiveController extends Controller
      public function index(Request $request)
      {
          $toReceives = $this->toReceive->with('user', 'customer')->orderBy('created_at', 'asc')->paginate(4);
-         return view('app.toReceive', ['toReceives' => $toReceives, 'message' => $request->message, 'error' => $request->error]);
+         foreach ($toReceives as $toReceive) {
+             if ($toReceive->customer === null) {
+                 $customerTrashed = Customer::getCustomerTrashed($toReceive->id);
+             }
+         }
+         return view('app.toReceive', ['toReceives' => $toReceives,'customerTrashed' => $customerTrashed, 'message' => $request->message, 'error' => $request->error]);
      }
 
      /**
@@ -54,10 +59,9 @@ class ToReceiveController extends Controller
       */
      public function update(ToReceive $toReceive)
      {
-       
-        $toReceive = $toReceive->update([
-                  'status' => 1
-                ]);
+         $toReceive = $toReceive->update([
+                   'status' => 1
+                 ]);
           
          if ($toReceive) {
              return redirect()->route('toReceive.index', ['message' => 'Sucesso! Você marcou como recebido.']);
