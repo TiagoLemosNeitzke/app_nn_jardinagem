@@ -20,7 +20,7 @@
                     <div class="card">
                         <div class="card-body">
 
-                            <p><span class="fw-bold">Cliente: </span>{{ $toReceive->customer->name ?? $customerTrashed->name }}</p>
+                            <p><span class="fw-bold">Cliente: </span>{{ $toReceive->customer->name }}</p>
                             <p><span class="fw-bold">Valor do serviço:</span> R$ {{ $toReceive->service_value }},00</p>
                             <p><span class="fw-bold">Serviço foi pago? </span>
                                 @if ($toReceive->status)
@@ -53,7 +53,7 @@
                                 </div>
                                 <div class="my-2">
 
-                                    <a class="btn btn-success w-100" href="tel:{{ $toReceive->customer->phone ?? $customerTrashed->phone }}"
+                                    <a class="btn btn-success w-100" href="tel:{{ $toReceive->customer->phone}}"
                                         title="Ligar para o cliente"><svg xmlns="http://www.w3.org/2000/svg" width="25"
                                             height="25" fill="currentColor" class="bi bi-telephone-outbound me-2"
                                             viewBox="0 0 16 16">
@@ -67,7 +67,7 @@
                             @endif
 
                             <div class="">
-                                <a href="{{ route('customer.show', ['customer' => $toReceive->customer->id ?? $customerTrashed->id]) }}"
+                                <a href="{{ route('customer.show', ['customer' => $toReceive->customer->id]) }}"
                                     class="btn btn-success w-100" title="Ver mais dados do cliente"><svg
                                         xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
                                         class="bi bi-person" viewBox="0 0 16 16">
