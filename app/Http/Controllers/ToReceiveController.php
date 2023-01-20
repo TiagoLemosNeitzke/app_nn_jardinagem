@@ -8,32 +8,15 @@ use Illuminate\Http\Request;
 
 class ToReceiveController extends Controller
 {
-    public $toReceive;
-
-    public function __construct(ToReceive $toReceive)
-    {
-        $this->toReceive = $toReceive;
-    }
-
-     /**
-      * Display a listing of the resource.
-      *
-      * @return \Illuminate\Http\Response
-      */
      public function index(Request $request)
      {
-         $toReceives = $this->toReceive->with('user', 'customer')->orderBy('created_at', 'asc')->paginate(4);
-
-         return view('app.toReceive', ['toReceives' => $toReceives, 'message' => $request->message, 'error' => $request->error]);
+        $toReceives = ToReceive::with(['user','customer' => function($query){
+            $query->withTrashed();
+        }])->paginate(4);
+       
+        return view('app.toReceive', ['toReceives' => $toReceives, 'message' => $request->message, 'error' => $request->error]);
      }
 
-     /**
-      * Update the specified resource in storage.
-      *
-      *
-      * @param  \App\Models\ToReceive  $toReceive
-      * @return \Illuminate\Http\Response
-      */
      public function update(ToReceive $toReceive)
      {
          $toReceive = $toReceive->update([
@@ -47,12 +30,6 @@ class ToReceiveController extends Controller
          };
      }
 
-     /**
-      * Remove the specified resource from storage.
-      *
-      * @param  \App\Models\ToReceive  $toReceive
-      * @return \Illuminate\Http\Response
-      */
      public function destroy(ToReceive $toReceive)
      {
          $toReceive = $toReceive->delete();
