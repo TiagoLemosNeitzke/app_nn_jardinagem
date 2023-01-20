@@ -35,14 +35,5 @@ Route::post('whatsapp', [App\Http\Controllers\WhatsappController::class, 'sendMe
 Route::resource('toReceive', 'App\Http\Controllers\ToReceiveController')->middleware('verified')->except('create', 'store','edit', 'show');
 
 Route::resource('expense', 'App\Http\Controllers\ExpenseController')->middleware('verified');
-/* Route::post('/searchCustomer', function () {
-    if (request()->name) {
-        $customer = \App\Models\Customer::where('name', request()->name)->get()->toArray();
-    }
 
-    if (request()->customer_id) {
-        $customer = \App\Models\Customer::where('id', request()->customer_id)->get()->toArray();
-        return 
-    }
-    //dd($customer[0]);
-})->name('searchCustomer'); */
+Route::resource('expenseToPay', 'App\Http\Controllers\ExpenseToPayController')->middleware('verified');
