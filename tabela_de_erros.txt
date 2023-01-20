@@ -9,3 +9,6 @@
 009 -> Registro da tarefa não pode ser encontrado no banco de dados.
 010 -> Não é possível editar o registro da tarefa;
 011 -> Não é possível cadastrar cliente. A tentativa de cadastro retornou false.
+012 -> Erro ao cadastra conta a pagar.
+013 -> Erro a tentar apagar uma conta a pagar.
+014 -> Erro ao tentar atualiza uma conta a pagar.

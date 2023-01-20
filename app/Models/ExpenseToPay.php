@@ -5,15 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Expense extends Model
+class ExpenseToPay extends Model
 {
     use HasFactory;
 
+    protected $table = 'expenses_to_pay';
+    
     protected $fillable = [
         'user_id',
         'expense_amount',
         'description',
-        'date_expense'
+        'due_date'
     ];
 
     public function user()

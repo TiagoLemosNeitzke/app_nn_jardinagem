@@ -164,7 +164,7 @@
                                     <li class="nav-item">
                                         <a class="dropdown-item" href="{{ route('toReceive.index') }}"
                                             title="À receber">
-                                            Contas Receber
+                                            Contas à Receber
                                         </a>
                                     </li>
                                     <li>
@@ -180,8 +180,8 @@
                                         <hr class="dropdown-divider bg-light">
                                     </li>
                                     <li class="nav-item">
-                                        <a class="dropdown-item" href="#" title="Registrar uma despesa">
-                                            Contas a Pagar
+                                        <a class="dropdown-item" href="{{ route('expenseToPay.index') }}" title="Registrar uma despesa à pagar">
+                                            Contas à Pagar
                                         </a>
                                     </li>
                                 </ul>
