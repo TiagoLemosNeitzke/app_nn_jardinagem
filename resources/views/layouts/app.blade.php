@@ -180,7 +180,7 @@
                                         <hr class="dropdown-divider bg-light">
                                     </li>
                                     <li class="nav-item">
-                                        <a class="dropdown-item" href="{{ route('expenseToPay.create') }}" title="Registrar uma despesa à pagar">
+                                        <a class="dropdown-item" href="{{ route('expenseToPay.index') }}" title="Registrar uma despesa à pagar">
                                             Contas à Pagar
                                         </a>
                                     </li>

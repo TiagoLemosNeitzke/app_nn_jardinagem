@@ -36,4 +36,4 @@ Route::resource('toReceive', 'App\Http\Controllers\ToReceiveController')->middle
 
 Route::resource('expense', 'App\Http\Controllers\ExpenseController')->middleware('verified');
 
-Route::resource('expenseToPay', 'App\Http\Controllers\ExpenseToPayController')->middleware('verified');
+Route::resource('expenseToPay', 'App\Http\Controllers\ExpenseToPayController')->middleware('verified')->except('show');

@@ -39,7 +39,7 @@
 
                     <div class="mb-3">
                         <label for="date_expense" class="form-label fw-bold">Data da despesa</label>
-                        <input class="form-control {{ $errors->first('date_expense') ? 'boder-danger' : '' }}" type="date" name="date_expense" id="date_expense" value="{{ $expense->date_expense ?? old('date_expense') }}">
+                        <input class="form-control {{ $errors->first('date_expense') ? 'border-danger' : '' }}" type="date" name="date_expense" id="date_expense" value="{{ $expense->date_expense ?? old('date_expense') }}">
                         <span class="text-danger">{{ $errors->first('date_expense') }}</span>
                     </div>
                     <div class="container d-flex justify-content-end mt-4 mb-2">

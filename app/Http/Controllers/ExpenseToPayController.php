@@ -15,7 +15,9 @@ class ExpenseToPayController extends Controller
      */
     public function index()
     {
-        return ExpenseToPay::get();
+        $expensesToPay = ExpenseToPay::paginate(4);
+
+        return view('app.expenseToPay', ['expenses' => $expensesToPay]);
     }
 
     /**
@@ -36,18 +38,9 @@ class ExpenseToPayController extends Controller
      */
     public function store(CreateUpdateExpenseToPayRequest $request)
     {
-        dd('store',$request);
-    }
+        ExpenseToPay::create($request->validated());
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        return view('app.createExpenseToPay', ['message' => 'Cadastro realizado com sucesso!']);
     }
 
     /**
@@ -58,7 +51,8 @@ class ExpenseToPayController extends Controller
      */
     public function edit($id)
     {
-        //
+        $expenseToPay = ExpenseToPay::where('id', $id)->first();
+        return view('app.createExpenseToPay', ['expenseToPay' => $expenseToPay]);
     }
 
     /**
@@ -68,9 +62,16 @@ class ExpenseToPayController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CreateUpdateExpenseToPayRequest $request, $id)
     {
-        //
+        $expenseToPay = ExpenseToPay::where('id', $id)->first();
+
+        $expenseToPay = $expenseToPay->update($request->validated());
+        if ($expenseToPay) {
+            return view('app.createExpenseToPay', ['message' => 'Despesa atualizada com sucesso!']);
+        } else {
+            return view('app.createExpenseToPay', ['error' => 'Erro ao tentar atualizar os dados da despesa. Tente novamente mais tarde. [007]']);
+        }
     }
 
     /**
@@ -81,6 +82,13 @@ class ExpenseToPayController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $expenseToPay = ExpenseToPay::destroy($id);
+        $expensesToPay = ExpenseToPay::paginate(4);
+
+        if ($expenseToPay) {
+            return view('app.expenseToPay', ['expenses' => $expensesToPay,'message' => 'Despesa removida do banco de dados com sucesso!']);
+        } else {
+            return view('app.expenseToPay', ['expenses' => $expensesToPay,'error' => 'Ocorreu um erro ao tentar excluir a despesa. Tente novamente mais tarde. [013]']);
+        }
     }
 }

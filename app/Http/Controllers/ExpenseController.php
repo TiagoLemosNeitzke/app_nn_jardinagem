@@ -36,13 +36,11 @@ class ExpenseController extends Controller
      * @param App\Http\Requests\CreateUpdateExpenseFormRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateUpdateExpenseFormRequest $request, Expense $expense)
+    public function store(CreateUpdateExpenseFormRequest $request)
     {
-        $expense->create($request->validated());
+        Expense::create($request->validated());
 
-        $expenses = $expense->paginate(9);
-
-        return view('app.expense', ['expenses' => $expenses ,'message' => 'Despesa cadastrada com sucesso!']);
+        return view('app.createExpense', ['message' => 'Cadastro realizado com sucesso!']);
     }
 
     /**
@@ -81,9 +79,8 @@ class ExpenseController extends Controller
      */
     public function destroy(Expense $expense)
     {
-        //$expense = $expense->destroy($expense->id);
-        $expenses = $expense->paginate(9);
-        $expense = false;
+        $expense = $expense->destroy($expense->id);
+        $expenses = Expense::paginate(9);
         if ($expense) {
             return view('app.expense', ['expenses' => $expenses,'message' => 'Despesa removida do banco de dados com sucesso!']);
         }else{
