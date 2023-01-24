@@ -44,6 +44,7 @@
                         <span class="text-danger">{{ $errors->first('due_date') }}</span>
                     </div>
                     <div class="container d-flex justify-content-end mt-4 mb-2">
+                    
                         @if (isset($expenseToPay))
                             <button type="submit" class="btn btn-success">Salvar</button>
                             <a href="{{ route('expenseToPay.index') }}" class="btn btn-secondary ms-2">Voltar</a>

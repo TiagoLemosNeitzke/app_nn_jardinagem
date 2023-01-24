@@ -30,11 +30,7 @@ class HomeController extends Controller
         $today = date('Y-m-d');
         $howManyCustomers = $customers->count();
         $tasksForToday = $tasks->where('scheduled_for_day', $today)->paginate(2);
-<<<<<<< HEAD
-        $toReceives = $toReceives->where('status', false)->with(['customer' => function($query) {
-=======
         $toReceives = $toReceives->where('status', false)->with(['customer' => function($query){
->>>>>>> feat/expensesToPay
             $query->withTrashed();
         }])->orderBy('created_at', 'asc')->paginate(2);
         

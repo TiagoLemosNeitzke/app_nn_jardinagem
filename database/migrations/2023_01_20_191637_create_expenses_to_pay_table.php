@@ -4,6 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+use function GuzzleHttp\default_ca_bundle;
+
 return new class extends Migration
 {
     /**
@@ -19,6 +21,7 @@ return new class extends Migration
             $table->string('expense_amount');
             $table->string('description');
             $table->date('due_date');
+            $table->boolean('paid')->default(false);
             $table->timestamps();
         });
     }

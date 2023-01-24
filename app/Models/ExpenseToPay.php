@@ -15,7 +15,8 @@ class ExpenseToPay extends Model
         'user_id',
         'expense_amount',
         'description',
-        'due_date'
+        'due_date',
+        'paid'
     ];
 
     public function user()
