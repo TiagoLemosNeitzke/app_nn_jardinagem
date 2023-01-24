@@ -21,7 +21,7 @@
             <div class="d-md-flex justify-content-between">
                 <div class="col-md-5 col-sm-12 mt-2">
                     <div class="card bg-teal mb-2 border">
-                        <div class="card-body text-center">Você possui os seguintes agendamentos para hoje.</div>
+                        <div class="card-body text-center">Serviços agendados para hoje.</div>
                     </div>
 
 
@@ -53,7 +53,7 @@
 
                 <div class="col-md-5 col-sm-12 mt-2">
                     <div class="card bg-teal mb-2 border">
-                        <div class="card-body text-center">As seguintes clientes ainda não pagaram.</div>
+                        <div class="card-body text-center">Clientes que ainda não pagaram.</div>
                     </div>
 
                     @foreach ($toReceives as $toReceive)
