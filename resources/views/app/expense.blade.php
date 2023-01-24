@@ -19,6 +19,7 @@
             @foreach ($expenses as $expense)
                 <div class="col-md-5 col-sm-12 my-2">
                     <div class="card">
+                        <div class="card-header text-center fw-bold bg-teal">Despesa</div>
                         <div class="card-body">
                             <p><span class="fw-bold">Valor da despesa:</span> R$ {{ $expense->expense_amount }},00</p>
                             <p><span class="fw-bold">Descrição da despesa:</span> {{ $expense->description }}</p>

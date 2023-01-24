@@ -19,7 +19,7 @@
             @foreach ($expenses as $expenseToPay)
                 <div class="col-md-5 col-sm-12 my-2">
                     <div class="card">
-                        <div class="card-header bg-teal text-center">Conta a pagar</div>
+                        <div class="card-header fw-bold bg-teal text-center">Conta a pagar</div>
                         <div class="card-body">
                             <p><span class="fw-bold">Valor da despesa:</span> R$ {{ $expenseToPay->expense_amount }},00</p>
                             <p><span class="fw-bold">Descrição da despesa:</span> {{ $expenseToPay->description }}</p>

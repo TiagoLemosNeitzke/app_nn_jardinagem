@@ -31,6 +31,7 @@
                         @foreach ($customers as $customer)
                             <div class="col-md-6 mb-2">
                                 <div class="card">
+                                    <div class="card-header fw-bold bg-teal text-center">Cliente</div>
                                     <div class="card-body">
                                         <h5 class="card-title fw-bold mb-4">{{ $customer->name }}</h5>
                                         <p><span class="fw-bold">Endereço:</span> {{ $customer->street }},

@@ -51,14 +51,6 @@
             justify-content: end;
         }
 
-        .bg {
-            background: #899286;
-        }
-
-        .hover:hover {
-            transform: scale(1.2) translate3d(5px, -10%, 3em);
-        }
-
         @media (max-width: 576px) {
             .hidden-sm{
                 display: none !important;
@@ -69,9 +61,9 @@
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-success shadow-sm">
             <div class="container">
-                <a class="navbar-brand fw-bolder" href="{{ url('/home') }}" title="Voltar para Dashboard">
+                <a class="navbar-brand fw-bolder text-white" href="{{ url('/home') }}" title="Voltar para Dashboard">
                     {{ config('app.name', 'Laravel') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -88,20 +80,20 @@
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}"
+                                    <a class="nav-link text-white fw-bold" href="{{ route('login') }}"
                                         title="Entrar no sistema">{{ __('Login') }}</a>
                                 </li>
                             @endif
 
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}"
+                                    <a class="nav-link text-white fw-bold" href="{{ route('register') }}"
                                         title="Criar conta">{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else
                             <li class="nav-item">
-                                <a class="nav-link fw-bold" href="{{ route('logout') }}"
+                                <a class="nav-link fw-bold text-white" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();"
                                     title="Sair do sistema"><svg xmlns="http://www.w3.org/2000/svg" width="30"
