@@ -53,7 +53,7 @@
                 <label for="name" class="fw-bold form-label">Nome</label>
                 <div class="col-sm-12">
                     <input type="text" class="form-control" id="name" name="name"
-                        value="{{ $customer->name ?? '' }}" required placeholder="Seu nome aqui">
+                        value="{{ $customer->name ?? '' }}" required placeholder="Nome do cliente">
                 </div>
             </div>
 
@@ -61,7 +61,7 @@
                 <label for="email" class="fw-bold form-label">Email</label>
                 <div class="col-sm-12">
                     <input type="email" class="form-control" id="email" name="email"
-                        value="{{ $customer->email ?? '' }}" placeholder="seuemail@email.com">
+                        value="{{ $customer->email ?? '' }}" placeholder="emaildocliente@email.com">
                 </div>
             </div>
 
@@ -100,7 +100,7 @@
                 <label for="inputCity" class="fw-bold form-label">Cidade</label>
                 <div class="col-sm-12">
                     <input type="text" class="form-control" id="inputCity" name="city"
-                        value="{{ $customer->city ?? '' }}" required placeholder="Fátima do Sul">
+                        value="{{ $customer->city ?? 'Fátima do Sul' }}" required placeholder="Fátima do Sul">
                 </div>
             </div>
             <div class="mb-3">
