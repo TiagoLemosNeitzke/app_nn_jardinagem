@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-        <div class="row mb-2 rounded text-center">
+        <div class="row text-center mb-2 rounded">
             @if (isset($message))
                 <span class="fw-bold text-success p-2">
                     {{ $message }}
@@ -19,30 +19,29 @@
             @foreach ($expenses as $expenseToPay)
                 <div class="col-md-5 col-sm-12 my-2">
                     <div class="card">
-                        <div class="card-header fw-bold bg-teal text-center">Conta a pagar</div>
+                        <div class="card-header fw-bold bg-teal text-center">
+                            @if ($expenseToPay->due_date <= date('Y-m-d', strtotime(now())))
+                                <span class="text-danger fw-bold">Esta esta vencida:</span>
+                            @endif
+                        </div>
                         <div class="card-body">
                             <p><span class="fw-bold">Valor da despesa:</span> R$ {{ $expenseToPay->expense_amount }},00</p>
                             <p><span class="fw-bold">Descrição da despesa:</span> {{ $expenseToPay->description }}</p>
 
-                            @if ($expenseToPay->due_date === date('Y-m-d', strtotime(now())))
-                                <p><span class="text-danger fw-bold">Esta conta vence hoje:</span>
-                                    {{ date('d-m-Y', strtotime($expenseToPay->due_date)) }}</p>
-                            @else
-                                <p><span class="fw-bold">Data de vencimento:</span>
-                                    {{ date('d-m-Y', strtotime($expenseToPay->due_date)) }}</p>
-                            @endif
+                            <p><span class="fw-bold">Data de vencimento:</span>
+                                {{ date('d-m-Y', strtotime($expenseToPay->due_date)) }}</p>
 
                             <div class="col -text-center">
-                            {{ $errors->first() }}
+                                {{ $errors->first() }}
                                 @if (!$expenseToPay->paid)
-                                    <form action="{{ route('expenseToPay.update', ['expenseToPay' => $expenseToPay]) }}" method="post">
+                                    <form action="{{ route('expenseToPay.update', ['expenseToPay' => $expenseToPay]) }}"
+                                        method="post">
                                         @method('PATCH')
                                         @csrf
                                         <input class="hidden" type="text" name="paid" value="true">
                                         <button class="btn btn-success w-100 mb-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                width="30" height="30" fill="currentColor"
-                                                class="bi bi-check2-circle" viewBox="0 0 16 16">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
+                                                fill="currentColor" class="bi bi-check2-circle" viewBox="0 0 16 16">
                                                 <path
                                                     d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z" />
                                                 <path
@@ -63,7 +62,8 @@
                                             d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                                     </svg>Editar</a>
 
-                                <form action="{{ route('expenseToPay.destroy', ['expenseToPay' => $expenseToPay->id]) }}" method="post">
+                                <form action="{{ route('expenseToPay.destroy', ['expenseToPay' => $expenseToPay->id]) }}"
+                                    method="post">
                                     @csrf
                                     @method('delete')
                                     <button type="submit" class="btn btn-danger w-100"><svg
