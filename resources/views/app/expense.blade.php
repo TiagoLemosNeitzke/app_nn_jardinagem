@@ -17,7 +17,7 @@
         </div>
         <div class="row">
             @foreach ($expenses as $expense)
-                <div class="col-md-5 col-sm-12 my-2">
+                <div class="col-md-6 col-sm-12 my-2">
                     <div class="card">
                         <div class="card-header text-center fw-bold bg-teal">Despesa</div>
                         <div class="card-body">
