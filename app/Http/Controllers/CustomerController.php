@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class CustomerController extends Controller
 {
-    public function __construct(Customer $customer)
+    public function __construct(public Customer $customer)
     {
         $this->customer = $customer;
     }
@@ -108,7 +108,7 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        $customer = $this->customer->destroy($customer->id);
+        $customer = $customer->destroy($customer->id);
         if ($customer) {
             return redirect()->route('customer.index', ['message' => 'Cliente Removido com sucesso da nossa base de dados.']);
         } else {
