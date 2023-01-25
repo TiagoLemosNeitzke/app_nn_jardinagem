@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ExpenseToPay;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\CreateUpdateExpenseToPayRequest;
 
 class ExpenseToPayController extends Controller
@@ -62,15 +63,41 @@ class ExpenseToPayController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CreateUpdateExpenseToPayRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        $expenseToPay = ExpenseToPay::where('id', $id)->first();
+        if ($request->method() === 'PATCH') {
+            $expenseToPay = ExpenseToPay::where('id', $id)->first();
+           
+            $expenseToPay = $expenseToPay->update(['paid' => true]);
+            if ($expenseToPay) {
+                return view('app.expenseToPay', ['message' => 'Despesa atualizada com sucesso!']);
+            } else {
+                return view('app.expenseToPay', ['error' => 'Ocorreu um erro ao tentar marcar a despesa como paga, tente novamente mais tarde. [014]']);
+            }
+        };
 
-        $expenseToPay = $expenseToPay->update($request->validated());
-        if ($expenseToPay) {
-            return view('app.createExpenseToPay', ['message' => 'Despesa atualizada com sucesso!']);
-        } else {
-            return view('app.createExpenseToPay', ['error' => 'Erro ao tentar atualizar os dados da despesa. Tente novamente mais tarde. [007]']);
+        if ($request->method() === 'PUT') {
+            $validator = Validator::make($request->all(), [
+               'user_id' => 'required',
+                'expense_amount' => 'required|string',
+                'description'  => 'required|string',
+                'due_date' => 'required'
+            ]);
+ 
+            if ($validator->fails()) {
+                return redirect('expenseToPay/'.$id.'/edit')
+                            ->withErrors($validator)
+                            ->withInput();
+            } else {
+                $expenseToPay = ExpenseToPay::where('id', $id)->first();
+
+                $expenseToPay = $expenseToPay->update($validator->validated());
+                if ($expenseToPay) {
+                    return view('app.createExpenseToPay', ['message' => 'Despesa atualizada com sucesso!']);
+                } else {
+                    return view('app.createExpenseToPay', ['error' => 'Erro ao tentar atualizar os dados da despesa. Tente novamente mais tarde. [007]']);
+                }
+            }
         }
     }
 

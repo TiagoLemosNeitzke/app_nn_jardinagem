@@ -18,7 +18,7 @@
            
                 @if (isset($expenseToPay))
                     <form class="form-group" action="{{ route('expenseToPay.update', ['expenseToPay' => $expenseToPay]) }}" method="POST">
-                        @method('put')
+                        @method('PUT')
                         @csrf
                 @else
                     <form class="form-group" action="{{ route('expenseToPay.store') }}" method="POST">
