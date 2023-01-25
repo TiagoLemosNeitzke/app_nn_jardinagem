@@ -21,7 +21,9 @@
                     <div class="card">
                         <div class="card-header fw-bold bg-teal text-center">
                             @if ($expenseToPay->due_date <= date('Y-m-d', strtotime(now())))
-                                <span class="text-danger fw-bold">Esta esta vencida:</span>
+                                <span class="text-danger fw-bold">Esta conta esta vencida</span>
+                            @else
+                                <span class="fw-bold">Esta conta ainda venceu</span>
                             @endif
                         </div>
                         <div class="card-body">
