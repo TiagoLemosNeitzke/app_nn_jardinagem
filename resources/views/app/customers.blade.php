@@ -68,7 +68,7 @@
                                             <form class="row" action="{{ route('customer.destroy', ['customer' => $customer]) }}" method="post">
                                                 @method('delete')
                                                 @csrf
-                                                <button class="btn btn-danger w-100">
+                                                <button class="btn btn-danger w-100" type="submit">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
                                                         fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
                                                         <path
