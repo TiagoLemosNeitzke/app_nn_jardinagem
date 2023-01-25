@@ -2,7 +2,7 @@
 @section('content')
     <div class="justify-content-center d-flex container">
         <div class="col-md-6 mb-2">
-            <div class="card border-success">
+            <div class="card">
                 <div class="card-header text-center">
                     @if (isset($user))
                         <p class="pt-1">Cliente cadastrado por: <span class="fw-bold">{{ $user }}</span></p>
@@ -19,7 +19,7 @@
                     <div class="container">
 
                         <div class="row my-2">
-                            <button type="button" class="btn btn-outline-success btn-sm" data-bs-toggle="modal"
+                            <button type="button" class="btn btn-success " data-bs-toggle="modal"
                                 data-bs-target="#notificationModal" title="Envia notificação que irá prestar o serviço"><svg
                                     xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                                     class="bi bi-whatsapp" viewBox="0 0 16 16">
@@ -32,7 +32,7 @@
 
 
                         <div class="row">
-                            <button type="button" class="btn btn-outline-success btn-sm" data-bs-toggle="modal"
+                            <button type="button" class="btn btn-success " data-bs-toggle="modal"
                                 data-bs-target="#chargeModal" title="Envia notificação de cobrança ao cliente"><svg
                                     xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                                     class="bi bi-whatsapp" viewBox="0 0 16 16">
@@ -44,7 +44,7 @@
                         </div>
 
                         <div class="row my-2">
-                            <a class="btn btn-outline-success btn-sm"
+                            <a class="btn btn-success "
                                 href="{{ route('task.create', ['id' => $customer->id, 'name' => $customer->name]) }}"
                                 title="Realizar agendamento."><svg xmlns="http://www.w3.org/2000/svg" width="25"
                                     height="25" fill="currentColor" class="bi bi-bookmark pb-1" viewBox="0 0 16 16">
@@ -56,7 +56,7 @@
                         </div>
 
                         <div class="row">
-                            <a class="btn btn-outline-primary btn-sm"
+                            <a class="btn btn-primary "
                                 href="{{ route('customer.edit', ['customer' => $customer->id]) }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
                                     class="bi bi-pencil-square pb-1" viewBox="0 0 16 16">
@@ -68,7 +68,7 @@
                         </div>
 
                         <div class="row my-2">
-                            <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal"
+                            <button class="btn btn-danger " data-bs-toggle="modal"
                                 data-bs-target="#exampleModal">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
                                     class="bi bi-trash3 pb-1" viewBox="0 0 16 16">
@@ -78,7 +78,7 @@
                         </div>
 
                         <div class="row my-2">
-                            <a class="btn btn-outline-secondary text-dark btn-sm" href="{{ $urlPrevious }}">
+                            <a class="btn btn-secondary text-white" href="{{ $urlPrevious }}">
                                 {{-- <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
                                     class="bi bi-skip-backward-circle pb-1" viewBox="0 0 16 16">
                                     <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
@@ -130,7 +130,7 @@
                                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="message">Olá! {{ $customer->name }}, iremos prestar o seu serviço de jardinagem hoje, dia {{ date('d/m') }}. Por favor confirme se terá alguém em sua residência.</textarea>
                             </div>
                             <button type="submit" href="{{ route('customer.edit', ['customer' => $customer->id]) }}"
-                                class="btn btn-outline-success"><svg xmlns="http://www.w3.org/2000/svg" width="30"
+                                class="btn btn-success"><svg xmlns="http://www.w3.org/2000/svg" width="30"
                                     height="30" fill="currentColor" class="bi bi-send-check me-2"
                                     viewBox="0 0 16 16">
                                     <path
@@ -193,7 +193,7 @@
                                 <textarea class="form-control" id="messageText" rows="3" name="message">Olá! {{ $customer->name }}, não identificamos o pagamento referente ao serviço de jardinagem, realizado no dia {{ date('d-m-y', strtotime($customer->task->did_day)) }}. Caso o pagamento tenha sido efetuado, por favor desconcidere esta mensagem.</textarea>
                             </div>
                            @endif
-                            <button type="submit" href="" class="btn btn-outline-success"><svg
+                            <button type="submit" href="" class="btn btn-success"><svg
                                     xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
                                     class="bi bi-send-check me-2" viewBox="0 0 16 16">
                                     <path
