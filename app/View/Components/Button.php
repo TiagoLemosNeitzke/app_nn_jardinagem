@@ -24,7 +24,7 @@ class Button extends Component
             'Notificar' => 'btn-success',
             'Cobrar' => 'btn-success',
             'Realizado' => 'btn-success',
-            'Marcar como Pago' => 'btn-success'
+            'Marcar como pago' => 'btn-success'
         ];
 
         return $btnClass[$this->text];

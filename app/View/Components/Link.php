@@ -23,7 +23,8 @@ class Link extends Component
         $btnClass = [
             'Editar' => 'btn-primary',
             'Agendar' => 'btn-success',
-            'Voltar' => 'btn-secondary',
+            'Ligar para o cliente' => 'btn-success',
+            'Dados do cliente' => 'btn-success'
         ];
 
         return $btnClass[$this->text];

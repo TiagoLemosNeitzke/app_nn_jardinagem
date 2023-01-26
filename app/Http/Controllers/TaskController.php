@@ -11,7 +11,7 @@ use Carbon\Carbon;
 
 class TaskController extends Controller
 {
-    public function __construct(Task $task, Customer $customer)
+    public function __construct(public Task $task, public Customer $customer)
     {
         $this->task = $task;
         $this->customer = $customer;
