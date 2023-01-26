@@ -45,8 +45,10 @@ class TaskController extends Controller
       */
      public function create(Request $request)
      {
-         $customer = $this->customer->where('id', $request->id)->first();
-         return view('app.createTask', ['customer' => $customer]);
+        $url = url()->previous();
+        $customer = $this->customer->where('id', $request->customer)->first();
+        
+         return view('app.createTask', ['customer' => $customer, 'url' => $url]);
      }
 
      /**

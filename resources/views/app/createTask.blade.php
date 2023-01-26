@@ -70,7 +70,7 @@
                     <button type="submit" class="btn btn-success" title="Salvar agendamento">Agendar</button>
                 @endif
 
-                <a class="btn btn-secondary" href="{{ route('task.index') }}" title="Voltar">Voltar</a>
+                <a class="btn btn-secondary" href="{{ $url }}" title="Voltar">Voltar</a>
 
                 </form>
             </div>

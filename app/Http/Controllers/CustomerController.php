@@ -65,15 +65,14 @@ class CustomerController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function show(Customer $customer, Request $request)
+    public function show(Customer $customer)
     {
         $urlPrevious = url()->previous();
-        $customer = $customer->where('id', $customer->id)->with('task')->first();
-        return view('app.showCustomer', ['customer' => $customer, 'user' => $request->get('user'), 'urlPrevious' => $urlPrevious]);
+        $customer = $customer->where('id', $customer->id)->with('user', 'task')->first();
+        return view('app.showCustomer', ['customer' => $customer, 'user' => $customer->user->name, 'urlPrevious' => $urlPrevious]);
     }
 
     /**
