@@ -15,11 +15,10 @@ class Form extends Component
         public string $route,
         public string $key,
         public string $method,
+        public string $httpVerb, //  DELETE, POST, PUT, PATCH
         public int $id,
     )
-    {
-        //
-    }
+    {}
 
     /**
      * Get the view / contents that represent the component.
