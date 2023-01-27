@@ -156,7 +156,7 @@
                                     <li class="nav-item">
                                         <a class="dropdown-item" href="{{ route('toReceive.index') }}"
                                             title="À receber">
-                                            Contas à Receber
+                                            Serviços à Receber
                                         </a>
                                     </li>
                                     <li>
