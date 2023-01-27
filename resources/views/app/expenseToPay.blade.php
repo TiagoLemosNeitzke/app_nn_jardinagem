@@ -20,10 +20,12 @@
                 <div class="col-md-5 col-sm-12 my-2">
                     <div class="card">
                         <div class="card-header fw-bold bg-teal text-center">
-                            @if ($expenseToPay->due_date <= date('Y-m-d', strtotime(now())))
+                            @if ($expenseToPay->due_date <= date('Y-m-d', strtotime(now())) && !$expenseToPay->paid)
                                 <span class="text-danger fw-bold">Esta conta esta vencida</span>
+                            @elseif ($expenseToPay->paid != false)
+                                <span class="text-success fw-bold">Esta conta esta paga</span>
                             @else
-                                <span class="fw-bold">Esta conta ainda venceu</span>
+                                <span class="fw-bold">Esta conta ainda não venceu</span>
                             @endif
                         </div>
                         <div class="card-body">
@@ -34,7 +36,7 @@
                                 {{ date('d-m-Y', strtotime($expenseToPay->due_date)) }}</p>
 
                             <div class="col -text-center">
-                                {{ $errors->first() }}
+                                
                                 @if (!$expenseToPay->paid)
                                     <x-form route="expenseToPay.update" key="expenseToPay" id="{{ $expenseToPay->id }}"
                                         method="POST" http-verb="PATCH">
