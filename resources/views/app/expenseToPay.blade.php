@@ -39,7 +39,7 @@
                                     <x-form route="expenseToPay.update" key="expenseToPay" id="{{ $expenseToPay->id }}"
                                         method="POST" http-verb="PATCH">
                                         <input class="hidden" type="text" name="paid" value="true">
-                                        <x-button text="Marcar como Pago" type="submit">
+                                        <x-button text="Marcar como pago" type="submit">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
                                                 fill="currentColor" class="bi bi-check2-circle" viewBox="0 0 16 16">
                                                 <path
