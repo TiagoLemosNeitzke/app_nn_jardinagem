@@ -7,18 +7,23 @@
         </div>
         <div class="row text-center">
             @if (isset($message))
-                <p class="fw-bold fs-4 text-success">{{ $message }}</p>
+                <p class="text-success">{{ $message }}</p>
                 <div>
-                    <a class="btn btn-success" href="{{ route('customer.index') }}">Voltar</a>
+                    <a class="btn btn-secondary" href="{{ route('customer.index') }}">Voltar</a>
                 </div>
             @elseif (isset($error))
-                <p class="fw-bold fs-4 text-danger">{{ $error }}</p>
-                <div>
-                    <a class="btn btn-success" href="{{ route('customer.index') }}">Voltar</a>
+                <p class="text-danger">{{ $error }}</p>
+                <div class="container d-flex justify-content-end">
+                    <a class="btn btn-secondary" href="{{ route('customer.index') }}">Voltar</a>
                 </div>
             @else
                 <div class="border-bottom fs-4 text-center mb-4 pb-2">
-                    <span>Aqui estão listados todos os seus clientes.</span>
+                    @if (isset($returnSearch))
+                        <span>{{ $returnSearch }}</span>
+                    @else
+                        <span>Aqui estão listados todos os seus clientes.</span>
+                    @endif
+                    
                 </div>
             @endif
         </div>

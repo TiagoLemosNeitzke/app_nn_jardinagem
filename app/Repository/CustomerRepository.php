@@ -7,16 +7,15 @@ use Illuminate\Http\Request;
 
 class CustomerRepository
 {
-    public function __construct(Customer $customer)
-    {
-        $this->customer = $customer;
-    }
-
     public function getCustomerName(Request $request)
     {
-        $parameters = '%'.$request->name.'%';
-       
-        $customer = $this->customer->where('name','like', $parameters)->first(); //to do essa busca está errada, tenho que trazer todos os nomes que encontrar, mas estou trazendo só o primeiro usando o first
-        return view('app.showCustomer', ['customer' => $customer]);
+        $params = '%'.$request->name.'%';
+        $url = url()->previous();
+        $customers = Customer::where('name', 'like', $params)->paginate(4);
+        if ($customers->total() == 0) {
+            return view('app.customers', ['customers' => $customers, 'url' => $url, 'error' => 'Sua busca não retornou nenhum cliente.']);
+        } else {
+            return view('app.customers', ['customers' => $customers, 'url' => $url, 'returnSearch' => 'Sua busca retornou o(s) seguinte(s) cliente(s).']);
+        }
     }
 }

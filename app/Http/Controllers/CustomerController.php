@@ -45,16 +45,15 @@ class CustomerController extends Controller
      */
     public function store(CreateUpdateCustomerFormRequest $request)
     {
-        $customer = $this->customer->where('name',$request->validated('name'))->first();
+        $customer = $this->customer->where('name', $request->validated('name'))->first();
         
         if ($customer === null) {
             $customer = $this->customer->create($request->validated());
-            if($customer->exists()){
+            if ($customer->exists()) {
                 return view('app.customers', ['message' => 'Cliente cadastrado com sucesso!']);
-            }else{
-               return view('app.customers', ['error' => 'Cliente não pode ser cadastrado. Tente novamente ou entre em contato com o suporte.[011]']);
+            } else {
+                return view('app.customers', ['error' => 'Cliente não pode ser cadastrado. Tente novamente ou entre em contato com o suporte.[011]']);
             }
-            
         }
 
         if ($customer->name === $request->validated('name')) {
@@ -71,7 +70,7 @@ class CustomerController extends Controller
     public function show(Customer $customer)
     {
         $urlPrevious = url()->previous();
-    $customer = $customer->where('id', $customer->id)->with('user', 'task')->first();
+        $customer = $customer->where('id', $customer->id)->with('user', 'task')->first();
         return view('app.showCustomer', ['customer' => $customer, 'user' => $customer->user->name, 'urlPrevious' => $urlPrevious]);
     }
 
