@@ -29,7 +29,9 @@
         }
 
         .btn-link-success:hover {
-            color: #20c997;
+            background-color: #146c43 !important;
+            color: #fff  !important;
+            
         }
 
         .bg-teal {
@@ -52,7 +54,7 @@
         }
 
         @media (max-width: 576px) {
-            .hidden-sm{
+            .hidden-sm {
                 display: none !important;
             }
         }
@@ -72,7 +74,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="navbar-collapse collapse" id="navbarSupportedContent">
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
@@ -80,15 +82,15 @@
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link text-white fw-bold" href="{{ route('login') }}"
-                                        title="Entrar no sistema">{{ __('Login') }}</a>
+                                    <a class="nav-link fw-bold text-white" href="{{ route('login') }}"
+                                        title="Entrar no sistema">{{ __('Entrar') }}</a>
                                 </li>
                             @endif
 
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link text-white fw-bold" href="{{ route('register') }}"
-                                        title="Criar conta">{{ __('Register') }}</a>
+                                    <a class="nav-link fw-bold text-white" href="{{ route('register') }}"
+                                        title="Criar conta">{{ __('Registrar') }}</a>
                                 </li>
                             @endif
                         @else
@@ -120,7 +122,7 @@
             <nav class="navbar navbar-expand-lg navbar-light bg-teal">
                 <div class="container-fluid">
 
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <div class="navbar-collapse collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-lg-0mb-2">
                             <li class="nav-item dropdown fw-bold btn btn-light me-2 btn-sm">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -154,8 +156,7 @@
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <li class="nav-item">
-                                        <a class="dropdown-item" href="{{ route('toReceive.index') }}"
-                                            title="À receber">
+                                        <a class="dropdown-item" href="{{ route('toReceive.index') }}" title="À receber">
                                             Serviços à Receber
                                         </a>
                                     </li>
@@ -172,7 +173,8 @@
                                         <hr class="dropdown-divider bg-light">
                                     </li>
                                     <li class="nav-item">
-                                        <a class="dropdown-item" href="{{ route('expenseToPay.index') }}" title="Registrar uma despesa à pagar">
+                                        <a class="dropdown-item" href="{{ route('expenseToPay.index') }}"
+                                            title="Registrar uma despesa à pagar">
                                             Contas à Pagar
                                         </a>
                                     </li>
@@ -204,16 +206,16 @@
                         </ul>
                         <div class="hidden-sm">
                             <form class="d-flex" action="{{ route('customer.search') }}" method="get">
-                            @csrf
-                            <input class="form-control me-2" type="search" placeholder="Nome do Cliente"
-                                aria-label="Search" name="name">
-                            <button class="btn btn-light fw-bold" type="submit" title="Buscar cliente"><svg
-                                    xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
-                                    class="bi bi-search" viewBox="0 0 16 16">
-                                    <path
-                                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                                </svg></button>
-                        </form>
+                                @csrf
+                                <input class="form-control me-2" type="search" placeholder="Nome do Cliente"
+                                    aria-label="Search" name="name">
+                                <button class="btn btn-light fw-bold" type="submit" title="Buscar cliente"><svg
+                                        xmlns="http://www.w3.org/2000/svg" width="30" height="30"
+                                        fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                        <path
+                                            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                                    </svg></button>
+                            </form>
                         </div>
                     </div>
                 </div>
