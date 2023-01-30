@@ -6,15 +6,15 @@
 
             @if (isset($error))
                 <div class="card-header bg-danger text-light fw-bold text-center">
-                    {{ $error }}
+                    <span>{{ $error }}</span>
                 </div>
             @elseif (isset($message))
                 <div class="card-header bg-success text-light fw-bold mb-4 text-center">
-                    {{ $message }}
+                    <span>{{ $message }}</span>
                 </div>
             @else
                 <div class="card-header bg-success text-light fw-bold text-center">
-                    Agendar
+                    <span>Agendar</span>
                 </div>
             @endif
             <div class="card-body">

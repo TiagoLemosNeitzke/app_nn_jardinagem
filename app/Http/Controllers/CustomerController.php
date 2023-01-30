@@ -71,7 +71,7 @@ class CustomerController extends Controller
     public function show(Customer $customer)
     {
         $urlPrevious = url()->previous();
-        $customer = $customer->where('id', $customer->id)->with('user', 'task')->first();
+    $customer = $customer->where('id', $customer->id)->with('user', 'task')->first();
         return view('app.showCustomer', ['customer' => $customer, 'user' => $customer->user->name, 'urlPrevious' => $urlPrevious]);
     }
 

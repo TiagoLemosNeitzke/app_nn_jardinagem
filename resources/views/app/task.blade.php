@@ -4,13 +4,20 @@
         <div class="row text-center">
 
             @if (isset($error))
-                <p class="fw-bold fs-4 text-danger">{{ $error }}</p>
-                <a href="{{ route('task.index') }}" class="btn btn-success btn-sm fw-bold mb-4">voltar</a>
+                <span class="text-danger p-2">
+                    {{ $error }}
+                </span>
+                <div class="d-flex justify-content-end container">
+                    <a href="{{ route('task.index') }}" class="btn btn-secondary btn-sm fw-bold mb-4">voltar</a>
+                </div>
             @endif
-
             @if (isset($message))
-                <p class="fw-bold fs-4 text-success">{{ $message }}</p>
-                <a href="{{ route('task.index') }}" class="btn btn-success btn-sm fw-bold mb-4">voltar</a>
+                <span class="fw-bold text-success p-2">
+                    {{ $message }}
+                </span>
+                <div class="d-flex justify-content-end container">
+                    <a href="{{ route('task.index') }}" class="btn btn-secondary btn-sm fw-bold mb-4">voltar</a>
+                </div>
             @endif
         </div>
         <div class="row">
@@ -52,7 +59,7 @@
             </div>
             <div class="row">
                 @foreach ($tasks as $task)
-                    <div class="col-sm-4 mb-2">
+                    <div class="col col-md-6 col-sm-12 mb-2">
                         <div class="card">
                             <div class="card-header fw-bold bg-teal text-center">
                                 Serviço
@@ -127,17 +134,18 @@
                                         </svg>
                                     </x-button>
                                 </x-form>
-
-                                <x-form route="customer.show" key="customer" id="{{ $task->customer_id }}" method="GET"
-                                    http-verb="GET">
-                                    <x-button text="Dados do cliente" type="submit">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
-                                            fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
-                                            <path
-                                                d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
-                                        </svg>
-                                    </x-button>
-                                </x-form>
+                                @if ($task->customer->deleted_at == null)
+                                    <x-form route="customer.show" key="customer" id="{{ $task->customer_id }}"
+                                        method="GET" http-verb="GET">
+                                        <x-button text="Dados do cliente" type="submit">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
+                                                fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
+                                            </svg>
+                                        </x-button>
+                                    </x-form>
+                                @endif
                             </div>
                         </div>
                     </div>

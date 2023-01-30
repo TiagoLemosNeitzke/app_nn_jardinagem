@@ -45,8 +45,8 @@ class TaskController extends Controller
       */
      public function create(Request $request)
      {
-        $url = url()->previous();
-        $customer = $this->customer->where('id', $request->customer)->first();
+         $url = url()->previous();
+         $customer = $this->customer->where('id', $request->customer)->first();
         
          return view('app.createTask', ['customer' => $customer, 'url' => $url]);
      }
@@ -59,29 +59,21 @@ class TaskController extends Controller
       */
      public function store(TaskRequest $request)
      {
+         $url = url()->previous();
          $customer = Customer::where('name', $request->name)->orWhere('id', $request->id)->first();
          if ($customer === null) {
-             return view('app.createTask', ['error' => 'Cliente não encontrado em nossa base de dados. Consulte sua lista de cliente. [005]']);
+             return view('app.createTask', ['error' => 'Cliente não encontrado em nossa base de dados. Consulte sua lista de cliente. [005]', 'url' => $url]);
          } else {
              $task = Task::where('customer_id', $customer->id)->where('did_day', null)->first();
              if ($task === null) {
                  $task = Task::create($request->validated());
-                 return view('app.createTask', ['message' => 'Agendamento realizado com sucesso!']);
+                 
+                 return view('app.createTask', ['message' => 'Agendamento realizado com sucesso!', 'url' => $url]);
              } else {
-                 return view('app.createTask', ['error' => 'Cliente já possui agendamento. Consulte seus agendamentos. [006]']);
+                 $url = url()->previous();
+                 return view('app.createTask', ['error' => 'Cliente já possui agendamento. Consulte seus agendamentos. [006]', 'url' => $url]);
              }
          }
-     }
-
-     /**
-      * Display the specified resource.
-      *
-      * @param  \App\Models\Task  $task
-      * @return \Illuminate\Http\Response
-      */
-     public function show(Task $task)
-     {
-        //
      }
 
      /**
@@ -90,10 +82,11 @@ class TaskController extends Controller
       * @param  \App\Models\Task  $task
       * @return \Illuminate\Http\Response
       */
-     public function edit(Task $task)
+     public function edit(Task $task, Request $request)
      {
+         $url = url()->previous();
          $task = $task->where('id', $task->id)->with('customer')->first();
-         return view('app.createTask', ['task' => $task]);
+         return view('app.createTask', ['task' => $task, 'url' => $url]);
      }
 
      /**
@@ -105,11 +98,12 @@ class TaskController extends Controller
       */
      public function update(TaskRequest $request, Task $task)
      {
-         $task = $task->update($request->validated());
+        $url = route('task.index'); 
+        $task = $task->update($request->validated());
          if ($task) {
-             return view('app.createTask', ['message' => 'Agendamento editado com sucesso!']);
+             return view('app.createTask', ['message' => 'Agendamento editado com sucesso!', 'url' => $url]);
          } else {
-             return view('app.createTask', ['error' => 'Ocorreu um erro ao tentar editar a tarefa. Tente novamente mais tarde [010]']);
+             return view('app.createTask', ['error' => 'Ocorreu um erro ao tentar editar a tarefa. Tente novamente mais tarde [010]', 'url' => $url]);
          }
      }
 
@@ -149,7 +143,7 @@ class TaskController extends Controller
              } else {
                  $task = $task->delete($task->id);
                  if ($task) {
-                     return response()->view('app.task', ['message' => 'Registro apagado da nossa base de dados com sucesso.']);
+                     return response()->view('app.task', ['message' => 'Sucesso! Registro apagado']);
                  } else {
                      return view('app.task', ['error' => 'Erro ao tentar apagar registro. [009]']);
                  }

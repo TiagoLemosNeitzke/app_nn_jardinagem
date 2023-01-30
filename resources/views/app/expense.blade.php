@@ -3,11 +3,11 @@
     <div class="container">
         <div class="row mb-2 rounded text-center">
             @if (isset($message))
-                <span class="fw-bold text-success p-2">
+                <span class="text-success p-2">
                     {{ $message }}
                 </span>
             @elseif (isset($error))
-                <span class="fw-bold text-danger p-2">
+                <span class="text-danger p-2">
                     {{ $error }}
                 </span>
             @endif

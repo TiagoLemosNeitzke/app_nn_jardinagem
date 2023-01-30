@@ -26,7 +26,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::resource('customer', 'App\Http\Controllers\CustomerController')->middleware('verified');
 
-Route::resource('task', 'App\Http\Controllers\TaskController')->middleware('verified');
+Route::resource('task', 'App\Http\Controllers\TaskController')->middleware('verified')->except('show');
 
 Route::put('task/{task}/done', [App\Http\Controllers\TaskController::class, 'done'])->middleware('verified')->name('task.done');
 

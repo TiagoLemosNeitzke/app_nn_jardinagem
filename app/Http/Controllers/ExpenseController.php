@@ -82,7 +82,7 @@ class ExpenseController extends Controller
         $expense = $expense->destroy($expense->id);
         $expenses = Expense::paginate(9);
         if ($expense) {
-            return view('app.expense', ['expenses' => $expenses,'message' => 'Despesa removida do banco de dados com sucesso!']);
+            return view('app.expense', ['expenses' => $expenses,'message' => 'Sucesso! Registro apagado']);
         }else{
             return view('app.expense', ['expenses' => $expenses,'error' => 'Ocorreu um erro ao tentar excluir a despesa. Tente novamente mais tarde. [008]']);
         }
