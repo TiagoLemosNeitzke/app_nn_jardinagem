@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('formCustomer')
+@section('content')
     @if (isset($error))
         <div class="row text-center">
             <p class="text-danger">{{ $error }}</p>

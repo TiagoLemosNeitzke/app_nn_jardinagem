@@ -222,11 +222,9 @@
             </nav>
         @endauth
 
-
         <main class="py-4">
+            </div>
             @yield('content')
-            @yield('formCustomer')
-            @yield('editCustomer')
         </main>
     </div>
 
