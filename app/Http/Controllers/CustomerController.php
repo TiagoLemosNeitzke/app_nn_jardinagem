@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateUpdateCustomerFormRequest;
 use App\Models\Customer;
+use App\Repository\CustomerRepository;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -43,9 +44,9 @@ class CustomerController extends Controller
      * @param  App\Http\Requests\CreateUpdateCustomerFormRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateUpdateCustomerFormRequest $request)
+    public function store(CreateUpdateCustomerFormRequest $request, CustomerRepository $customer)
     {
-        $customer = $this->customer->where('name', $request->validated('name'))->first();
+        $customer = $customer->getCustomer($request);
         
         if ($customer === null) {
             $customer = $this->customer->create($request->validated());
