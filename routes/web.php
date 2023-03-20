@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\WhatsappController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\WhatsappController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,20 +21,22 @@ Route::get('/', function () {
 
 Auth::routes(['verify' => true]);
 
-Route::get('/search', [App\Repository\CustomerRepository::class, 'getCustomerName'])->name('customer.search');
+Route::get('/search', [App\Repository\CustomerRepository::class, 'customerSearch'])->name('customer.search');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('verified');
+Route::group(['middleware' => ['verified']], function () {
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::resource('customer', 'App\Http\Controllers\CustomerController')->middleware('verified');
+    Route::resource('customer', 'App\Http\Controllers\CustomerController');
 
-Route::resource('task', 'App\Http\Controllers\TaskController')->middleware('verified')->except('show');
+    Route::resource('task', 'App\Http\Controllers\TaskController')->except('show');
 
-Route::put('task/{task}/done', [App\Http\Controllers\TaskController::class, 'done'])->middleware('verified')->name('task.done');
+    Route::put('task/{task}/done', [App\Http\Controllers\TaskController::class, 'done'])->name('task.done');
 
-Route::post('whatsapp', [App\Http\Controllers\WhatsappController::class, 'sendMessage'])->middleware('verified')->name('whatsapp');
+    Route::post('whatsapp', [App\Http\Controllers\WhatsappController::class, 'sendMessage'])->name('whatsapp');
 
-Route::resource('toReceive', 'App\Http\Controllers\ToReceiveController')->middleware('verified')->except('create', 'store','edit', 'show');
+    Route::resource('toReceive', 'App\Http\Controllers\ToReceiveController')->except('create', 'store', 'edit', 'show');
 
-Route::resource('expense', 'App\Http\Controllers\ExpenseController')->middleware('verified');
+    Route::resource('expense', 'App\Http\Controllers\ExpenseController');
 
-Route::resource('expenseToPay', 'App\Http\Controllers\ExpenseToPayController')->middleware('verified')->except('show');
+    Route::resource('expenseToPay', 'App\Http\Controllers\ExpenseToPayController')->except('show');
+});

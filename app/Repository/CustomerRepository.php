@@ -4,10 +4,12 @@ namespace App\Repository;
 
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use App\Http\Requests\CreateUpdateCustomerFormRequest;
+use Illuminate\Support\Facades\Validator;
 
 class CustomerRepository
 {
-    public function getCustomerName(Request $request)
+    public function customerSearch(Request $request)
     {
         $params = '%'.$request->name.'%';
         $url = url()->previous();
@@ -17,5 +19,19 @@ class CustomerRepository
         } else {
             return view('app.customers', ['customers' => $customers, 'url' => $url, 'returnSearch' => 'Sua busca retornou o(s) seguinte(s) cliente(s).']);
         }
+    }
+
+    public function getCustomer()
+    {
+        $customer = Customer::with('user')->orderBy('name', 'asc')->paginate(8);
+
+        return $customer;
+    }
+
+    public function getCustomerName($request)
+    {
+        $customer = Customer::where('name', $request['name'])->first();
+        
+        return $customer;
     }
 }
