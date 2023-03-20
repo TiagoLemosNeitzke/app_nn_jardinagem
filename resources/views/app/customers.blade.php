@@ -20,8 +20,6 @@
                 <div class="border-bottom fs-4 text-center mb-4 pb-2">
                     @if (isset($returnSearch))
                         <span>{{ $returnSearch }}</span>
-                    @else
-                        <span>Aqui estão listados todos os seus clientes.</span>
                     @endif
                     
                 </div>
