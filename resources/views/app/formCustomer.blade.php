@@ -52,7 +52,7 @@
                             <input type="text" class="form-control" id="name" name="name"
                                 value="{{ $customer->name ?? '' }}" required placeholder="Nome do cliente">
                             @error('name')
-                                <div class="alert alert-danger mt-2">{{ $message }}</div>
+                                <span class="text-danger fs-6">{{ $errors->first('name') }}</span>
                             @enderror
                         </div>
                     </div>
@@ -63,7 +63,7 @@
                             <input type="email" class="form-control" id="email" name="email"
                                 value="{{ $customer->email ?? '' }}" placeholder="emaildocliente@email.com">
                             @error('email')
-                                <div class="alert alert-danger mt-2">{{ $message }}</div>
+                                <span class="text-danger fs-6">{{ $errors->first('email') }}</span>
                             @enderror
                         </div>
                     </div>
@@ -74,7 +74,7 @@
                             <input type="phone" class="form-control" id="inputPhone" name="phone"
                                 value="{{ $customer->phone ?? '' }}" required placeholder="67998880000">
                             @error('phone')
-                                <div class="alert alert-danger mt-2">{{ $message }}</div>
+                                <span class="text-danger fs-6">{{ $errors->first('phone') }}</span>
                             @enderror
                         </div>
                     </div>
@@ -85,7 +85,7 @@
                             <input type="text" class="form-control" id="inputStreet" name="street"
                                 value="{{ $customer->street ?? '' }}" required placeholder="Av. Nove de Julho">
                             @error('street')
-                                <div class="alert alert-danger mt-2">{{ $message }}</div>
+                                <span class="text-danger fs-6">{{ $errors->first('street') }}</span>
                             @enderror
                         </div>
                     </div>
@@ -95,7 +95,7 @@
                             <input id="inputNumber" class="form-control" type="number" name="street_number"
                                 value="{{ $customer->street_number ?? '' }}" required placeholder="1234">
                             @error('street_number')
-                                <div class="alert alert-danger mt-2">{{ $message }}</div>
+                                <span class="text-danger fs-6">{{ $errors->first('street_number') }}</span>
                             @enderror
                         </div>
                     </div>
@@ -106,7 +106,7 @@
                             <input type="text" class="form-control" id="inputDistrict" name="district"
                                 value="{{ $customer->district ?? '' }}" required placeholder="Jardim Brasilândia">
                             @error('district')
-                                <div class="alert alert-danger mt-2">{{ $message }}</div>
+                                <span class="text-danger fs-6">{{ $errors->first('district') }}</span>
                             @enderror
                         </div>
                     </div>
@@ -117,7 +117,7 @@
                             <input type="text" class="form-control" id="inputCity" name="city"
                                 value="{{ $customer->city ?? 'Fátima do Sul' }}" required placeholder="Fátima do Sul">
                             @error('city')
-                                <div class="alert alert-danger mt-2">{{ $message }}</div>
+                                <span class="text-danger fs-6">{{ $errors->first('city') }}</span>
                             @enderror
                         </div>
                     </div>
@@ -127,7 +127,7 @@
                             <input type="text" class="form-control text-uppercase" id="inputState" name="state"
                                 value="{{ $customer->state ?? 'MS' }}" required>
                             @error('state')
-                                <div class="alert alert-danger mt-2">{{ $message }}</div>
+                                <span class="text-danger fs-6">{{ $errors->first('state') }}</span>
                             @enderror
                         </div>
                     </div>
@@ -146,7 +146,7 @@
                         <input type="text" class="form-control" id="name" name="name"
                             value="{{ old('name') ?? '' }}" required placeholder="Nome do cliente">
                         @error('name')
-                            <div class="alert alert-danger mt-2">{{ $message }}</div>
+                            <span class="text-danger fs-6">{{ $errors->first('name') }}</span>
                         @enderror
                     </div>
                 </div>
@@ -157,7 +157,7 @@
                         <input type="email" class="form-control" id="email" name="email"
                             value="{{ old('email') ?? '' }}" placeholder="emaildocliente@email.com">
                         @error('email')
-                            <div class="alert alert-danger mt-2">{{ $message }}</div>
+                            <span class="text-danger fs-6">{{ $errors->first('email') }}</span>
                         @enderror
                     </div>
                 </div>
@@ -168,28 +168,28 @@
                         <input type="phone" class="form-control" id="inputPhone" name="phone"
                             value="{{ old('phone') ?? '' }}" required placeholder="67998880000">
                         @error('phone')
-                            <div class="alert alert-danger mt-2">{{ $message }}</div>
+                            <span class="text-danger fs-6">{{ $errors->first('phone') }}</span>
                         @enderror
                     </div>
                 </div>
 
                 <div class="mb-3">
-                    <label for="inputStreet" class="fw-bold form-label">Rua</label>
+                    <label for="inputStreet" class="fw-bold form-label">Avenida / Rua</label>
                     <div class="col-sm-12">
                         <input type="text" class="form-control" id="inputStreet" name="street"
-                            value="{{ old('street') ?? '' }}" required placeholder="Av. Nove de Julho">
+                            value="{{ old('street') ?? '' }}" required placeholder="Nove de Julho">
                         @error('street')
-                            <div class="alert alert-danger mt-2">{{ $message }}</div>
+                            <span class="text-danger fs-6">{{ $errors->first('street') }}</span>
                         @enderror
                     </div>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label fw-bold" for="inputNumber">Numero</label>
+                    <label class="form-label fw-bold" for="inputNumber">Número</label>
                     <div class="col-sm-2">
                         <input id="inputNumber" class="form-control" type="number" name="street_number"
                             value="{{ old('street_number') ?? '' }}" required placeholder="1234">
                         @error('street_number')
-                            <div class="alert alert-danger mt-2">{{ $message }}</div>
+                            <span class="text-danger fs-6">{{ $errors->first('street_number') }}</span>
                         @enderror
                     </div>
                 </div>
@@ -200,7 +200,7 @@
                         <input type="text" class="form-control" id="inputDistrict" name="district"
                             value="{{ old('district') ?? '' }}" required placeholder="Jardim Brasilândia">
                         @error('district')
-                            <div class="alert alert-danger mt-2">{{ $message }}</div>
+                            <span class="text-danger fs-6">{{ $errors->first('district') }}</span>
                         @enderror
                     </div>
                 </div>
@@ -211,7 +211,7 @@
                         <input type="text" class="form-control" id="inputCity" name="city"
                             value="{{ old('city') ?? 'Fátima do Sul' }}" required placeholder="Fátima do Sul">
                         @error('city')
-                            <div class="alert alert-danger mt-2">{{ $message }}</div>
+                            <span class="text-danger fs-6">{{ $errors->first('city') }}</span>
                         @enderror
                     </div>
                 </div>
@@ -221,7 +221,7 @@
                         <input type="text" class="form-control text-uppercase" id="inputState" name="state"
                             value="{{ old('state') ?? 'MS' }}" required>
                         @error('state')
-                            <div class="alert alert-danger mt-2">{{ $message }}</div>
+                            <span class="text-danger fs-6">{{ $errors->first('state') }}</span>
                         @enderror
                     </div>
                 </div>

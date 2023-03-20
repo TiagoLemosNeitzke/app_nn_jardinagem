@@ -13,7 +13,7 @@ class CustomerRepository
     {
         $params = '%'.$request->name.'%';
         $url = url()->previous();
-        $customers = Customer::where('name', 'like', $params)->paginate(4);
+        $customers = Customer::where(['user_id', '=', auth()->user()->id],['name', 'like', $params])->paginate(4);
         if ($customers->total() == 0) {
             return view('app.customers', ['customers' => $customers, 'url' => $url, 'error' => 'Sua busca não retornou nenhum cliente.']);
         } else {
@@ -30,15 +30,22 @@ class CustomerRepository
 
     public function getCustomerName($request)
     {
-        $customer = Customer::where('name', $request['name'])->first();
+        $customer = Customer::where(['user_id', '=', auth()->user()->id],['name', $request['name']])->first();
         
         return $customer;
     }
 
-    public function getCustomerId($customer)
+    public function getCustomerId($id)
     {
-        $customer = Customer::where('id', $customer->id)->with('user', 'task')->first();
+        $customer = Customer::where([['user_id', '=', auth()->user()->id],['id','=', $id]])->with('user', 'task')->first();
 
         return $customer;
+    }
+
+    public function getCustomerIdOrName($param)
+    {
+        dd($param, 'reposit');
+        $customer = Customer::where('name', $param['name'])->orWhere('user_id', $param['user_id'])->first();
+        dd($customer);
     }
 }

@@ -30,4 +30,18 @@ class TaskRequest extends FormRequest
             'service_value' => 'required|integer'
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'user_id.required' => 'O Campo é obrigatório.',
+            'customer_id.required' => 'O Campo é obrigatório.',
+            'scheduled_for_day.required' => 'O Campo é obrigatório.',
+            'schedule_for_day.date' => 'Insira uma data.',
+            'service_value.required' => 'O Campo é obrigatório.',
+            'service_value.integer' => 'Insira um valor numérico inteiro. '
+        ];
+
+        
+    }
 }

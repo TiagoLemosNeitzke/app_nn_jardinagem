@@ -56,7 +56,7 @@
                     <div class="mb-3">
                         <label for="service_value" class="form-label fw-bold">Valor do Serviço (em centavos):</label>
                         <input type="text" class="form-control" id="service_value" name="service_value"
-                            value="{{ $task->service_value ?? '' }}" required>
+                            value="{{ $task->service_value ?? '' }}">
 
                         <span class="text-danger fs-6">{{ $errors->first('service_value') }}</span>
 

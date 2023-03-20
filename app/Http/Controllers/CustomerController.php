@@ -72,6 +72,8 @@ class CustomerController extends Controller
     public function show(Customer $customer, CustomerRepository $customerFiltered)
     {
         $urlPrevious = url()->previous();
+        
+        $customer = $customer->id;
 
         $customer = $customerFiltered->getCustomerId($customer);
         
