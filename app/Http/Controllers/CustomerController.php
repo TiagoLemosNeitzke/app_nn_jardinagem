@@ -20,7 +20,7 @@ class CustomerController extends Controller
      */
     public function index(Request $request, CustomerRepository $customers)
     {
-        $customers = $customers->getCustomer();
+        $customers = $customers->getCustomers();
         
         if ($request->message) {
             return view('app.customers', ['customers' => $customers, 'message' => $request->message]);

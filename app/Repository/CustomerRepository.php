@@ -21,11 +21,11 @@ class CustomerRepository
         }
     }
 
-    public function getCustomer()
+    public function getCustomers()
     {
-        $customer = Customer::with('user')->orderBy('name', 'asc')->paginate(8);
+        $customers = Customer::with('user')->orderBy('name', 'asc')->paginate(8);
 
-        return $customer;
+        return $customers;
     }
 
     public function getCustomerName($request)
