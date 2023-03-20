@@ -124,9 +124,8 @@
 
                     <div class="navbar-collapse collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-lg-0mb-2">
-                            <li class="nav-item dropdown fw-bold btn btn-light me-2 btn-sm">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                    data-bs-toggle="dropdown" aria-expanded="false" title="Clientes"><svg
+                            <li class="nav-item fw-bold btn btn-light me-2 btn-sm">
+                                <a class="nav-link" href="{{ route('customer.index') }}"  title="Clientes"><svg
                                         xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
                                         class="bi bi-people" viewBox="0 0 16 16">
                                         <path
@@ -134,12 +133,6 @@
                                     </svg>
                                     Clientes
                                 </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="{{ route('customer.index') }}"
-                                            title="Lista todos os clientes">Todos os
-                                            clientes</a>
-                                    </li>
-                                </ul>
                             </li>
 
                             <li class="nav-item dropdown fw-bold btn btn-light me-2 btn-sm">
@@ -181,9 +174,8 @@
                                 </ul>
                             </li>
 
-                            <li class="nav-item dropdown fw-bold btn btn-light me-2 btn-sm">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                    data-bs-toggle="dropdown" aria-expanded="false" title="Clientes"><svg
+                            <li class="nav-item fw-bold btn btn-light me-2 btn-sm">
+                                <a class="nav-link" href="{{ route('task.index') }}" title="Clientes"><svg
                                         xmlns="http://www.w3.org/2000/svg" width="30" height="30"
                                         fill="currentColor" class="bi bi-journal-bookmark" viewBox="0 0 16 16">
                                         <path fill-rule="evenodd"
@@ -195,12 +187,7 @@
                                     </svg>
                                     Agenda
                                 </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="{{ route('task.index') }}"
-                                            title="Lista todos os clientes">Agendamentos</a>
-                                    </li>
-
-                                </ul>
+                               
                             </li>
 
                         </ul>
