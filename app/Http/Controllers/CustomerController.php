@@ -18,9 +18,9 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request, CustomerRepository $customer)
     {
-        $customers = $this->customer->with('user')->orderBy('name', 'asc')->paginate(8);
+        $customers = $customer = $customer->getCustomer($request);
         if ($request->message) {
             return view('app.customers', ['customers' => $customers, 'message' => $request->message]);
         } else {
@@ -44,9 +44,9 @@ class CustomerController extends Controller
      * @param  App\Http\Requests\CreateUpdateCustomerFormRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateUpdateCustomerFormRequest $request, CustomerRepository $customer)
+    public function store(CreateUpdateCustomerFormRequest $request)
     {
-        $customer = $customer->getCustomer($request);
+        
         
         if ($customer === null) {
             $customer = $this->customer->create($request->validated());
