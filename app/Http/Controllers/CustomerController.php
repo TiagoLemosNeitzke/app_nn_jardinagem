@@ -18,9 +18,9 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request, CustomerRepository $customers)
     {
-        $customers = $this->customer->with('user')->orderBy('name', 'asc')->paginate(8);
+        $customers = $customers->getCustomer();
         if ($request->message) {
             return view('app.customers', ['customers' => $customers, 'message' => $request->message]);
         } else {
