@@ -7,6 +7,7 @@ use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Http\Requests\TaskRequest;
 use App\Models\ToReceive;
+use App\Repository\TaskRepository;
 use Carbon\Carbon;
 
 class TaskController extends Controller
@@ -21,20 +22,24 @@ class TaskController extends Controller
       *
       * @return \Illuminate\Http\Response
       */
-     public function index(Request $request)
+     public function index(Request $request, TaskRepository $tasks)
      {
-         if ($request->filter === 'all') {
-             $tasks = $this->task->orderBy('scheduled_for_day', 'asc')->paginate(9);
-             return view('app.task', ['tasks' => $tasks, 'filter' => 'all']);
-         } elseif ($request->filter === 'open') {
-             $tasks = $this->task->where('did_day', null)->orderBy('scheduled_for_day', 'asc')->paginate(9);
-             return view('app.task', ['tasks' => $tasks, 'filter' => 'open']);
-         } elseif ($request->filter === 'done') {
-             $tasks = $this->task->where('did_day', '<>', null)->orderBy('scheduled_for_day', 'asc')->paginate(9);
-             return view('app.task', ['tasks' => $tasks, 'filter' => 'done']);
+         $tasks = $tasks->getTaskFiltered($request->get('filter'));
+         
+         if ($tasks[1] === 'all') {
+
+             return view('app.task', ['tasks' => $tasks[0], 'filter' => 'all']);
+             
+         } elseif ($tasks[1] === 'open') {
+
+             return view('app.task', ['tasks' => $tasks[0], 'filter' => 'open']);
+
+         } elseif ($tasks[1] === 'done') {
+
+             return view('app.task', ['tasks' => $tasks[0][0], 'filter' => 'done']);
+
          } else {
-             $tasks = $this->task->where('did_day', null)->orderBy('scheduled_for_day', 'asc')->paginate(9);
-             return view('app.task', ['tasks' => $tasks, 'filter' => 'all']);
+             return view('app.task', ['tasks' => $tasks[0], 'filter' => 'all']);
          }
      }
 
@@ -46,7 +51,7 @@ class TaskController extends Controller
      public function create(Request $request)
      {
          $url = url()->previous();
-         $customer = $this->customer->where('id', $request->customer)->first();
+         $customer = $this->customer->where('user_id', auth()->user()->id)->endWhere('id', $request->customer->id)->first();
         
          return view('app.createTask', ['customer' => $customer, 'url' => $url]);
      }
@@ -98,8 +103,8 @@ class TaskController extends Controller
       */
      public function update(TaskRequest $request, Task $task)
      {
-        $url = route('task.index'); 
-        $task = $task->update($request->validated());
+         $url = route('task.index');
+         $task = $task->update($request->validated());
          if ($task) {
              return view('app.createTask', ['message' => 'Agendamento editado com sucesso!', 'url' => $url]);
          } else {

@@ -23,7 +23,7 @@ class CustomerRepository
 
     public function getCustomers()
     {
-        $customers = Customer::with('user')->orderBy('name', 'asc')->paginate(8);
+        $customers = Customer::where('user_id', auth()->user()->id)->with('user')->orderBy('name', 'asc')->paginate(8);
 
         return $customers;
     }
