@@ -34,4 +34,11 @@ class CustomerRepository
         
         return $customer;
     }
+
+    public function getCustomerId($customer)
+    {
+        $customer = Customer::where('id', $customer->id)->with('user', 'task')->first();
+
+        return $customer;
+    }
 }

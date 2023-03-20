@@ -69,10 +69,12 @@ class CustomerController extends Controller
      * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function show(Customer $customer)
+    public function show(Customer $customer, CustomerRepository $customerFiltered)
     {
         $urlPrevious = url()->previous();
-        $customer = $customer->where('id', $customer->id)->with('user', 'task')->first();
+
+        $customer = $customerFiltered->getCustomerId($customer);
+        
         return view('app.showCustomer', ['customer' => $customer, 'user' => $customer->user->name, 'urlPrevious' => $urlPrevious]);
     }
 
