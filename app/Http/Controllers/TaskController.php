@@ -9,7 +9,6 @@ use App\Http\Requests\TaskRequest;
 use App\Models\ToReceive;
 use App\Repository\CustomerRepository;
 use App\Repository\TaskRepository;
-use Carbon\Carbon;
 
 class TaskController extends Controller
 {
@@ -83,10 +82,11 @@ class TaskController extends Controller
       * @param  \App\Models\Task  $task
       * @return \Illuminate\Http\Response
       */
-     public function edit(Task $task, Request $request)
+     public function edit(Task $task)
      {
          $url = url()->previous();
-         $task = $task->where('id', $task->id)->with('customer')->first();
+         $task = $task->load('customer');
+    
          return view('app.createTask', ['task' => $task, 'url' => $url]);
      }
 

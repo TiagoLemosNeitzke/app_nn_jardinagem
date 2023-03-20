@@ -45,4 +45,11 @@ class TaskRepository
          return $task;
 
     }
+
+    public function getTask($id)
+    {
+        $task = Task::where('id', $id)->with('customer')->first();
+
+        return $task;
+    }
 }
