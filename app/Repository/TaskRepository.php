@@ -6,9 +6,14 @@ use App\Models\Task;
 
 class TaskRepository
 {
+    public function __construct(public UserRepository $user_id)
+    {
+        //   
+    }
+    
     public function getTaskFiltered($filter)
     {
-        $user_id = auth()->user()->id;
+        $user_id = $this->user_id->getAuthUserId();
 
         if ($filter === 'all') {
             $tasks = Task::where('user_id', $user_id)->orderBy('scheduled_for_day', 'asc')->paginate(9);
@@ -31,7 +36,7 @@ class TaskRepository
 
     public function getTaskNull()
     {
-        $user_id = auth()->user()->id;
+        $user_id = $this->user_id->getAuthUserId();
 
         $task = Task::where([['user_id', '=', $user_id], ['did_day', '=', null]])->orderBy('scheduled_for_day', 'asc')->paginate(9);
 
@@ -40,15 +45,18 @@ class TaskRepository
 
     public function getTaskCustomerId($id)
     {
-         $task = Task::where('customer_id', $id)->where('did_day', null)->first();
+        $user_id = $this->user_id->getAuthUserId();
+        
+        $task = Task::where([['user_id', '=', $user_id],['customer_id', '=', $id]])->where('did_day', null)->first();
 
-         return $task;
-
+        return $task;
     }
 
     public function getTask($id)
     {
-        $task = Task::where('id', $id)->with('customer')->first();
+        $user_id = $this->user_id->getAuthUserId();
+
+        $task = Task::where([['user_id', '=', $user_id],['id', '=', $id]])->with('customer')->first();
 
         return $task;
     }
