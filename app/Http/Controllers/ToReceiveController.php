@@ -10,7 +10,7 @@ class ToReceiveController extends Controller
 {
      public function index(Request $request)
      {
-        $toReceives = ToReceive::with(['user','customer' => function($query){
+        $toReceives = ToReceive::where('user_id', auth()->user()->id)->with(['user','customer' => function($query){
             $query->withTrashed();
         }])->paginate(4);
        

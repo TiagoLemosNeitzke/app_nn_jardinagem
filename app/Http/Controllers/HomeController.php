@@ -29,8 +29,8 @@ class HomeController extends Controller
     {
         $today = date('Y-m-d');
         $howManyCustomers = $customers->count();
-        $tasksForToday = $tasks->where('scheduled_for_day', $today)->paginate(2);
-        $toReceives = $toReceives->where('status', false)->with(['customer' => function($query){
+        $tasksForToday = $tasks->where([['user_id', '=', auth()->user()->id],['scheduled_for_day', '=' ,$today]])->paginate(2);
+        $toReceives = $toReceives->where([['user_id', '=', auth()->user()->id],['status', '=', false]])->with(['customer' => function($query){
             $query->withTrashed();
         }])->orderBy('created_at', 'asc')->paginate(2);
         
