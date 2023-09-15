@@ -4455,7 +4455,6 @@
                 }
             ],
             "time": "2022-11-03T14:55:06+00:00"
-<<<<<<< HEAD
         },
         {
             "name": "symfony/polyfill-php81",
@@ -4535,8 +4534,6 @@
                 }
             ],
             "time": "2022-05-24T11:49:31+00:00"
-=======
->>>>>>> 7615b35 (build: atualizado o composer)
         },
         {
             "name": "symfony/polyfill-uuid",
